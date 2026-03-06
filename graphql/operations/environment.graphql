@@ -1,0 +1,67 @@
+# Environments - variable environments
+
+query GetEnvironment($id: ID!) {
+  environment(id: $id) {
+    id
+    name
+    version
+    variables {
+      name
+      value
+      kind
+    }
+  }
+}
+
+query ListEnvironments {
+  environments {
+    id
+    name
+    version
+    variables {
+      name
+      value
+      kind
+    }
+  }
+}
+
+query GetEnvironmentContext {
+  environmentContext {
+    global {
+      id
+      name
+    }
+    selected {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateEnvironment($input: CreateEnvironmentInput!) {
+  createEnvironment(input: $input) {
+    environment {
+      id
+      name
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation SelectEnvironment($id: ID) {
+  selectEnvironment(id: $id) {
+    environment {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteEnvironment($id: ID!) {
+  deleteEnvironment(id: $id) {
+    deletedId
+  }
+}

@@ -1,0 +1,73 @@
+# Projects - project management
+
+query ListProjects {
+  projects {
+    id
+    name
+    path
+    size
+    status
+    temporary
+    createdAt
+    updatedAt
+    version
+  }
+}
+
+query GetCurrentProject {
+  currentProject {
+    project {
+      id
+      name
+      path
+      size
+      status
+      temporary
+      createdAt
+      updatedAt
+      version
+    }
+    readOnly
+  }
+}
+
+mutation CreateProject($input: CreateProjectInput!) {
+  createProject(input: $input) {
+    project {
+      id
+      name
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation SelectProject($id: ID!) {
+  selectProject(id: $id) {
+    currentProject {
+      project {
+        id
+        name
+      }
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation RenameProject($id: ID!, $name: String!) {
+  renameProject(id: $id, name: $name) {
+    project {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteProject($id: ID!) {
+  deleteProject(id: $id) {
+    deletedId
+  }
+}

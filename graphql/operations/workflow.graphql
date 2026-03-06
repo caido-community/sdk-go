@@ -1,0 +1,81 @@
+# Workflows - automation workflows
+
+query GetWorkflow($id: ID!) {
+  workflow(id: $id) {
+    id
+    name
+    kind
+    enabled
+    global
+    readOnly
+    definition
+    createdAt
+    updatedAt
+  }
+}
+
+query ListWorkflows {
+  workflows {
+    id
+    name
+    kind
+    enabled
+    global
+    readOnly
+    createdAt
+    updatedAt
+  }
+}
+
+query ListWorkflowNodeDefinitions {
+  workflowNodeDefinitions {
+    raw
+  }
+}
+
+mutation CreateWorkflow($input: CreateWorkflowInput!) {
+  createWorkflow(input: $input) {
+    workflow {
+      id
+      name
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation RenameWorkflow($id: ID!, $name: String!) {
+  renameWorkflow(id: $id, name: $name) {
+    workflow {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteWorkflow($id: ID!) {
+  deleteWorkflow(id: $id) {
+    deletedId
+  }
+}
+
+mutation GlobalizeWorkflow($id: ID!) {
+  globalizeWorkflow(id: $id) {
+    workflow {
+      id
+      name
+      global
+    }
+  }
+}
+
+mutation LocalizeWorkflow($id: ID!) {
+  localizeWorkflow(id: $id) {
+    workflow {
+      id
+      name
+      global
+    }
+  }
+}

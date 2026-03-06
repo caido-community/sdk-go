@@ -1,0 +1,107 @@
+# Findings - security findings attached to requests
+
+query GetFinding($id: ID!) {
+  finding(id: $id) {
+    id
+    title
+    description
+    host
+    path
+    reporter
+    hidden
+    dedupeKey
+    createdAt
+    request {
+      id
+      method
+      host
+      port
+      path
+      query
+      isTls
+    }
+  }
+}
+
+query ListFindings(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $filter: FilterClauseFindingInput
+  $order: FindingOrderInput
+) {
+  findings(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    filter: $filter
+    order: $order
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        description
+        host
+        path
+        reporter
+        hidden
+        dedupeKey
+        createdAt
+        request {
+          id
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+
+    }
+  }
+}
+
+query ListFindingReporters {
+  findingReporters
+}
+
+mutation CreateFinding($requestId: ID!, $input: CreateFindingInput!) {
+  createFinding(requestId: $requestId, input: $input) {
+    finding {
+      id
+      title
+      description
+      host
+      path
+      reporter
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation DeleteFindings($input: DeleteFindingsInput) {
+  deleteFindings(input: $input) {
+    deletedIds
+  }
+}
+
+mutation ExportFindings($input: ExportFindingsInput!) {
+  exportFindings(input: $input) {
+    export {
+      id
+    }
+    error {
+      __typename
+    }
+  }
+}

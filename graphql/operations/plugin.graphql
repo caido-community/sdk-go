@@ -1,0 +1,48 @@
+# Plugins - installed plugin packages
+
+query ListPluginPackages {
+  pluginPackages {
+    id
+    name
+    description
+    version
+    manifestId
+    installedAt
+    author {
+      name
+      email
+      url
+    }
+    plugins {
+      id
+      enabled
+    }
+  }
+}
+
+mutation InstallPluginPackage($input: InstallPluginPackageInput!) {
+  installPluginPackage(input: $input) {
+    package {
+      id
+      name
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation DeleteUpstreamPlugin($id: ID!) {
+  deleteUpstreamPlugin(id: $id) {
+    deletedId
+  }
+}
+
+mutation TogglePlugin($id: ID!, $enabled: Boolean!) {
+  togglePlugin(id: $id, enabled: $enabled) {
+    plugin {
+      id
+      enabled
+    }
+  }
+}

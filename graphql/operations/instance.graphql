@@ -1,0 +1,27 @@
+# Instance - runtime info and settings
+
+query GetRuntime {
+  runtime {
+    version
+    platform
+    logs
+  }
+}
+
+query GetInstanceSettings {
+  instanceSettings {
+    onboarding {
+      analytic
+    }
+  }
+}
+
+mutation SetInstanceSettings($input: SetInstanceSettingsInput!) {
+  setInstanceSettings(input: $input) {
+    settings {
+      onboarding {
+        analytic
+      }
+    }
+  }
+}

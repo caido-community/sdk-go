@@ -1,0 +1,13 @@
+# Tasks - background task management
+
+query ListTasks {
+  tasks {
+    id
+  }
+}
+
+mutation CancelTask($id: ID!) {
+  cancelTask(id: $id) {
+    cancelledId
+  }
+}

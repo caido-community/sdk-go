@@ -1,0 +1,61 @@
+# Sitemap - site structure tree
+
+query ListSitemapRootEntries($scopeId: ID) {
+  sitemapRootEntries(scopeId: $scopeId) {
+    edges {
+      node {
+        id
+        label
+        kind
+        hasDescendants
+      }
+    }
+  }
+}
+
+query ListSitemapDescendantEntries(
+  $parentId: ID!
+  $depth: SitemapDescendantsDepth!
+) {
+  sitemapDescendantEntries(parentId: $parentId, depth: $depth) {
+    edges {
+      node {
+        id
+        label
+        kind
+        parentId
+        hasDescendants
+        request {
+          id
+          method
+          path
+          response {
+            statusCode
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetSitemapEntry($id: ID!) {
+  sitemapEntry(id: $id) {
+    id
+    label
+    kind
+    parentId
+    hasDescendants
+  }
+}
+
+mutation ClearSitemapEntries {
+  clearSitemapEntries {
+    deletedIds
+  }
+}
+
+mutation DeleteSitemapEntries($ids: [ID!]!) {
+  deleteSitemapEntries(ids: $ids) {
+    deletedIds
+  }
+}

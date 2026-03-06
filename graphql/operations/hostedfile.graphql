@@ -1,0 +1,28 @@
+# Hosted Files - files served by Caido
+
+query ListHostedFiles {
+  hostedFiles {
+    id
+    name
+    path
+    size
+    status
+    createdAt
+    updatedAt
+  }
+}
+
+mutation RenameHostedFile($id: ID!, $name: String!) {
+  renameHostedFile(id: $id, name: $name) {
+    hostedFile {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteHostedFile($id: ID!) {
+  deleteHostedFile(id: $id) {
+    deletedId
+  }
+}

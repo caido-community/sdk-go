@@ -1,0 +1,120 @@
+# Automate - fuzzing sessions
+
+query GetAutomateSession($id: ID!) {
+  automateSession(id: $id) {
+    id
+    name
+    connection {
+      host
+      port
+      isTLS
+    }
+    raw
+    createdAt
+    entries {
+      id
+      name
+      createdAt
+    }
+  }
+}
+
+query GetAutomateEntry($id: ID!) {
+  automateEntry(id: $id) {
+    id
+    name
+    createdAt
+    connection {
+      host
+      port
+      isTLS
+    }
+    raw
+  }
+}
+
+query ListAutomateSessions(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+) {
+  automateSessions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        name
+        createdAt
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+    }
+  }
+}
+
+mutation CreateAutomateSession($input: CreateAutomateSessionInput!) {
+  createAutomateSession(input: $input) {
+    session {
+      id
+      name
+    }
+  }
+}
+
+mutation RenameAutomateSession($id: ID!, $name: String!) {
+  renameAutomateSession(id: $id, name: $name) {
+    session {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteAutomateSession($id: ID!) {
+  deleteAutomateSession(id: $id) {
+    deletedId
+  }
+}
+
+mutation StartAutomateTask($automateSessionId: ID!) {
+  startAutomateTask(automateSessionId: $automateSessionId) {
+    automateTask {
+      id
+    }
+  }
+}
+
+mutation CancelAutomateTask($id: ID!) {
+  cancelAutomateTask(id: $id) {
+    cancelledId
+  }
+}
+
+mutation PauseAutomateTask($id: ID!) {
+  pauseAutomateTask(id: $id) {
+    automateTask {
+      id
+    }
+  }
+}
+
+mutation ResumeAutomateTask($id: ID!) {
+  resumeAutomateTask(id: $id) {
+    automateTask {
+      id
+    }
+  }
+}

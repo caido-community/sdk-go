@@ -1,0 +1,49 @@
+schema: graphql/schema.graphql
+operations:
+  - graphql/operations/*.graphql
+generated: graphql/generated.go
+package: graphql
+optional: pointer
+use_struct_references: true
+
+bindings:
+  DateTime:
+    type: string
+  Timestamp:
+    type: int64
+  Sensitive:
+    type: string
+  Token:
+    type: string
+  Upload:
+    type: io.Reader
+  JSON:
+    type: encoding/json.RawMessage
+  JsonObject:
+    type: encoding/json.RawMessage
+  JsonRaw:
+    type: encoding/json.RawMessage
+  Blob:
+    type: string
+  Duration:
+    type: int64
+  HTTPQL:
+    type: string
+  Image:
+    type: string
+  Alias:
+    type: string
+  Port:
+    type: int
+  Rank:
+    type: string
+  Snapshot:
+    type: string
+  Uri:
+    type: string
+  Url:
+    type: string
+  Version:
+    type: string
+  Binary:
+    type: string

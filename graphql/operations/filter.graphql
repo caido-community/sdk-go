@@ -1,0 +1,38 @@
+# Filter Presets - saved HTTPQL filters
+
+query GetFilterPreset($id: ID!) {
+  filterPreset(id: $id) {
+    id
+    name
+    alias
+    clause
+  }
+}
+
+query ListFilterPresets {
+  filterPresets {
+    id
+    name
+    alias
+    clause
+  }
+}
+
+mutation CreateFilterPreset($input: CreateFilterPresetInput!) {
+  createFilterPreset(input: $input) {
+    filter {
+      id
+      name
+      alias
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation DeleteFilterPreset($id: ID!) {
+  deleteFilterPreset(id: $id) {
+    deletedId
+  }
+}

@@ -1,0 +1,48 @@
+# Scopes - target scope management
+
+query GetScope($id: ID!) {
+  scope(id: $id) {
+    id
+    name
+    allowlist
+    denylist
+    indexed
+  }
+}
+
+query ListScopes {
+  scopes {
+    id
+    name
+    allowlist
+    denylist
+    indexed
+  }
+}
+
+mutation CreateScope($input: CreateScopeInput!) {
+  createScope(input: $input) {
+    scope {
+      id
+      name
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation RenameScope($id: ID!, $name: String!) {
+  renameScope(id: $id, name: $name) {
+    scope {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteScope($id: ID!) {
+  deleteScope(id: $id) {
+    deletedId
+  }
+}

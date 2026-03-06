@@ -1,0 +1,151 @@
+# Intercept - MITM proxy entries and message queue
+
+query ListInterceptEntries(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $filter: HTTPQL
+  $order: InterceptEntryOrderInput
+  $scopeId: ID
+) {
+  interceptEntries(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    filter: $filter
+    order: $order
+    scopeId: $scopeId
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        request {
+          id
+          method
+          host
+          port
+          path
+          query
+          isTls
+          createdAt
+          length
+          response {
+            id
+            statusCode
+            roundtripTime
+            length
+          }
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+    }
+  }
+}
+
+query GetInterceptEntry($id: ID!) {
+  interceptEntry(id: $id) {
+    id
+    request {
+      id
+      method
+      host
+      port
+      path
+      query
+      isTls
+      raw
+      createdAt
+      length
+      response {
+        id
+        statusCode
+        raw
+        roundtripTime
+        length
+      }
+    }
+  }
+}
+
+query GetInterceptStatus {
+  interceptStatus
+}
+
+query GetInterceptOptions {
+  interceptOptions {
+    request {
+      enabled
+    }
+    response {
+      enabled
+    }
+    scope {
+      scopeId
+    }
+  }
+}
+
+mutation ForwardInterceptMessage(
+  $id: ID!
+  $input: ForwardInterceptMessageInput
+) {
+  forwardInterceptMessage(id: $id, input: $input) {
+    forwardedId
+  }
+}
+
+mutation DropInterceptMessage($id: ID!) {
+  dropInterceptMessage(id: $id) {
+    droppedId
+  }
+}
+
+mutation PauseIntercept {
+  pauseIntercept {
+    status
+  }
+}
+
+mutation ResumeIntercept {
+  resumeIntercept {
+    status
+  }
+}
+
+mutation SetInterceptOptions($input: InterceptOptionsInput!) {
+  setInterceptOptions(input: $input) {
+    options {
+      request {
+        enabled
+      }
+      response {
+        enabled
+      }
+    }
+  }
+}
+
+mutation DeleteInterceptEntries($filter: HTTPQL, $scopeId: ID) {
+  deleteInterceptEntries(filter: $filter, scopeId: $scopeId) {
+    task {
+      id
+    }
+  }
+}
+
+mutation DeleteInterceptEntry($id: ID!) {
+  deleteInterceptEntry(id: $id) {
+    deletedId
+  }
+}

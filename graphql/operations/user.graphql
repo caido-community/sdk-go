@@ -1,0 +1,16 @@
+# User - current user info
+
+query GetViewer {
+  viewer {
+    __typename
+    ... on CloudUser {
+      id
+      profile {
+        identity {
+          email
+          name
+        }
+      }
+    }
+  }
+}

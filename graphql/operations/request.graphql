@@ -1,0 +1,159 @@
+# Requests - list and get proxied HTTP requests
+
+query GetRequest($id: ID!) {
+  request(id: $id) {
+    id
+    method
+    host
+    port
+    path
+    query
+    isTls
+    raw
+    createdAt
+    length
+    fileExtension
+    alteration
+    source
+    response {
+      id
+      statusCode
+      raw
+      roundtripTime
+      length
+      alteration
+      createdAt
+    }
+  }
+}
+
+query GetRequestMetadata($id: ID!) {
+  request(id: $id) {
+    id
+    method
+    host
+    port
+    path
+    query
+    isTls
+    createdAt
+    length
+    fileExtension
+    alteration
+    source
+    response {
+      id
+      statusCode
+      roundtripTime
+      length
+      alteration
+      createdAt
+    }
+  }
+}
+
+query ListRequests(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $filter: HTTPQL
+  $order: RequestResponseOrderInput
+  $scopeId: ID
+) {
+  requests(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    filter: $filter
+    order: $order
+    scopeId: $scopeId
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        method
+        host
+        port
+        path
+        query
+        isTls
+        createdAt
+        length
+        fileExtension
+        alteration
+        source
+        response {
+          id
+          statusCode
+          roundtripTime
+          length
+          alteration
+          createdAt
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+    }
+  }
+}
+
+query ListRequestsByOffset(
+  $limit: Int
+  $offset: Int
+  $filter: HTTPQL
+  $order: RequestResponseOrderInput
+  $scopeId: ID
+) {
+  requestsByOffset(
+    limit: $limit
+    offset: $offset
+    filter: $filter
+    order: $order
+    scopeId: $scopeId
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        method
+        host
+        port
+        path
+        query
+        isTls
+        createdAt
+        length
+        fileExtension
+        alteration
+        source
+        response {
+          id
+          statusCode
+          roundtripTime
+          length
+          alteration
+          createdAt
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+    }
+  }
+}

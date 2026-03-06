@@ -1,0 +1,35 @@
+# Authentication - OAuth device flow and token refresh
+
+query GetAuthenticationState {
+  authenticationState {
+    allowGuests
+  }
+}
+
+mutation StartAuthenticationFlow {
+  startAuthenticationFlow {
+    request {
+      id
+      userCode
+      verificationUrl
+      expiresAt
+    }
+    error {
+      __typename
+    }
+  }
+}
+
+mutation RefreshAuthenticationToken($refreshToken: Token!) {
+  refreshAuthenticationToken(refreshToken: $refreshToken) {
+    token {
+      accessToken
+      refreshToken
+      expiresAt
+      scopes
+    }
+    error {
+      __typename
+    }
+  }
+}

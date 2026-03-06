@@ -1,0 +1,238 @@
+# Replay - send and manage replayed requests
+
+query GetReplaySession($id: ID!) {
+  replaySession(id: $id) {
+    id
+    name
+    activeEntry {
+      id
+    }
+    collection {
+      id
+      name
+    }
+    entries(first: 100) {
+      edges {
+        node {
+          id
+          raw
+          connection {
+            host
+            port
+            isTLS
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}
+
+query ListReplaySessions(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+) {
+  replaySessions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        name
+        activeEntry {
+          id
+        }
+        collection {
+          id
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+
+    }
+  }
+}
+
+query GetReplayEntry($id: ID!) {
+  replayEntry(id: $id) {
+    id
+    raw
+    error
+    createdAt
+    connection {
+      host
+      port
+      isTLS
+    }
+    settings {
+      placeholders {
+        inputRange {
+          start
+          end
+        }
+        outputRange {
+          start
+          end
+        }
+        preprocessors {
+          options {
+            ... on ReplayPrefixPreprocessor {
+              value
+            }
+            ... on ReplaySuffixPreprocessor {
+              value
+            }
+          }
+        }
+      }
+    }
+    request {
+      id
+      method
+      host
+      port
+      path
+      query
+      isTls
+      raw
+      createdAt
+      response {
+        id
+        statusCode
+        raw
+        roundtripTime
+        length
+      }
+    }
+  }
+}
+
+query ListReplaySessionCollections(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+) {
+  replaySessionCollections(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+  ) {
+    edges {
+      cursor
+      node {
+        id
+        name
+        sessions {
+          id
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    count {
+      value
+
+    }
+  }
+}
+
+mutation CreateReplaySession($input: CreateReplaySessionInput!) {
+  createReplaySession(input: $input) {
+    session {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateReplaySessionCollection(
+  $input: CreateReplaySessionCollectionInput!
+) {
+  createReplaySessionCollection(input: $input) {
+    collection {
+      id
+      name
+    }
+  }
+}
+
+mutation RenameReplaySession($id: ID!, $name: String!) {
+  renameReplaySession(id: $id, name: $name) {
+    session {
+      id
+      name
+    }
+  }
+}
+
+mutation RenameReplaySessionCollection($id: ID!, $name: String!) {
+  renameReplaySessionCollection(id: $id, name: $name) {
+    collection {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteReplaySessions($ids: [ID!]!) {
+  deleteReplaySessions(ids: $ids) {
+    deletedIds
+  }
+}
+
+mutation DeleteReplaySessionCollection($id: ID!) {
+  deleteReplaySessionCollection(id: $id) {
+    deletedId
+  }
+}
+
+mutation MoveReplaySession($id: ID!, $collectionId: ID!) {
+  moveReplaySession(id: $id, collectionId: $collectionId) {
+    session {
+      id
+      name
+      collection {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation StartReplayTask($sessionId: ID!, $input: StartReplayTaskInput!) {
+  startReplayTask(sessionId: $sessionId, input: $input) {
+    task {
+      id
+    }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
+  }
+}
