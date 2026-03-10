@@ -23,6 +23,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 	"sync"
 
 	gql "github.com/Khan/genqlient/graphql"
@@ -162,8 +163,16 @@ func (c *Client) SetTokenRefresher(fn TokenRefreshFunc) {
 func (c *Client) BaseURL() string { return c.baseURL }
 
 // WebSocketEndpoint returns the WebSocket URL for GraphQL subscriptions.
+// It converts http/https schemes to ws/wss as required by WebSocket libraries.
 func (c *Client) WebSocketEndpoint() string {
-	return c.baseURL + "/ws"
+	base := c.baseURL
+	switch {
+	case strings.HasPrefix(base, "https://"):
+		base = "wss://" + base[8:]
+	case strings.HasPrefix(base, "http://"):
+		base = "ws://" + base[7:]
+	}
+	return base + "/ws"
 }
 
 // Connect verifies connectivity and authentication with the Caido instance.
