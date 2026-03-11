@@ -7865,7 +7865,7 @@ func (v *RenameWorkflowResponse) GetRenameWorkflow() *RenameWorkflowRenameWorkfl
 
 type ReplayEntrySettingsInput struct {
 	ConnectionClose     bool                      `json:"connectionClose"`
-	Placeholders        []*ReplayPlaceholderInput `json:"placeholders"`
+	Placeholders        []*ReplayPlaceholderInput `json:"placeholders,omitempty"`
 	UpdateContentLength bool                      `json:"updateContentLength"`
 }
 
