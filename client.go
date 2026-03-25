@@ -172,7 +172,7 @@ func (c *Client) WebSocketEndpoint() string {
 	case strings.HasPrefix(base, "http://"):
 		base = "ws://" + base[7:]
 	}
-	return base + "/ws"
+	return base + "/ws/graphql"
 }
 
 // Connect verifies connectivity and authentication with the Caido instance.
