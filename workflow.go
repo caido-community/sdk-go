@@ -66,3 +66,25 @@ func (s *WorkflowSDK) Localize(
 ) (*gen.LocalizeWorkflowResponse, error) {
 	return gen.LocalizeWorkflow(ctx, s.client.GraphQL, id)
 }
+
+// RunActive executes an active workflow on a request.
+func (s *WorkflowSDK) RunActive(
+	ctx context.Context, id string,
+	input *gen.RunActiveWorkflowInput,
+) (*gen.RunActiveWorkflowResponse, error) {
+	return gen.RunActiveWorkflow(ctx, s.client.GraphQL, id, input)
+}
+
+// RunConvert executes a convert workflow on input data.
+func (s *WorkflowSDK) RunConvert(
+	ctx context.Context, id string, input string,
+) (*gen.RunConvertWorkflowResponse, error) {
+	return gen.RunConvertWorkflow(ctx, s.client.GraphQL, id, input)
+}
+
+// Toggle enables or disables a workflow.
+func (s *WorkflowSDK) Toggle(
+	ctx context.Context, id string, enabled bool,
+) (*gen.ToggleWorkflowResponse, error) {
+	return gen.ToggleWorkflow(ctx, s.client.GraphQL, id, enabled)
+}

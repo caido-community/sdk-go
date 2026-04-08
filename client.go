@@ -53,6 +53,7 @@ type Client struct {
 	Automate     *AutomateSDK
 	Sitemap      *SitemapSDK
 	Intercept    *InterceptSDK
+	Tamper       *TamperSDK
 	Auth         *AuthSDK
 
 	// Low-level access
@@ -123,6 +124,7 @@ func NewClient(opts Options) (*Client, error) {
 	c.Automate = &AutomateSDK{client: c}
 	c.Sitemap = &SitemapSDK{client: c}
 	c.Intercept = &InterceptSDK{client: c}
+	c.Tamper = &TamperSDK{client: c}
 	c.Auth = &AuthSDK{client: c}
 
 	return c, nil

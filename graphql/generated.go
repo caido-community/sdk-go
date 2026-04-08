@@ -1593,6 +1593,300 @@ func (v *CreateScopeResponse) GetCreateScope() *CreateScopeCreateScopeCreateScop
 	return v.CreateScope
 }
 
+// CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload includes the requested fields of the GraphQL type CreateTamperRuleCollectionPayload.
+type CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload struct {
+	Collection *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection `json:"collection"`
+}
+
+// GetCollection returns CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload.Collection, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload) GetCollection() *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection {
+	return v.Collection
+}
+
+// CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection includes the requested fields of the GraphQL type TamperRuleCollection.
+type CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// GetId returns CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection.Id, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection) GetId() string {
+	return v.Id
+}
+
+// GetName returns CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection.Name, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayloadCollectionTamperRuleCollection) GetName() string {
+	return v.Name
+}
+
+type CreateTamperRuleCollectionInput struct {
+	Name string `json:"name"`
+}
+
+// GetName returns CreateTamperRuleCollectionInput.Name, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCollectionInput) GetName() string { return v.Name }
+
+// CreateTamperRuleCollectionResponse is returned by CreateTamperRuleCollection on success.
+type CreateTamperRuleCollectionResponse struct {
+	CreateTamperRuleCollection *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload `json:"createTamperRuleCollection"`
+}
+
+// GetCreateTamperRuleCollection returns CreateTamperRuleCollectionResponse.CreateTamperRuleCollection, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCollectionResponse) GetCreateTamperRuleCollection() *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload {
+	return v.CreateTamperRuleCollection
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayload includes the requested fields of the GraphQL type CreateTamperRulePayload.
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayload struct {
+	Error *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError `json:"-"`
+	Rule  *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule             `json:"rule"`
+}
+
+// GetError returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayload.Error, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload) GetError() *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError {
+	return v.Error
+}
+
+// GetRule returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayload.Rule, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload) GetRule() *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule {
+	return v.Rule
+}
+
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*CreateTamperRuleCreateTamperRuleCreateTamperRulePayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.CreateTamperRuleCreateTamperRuleCreateTamperRulePayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError)
+			err = __unmarshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal CreateTamperRuleCreateTamperRuleCreateTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Rule *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule `json:"rule"`
+}
+
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload) __premarshalJSON() (*__premarshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayload, error) {
+	var retval __premarshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal CreateTamperRuleCreateTamperRuleCreateTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Rule = v.Rule
+	return &retval, nil
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError includes the requested fields of the GraphQL interface CreateTamperRuleError.
+//
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError is implemented by the following types:
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError interface {
+	implementsGraphQLInterfaceCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError) implementsGraphQLInterfaceCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError() {
+}
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError) implementsGraphQLInterfaceCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError() {
+}
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError) implementsGraphQLInterfaceCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError() {
+}
+
+func __unmarshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError(b []byte, v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "InvalidHTTPQLUserError":
+		*v = new(CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError)
+		return json.Unmarshal(b, *v)
+	case "InvalidRegexUserError":
+		*v = new(CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError)
+		return json.Unmarshal(b, *v)
+	case "OtherUserError":
+		*v = new(CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing CreateTamperRuleError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalCreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError(v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError:
+		typename = "InvalidHTTPQLUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError:
+		typename = "InvalidRegexUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorCreateTamperRuleError: "%T"`, v)
+	}
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError includes the requested fields of the GraphQL type InvalidHTTPQLUserError.
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError.Typename, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidHTTPQLUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError includes the requested fields of the GraphQL type InvalidRegexUserError.
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError.Typename, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorInvalidRegexUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule includes the requested fields of the GraphQL type TamperRule.
+type CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// GetId returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule.Id, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule) GetId() string {
+	return v.Id
+}
+
+// GetName returns CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule.Name, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule) GetName() string {
+	return v.Name
+}
+
+type CreateTamperRuleInput struct {
+	CollectionId string              `json:"collectionId"`
+	Condition    *string             `json:"condition"`
+	Name         string              `json:"name"`
+	Section      *TamperSectionInput `json:"section,omitempty"`
+	Sources      []Source            `json:"sources"`
+}
+
+// GetCollectionId returns CreateTamperRuleInput.CollectionId, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleInput) GetCollectionId() string { return v.CollectionId }
+
+// GetCondition returns CreateTamperRuleInput.Condition, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleInput) GetCondition() *string { return v.Condition }
+
+// GetName returns CreateTamperRuleInput.Name, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleInput) GetName() string { return v.Name }
+
+// GetSection returns CreateTamperRuleInput.Section, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleInput) GetSection() *TamperSectionInput { return v.Section }
+
+// GetSources returns CreateTamperRuleInput.Sources, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleInput) GetSources() []Source { return v.Sources }
+
+// CreateTamperRuleResponse is returned by CreateTamperRule on success.
+type CreateTamperRuleResponse struct {
+	CreateTamperRule *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload `json:"createTamperRule"`
+}
+
+// GetCreateTamperRule returns CreateTamperRuleResponse.CreateTamperRule, and is useful for accessing the field via an interface.
+func (v *CreateTamperRuleResponse) GetCreateTamperRule() *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload {
+	return v.CreateTamperRule
+}
+
 // CreateWorkflowCreateWorkflowCreateWorkflowPayload includes the requested fields of the GraphQL type CreateWorkflowPayload.
 type CreateWorkflowCreateWorkflowCreateWorkflowPayload struct {
 	Workflow *CreateWorkflowCreateWorkflowCreateWorkflowPayloadWorkflow                 `json:"workflow"`
@@ -2083,6 +2377,46 @@ type DeleteSitemapEntriesResponse struct {
 // GetDeleteSitemapEntries returns DeleteSitemapEntriesResponse.DeleteSitemapEntries, and is useful for accessing the field via an interface.
 func (v *DeleteSitemapEntriesResponse) GetDeleteSitemapEntries() *DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload {
 	return v.DeleteSitemapEntries
+}
+
+// DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload includes the requested fields of the GraphQL type DeleteTamperRuleCollectionPayload.
+type DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload struct {
+	DeletedId *string `json:"deletedId"`
+}
+
+// GetDeletedId returns DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload.DeletedId, and is useful for accessing the field via an interface.
+func (v *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload) GetDeletedId() *string {
+	return v.DeletedId
+}
+
+// DeleteTamperRuleCollectionResponse is returned by DeleteTamperRuleCollection on success.
+type DeleteTamperRuleCollectionResponse struct {
+	DeleteTamperRuleCollection *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload `json:"deleteTamperRuleCollection"`
+}
+
+// GetDeleteTamperRuleCollection returns DeleteTamperRuleCollectionResponse.DeleteTamperRuleCollection, and is useful for accessing the field via an interface.
+func (v *DeleteTamperRuleCollectionResponse) GetDeleteTamperRuleCollection() *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload {
+	return v.DeleteTamperRuleCollection
+}
+
+// DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload includes the requested fields of the GraphQL type DeleteTamperRulePayload.
+type DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload struct {
+	DeletedId *string `json:"deletedId"`
+}
+
+// GetDeletedId returns DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload.DeletedId, and is useful for accessing the field via an interface.
+func (v *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload) GetDeletedId() *string {
+	return v.DeletedId
+}
+
+// DeleteTamperRuleResponse is returned by DeleteTamperRule on success.
+type DeleteTamperRuleResponse struct {
+	DeleteTamperRule *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload `json:"deleteTamperRule"`
+}
+
+// GetDeleteTamperRule returns DeleteTamperRuleResponse.DeleteTamperRule, and is useful for accessing the field via an interface.
+func (v *DeleteTamperRuleResponse) GetDeleteTamperRule() *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload {
+	return v.DeleteTamperRule
 }
 
 // DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload includes the requested fields of the GraphQL type DeleteUpstreamPluginPayload.
@@ -4272,6 +4606,64 @@ func (v *GetSitemapEntrySitemapEntry) GetParentId() *string { return v.ParentId 
 
 // GetHasDescendants returns GetSitemapEntrySitemapEntry.HasDescendants, and is useful for accessing the field via an interface.
 func (v *GetSitemapEntrySitemapEntry) GetHasDescendants() bool { return v.HasDescendants }
+
+// GetTamperRuleResponse is returned by GetTamperRule on success.
+type GetTamperRuleResponse struct {
+	TamperRule *GetTamperRuleTamperRule `json:"tamperRule"`
+}
+
+// GetTamperRule returns GetTamperRuleResponse.TamperRule, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleResponse) GetTamperRule() *GetTamperRuleTamperRule { return v.TamperRule }
+
+// GetTamperRuleTamperRule includes the requested fields of the GraphQL type TamperRule.
+type GetTamperRuleTamperRule struct {
+	Id         string                             `json:"id"`
+	Name       string                             `json:"name"`
+	Condition  *string                            `json:"condition"`
+	Sources    []Source                           `json:"sources"`
+	Enable     *GetTamperRuleTamperRuleEnable     `json:"enable"`
+	Collection *GetTamperRuleTamperRuleCollection `json:"collection"`
+}
+
+// GetId returns GetTamperRuleTamperRule.Id, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetId() string { return v.Id }
+
+// GetName returns GetTamperRuleTamperRule.Name, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetName() string { return v.Name }
+
+// GetCondition returns GetTamperRuleTamperRule.Condition, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetCondition() *string { return v.Condition }
+
+// GetSources returns GetTamperRuleTamperRule.Sources, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetSources() []Source { return v.Sources }
+
+// GetEnable returns GetTamperRuleTamperRule.Enable, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetEnable() *GetTamperRuleTamperRuleEnable { return v.Enable }
+
+// GetCollection returns GetTamperRuleTamperRule.Collection, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRule) GetCollection() *GetTamperRuleTamperRuleCollection {
+	return v.Collection
+}
+
+// GetTamperRuleTamperRuleCollection includes the requested fields of the GraphQL type TamperRuleCollection.
+type GetTamperRuleTamperRuleCollection struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// GetId returns GetTamperRuleTamperRuleCollection.Id, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRuleCollection) GetId() string { return v.Id }
+
+// GetName returns GetTamperRuleTamperRuleCollection.Name, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRuleCollection) GetName() string { return v.Name }
+
+// GetTamperRuleTamperRuleEnable includes the requested fields of the GraphQL type TamperRuleEnable.
+type GetTamperRuleTamperRuleEnable struct {
+	Rank string `json:"rank"`
+}
+
+// GetRank returns GetTamperRuleTamperRuleEnable.Rank, and is useful for accessing the field via an interface.
+func (v *GetTamperRuleTamperRuleEnable) GetRank() string { return v.Rank }
 
 // GetViewerResponse is returned by GetViewer on success.
 type GetViewerResponse struct {
@@ -6890,6 +7282,5556 @@ func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSite
 	return v.HasDescendants
 }
 
+// ListTamperRuleCollectionsResponse is returned by ListTamperRuleCollections on success.
+type ListTamperRuleCollectionsResponse struct {
+	TamperRuleCollections []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection `json:"tamperRuleCollections"`
+}
+
+// GetTamperRuleCollections returns ListTamperRuleCollectionsResponse.TamperRuleCollections, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsResponse) GetTamperRuleCollections() []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection {
+	return v.TamperRuleCollections
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection includes the requested fields of the GraphQL type TamperRuleCollection.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection struct {
+	Id    string                                                                               `json:"id"`
+	Name  string                                                                               `json:"name"`
+	Rules []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule `json:"rules"`
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) GetId() string {
+	return v.Id
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) GetName() string {
+	return v.Name
+}
+
+// GetRules returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection.Rules, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) GetRules() []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule {
+	return v.Rules
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule includes the requested fields of the GraphQL type TamperRule.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule struct {
+	Id        string                                                                                                `json:"id"`
+	Name      string                                                                                                `json:"name"`
+	Condition *string                                                                                               `json:"condition"`
+	Sources   []Source                                                                                              `json:"sources"`
+	Enable    *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable              `json:"enable"`
+	Section   ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection `json:"-"`
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetId() string {
+	return v.Id
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetName() string {
+	return v.Name
+}
+
+// GetCondition returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Condition, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetCondition() *string {
+	return v.Condition
+}
+
+// GetSources returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Sources, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetSources() []Source {
+	return v.Sources
+}
+
+// GetEnable returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Enable, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetEnable() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable {
+	return v.Enable
+}
+
+// GetSection returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Section, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) GetSection() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection {
+	return v.Section
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule
+		Section json.RawMessage `json:"section"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Section
+		src := firstPass.Section
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Section: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule struct {
+	Id string `json:"id"`
+
+	Name string `json:"name"`
+
+	Condition *string `json:"condition"`
+
+	Sources []Source `json:"sources"`
+
+	Enable *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable `json:"enable"`
+
+	Section json.RawMessage `json:"section"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule
+
+	retval.Id = v.Id
+	retval.Name = v.Name
+	retval.Condition = v.Condition
+	retval.Sources = v.Sources
+	retval.Enable = v.Enable
+	{
+
+		dst := &retval.Section
+		src := v.Section
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule.Section: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable includes the requested fields of the GraphQL type TamperRuleEnable.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable struct {
+	Rank string `json:"rank"`
+}
+
+// GetRank returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable.Rank, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleEnable) GetRank() string {
+	return v.Rank
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection includes the requested fields of the GraphQL interface TamperSection.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperSectionRequestAll":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestBody":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestFirstLine":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestHeader":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestMethod":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestPath":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestQuery":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionRequestSNI":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionResponseAll":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionResponseBody":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionResponseFirstLine":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionResponseHeader":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader)
+		return json.Unmarshal(b, *v)
+	case "TamperSectionResponseStatusCode":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperSection.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll:
+		typename = "TamperSectionRequestAll"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody:
+		typename = "TamperSectionRequestBody"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine:
+		typename = "TamperSectionRequestFirstLine"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader:
+		typename = "TamperSectionRequestHeader"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod:
+		typename = "TamperSectionRequestMethod"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath:
+		typename = "TamperSectionRequestPath"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery:
+		typename = "TamperSectionRequestQuery"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI:
+		typename = "TamperSectionRequestSNI"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll:
+		typename = "TamperSectionResponseAll"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody:
+		typename = "TamperSectionResponseBody"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine:
+		typename = "TamperSectionResponseFirstLine"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader:
+		typename = "TamperSectionResponseHeader"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode:
+		typename = "TamperSectionResponseStatusCode"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSection: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll includes the requested fields of the GraphQL type TamperSectionRequestAll.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll struct {
+	Typename  *string                                                                                                                                    `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAll.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll includes the requested fields of the GraphQL interface TamperOperationAll.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationAllRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationAll.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw:
+		typename = "TamperOperationAllRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAll: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw includes the requested fields of the GraphQL type TamperOperationAllRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw struct {
+	Typename *string                                                                                                                                                              `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody includes the requested fields of the GraphQL type TamperSectionRequestBody.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody struct {
+	Typename  *string                                                                                                                                      `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBody.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody includes the requested fields of the GraphQL interface TamperOperationBody.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationBodyRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationBody.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw:
+		typename = "TamperOperationBodyRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBody: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw includes the requested fields of the GraphQL type TamperOperationBodyRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw struct {
+	Typename *string                                                                                                                                                                `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine includes the requested fields of the GraphQL type TamperSectionRequestFirstLine.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine struct {
+	Typename  *string                                                                                                                                                `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLine.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine includes the requested fields of the GraphQL interface TamperOperationFirstLine.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationFirstLineRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationFirstLine.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw:
+		typename = "TamperOperationFirstLineRaw"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLine: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw includes the requested fields of the GraphQL type TamperOperationFirstLineRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestFirstLineOperationTamperOperationFirstLineRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader includes the requested fields of the GraphQL type TamperSectionRequestHeader.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader struct {
+	Typename  *string                                                                                                                                          `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeader.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader includes the requested fields of the GraphQL interface TamperOperationHeader.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationHeaderAdd":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderRemove":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderUpdate":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationHeader.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd:
+		typename = "TamperOperationHeaderAdd"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw:
+		typename = "TamperOperationHeaderRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove:
+		typename = "TamperOperationHeaderRemove"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate:
+		typename = "TamperOperationHeaderUpdate"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeader: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd includes the requested fields of the GraphQL type TamperOperationHeaderAdd.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd struct {
+	Typename *string                                                                                                                                                                      `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer    `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd struct {
+	Typename *string `json:"__typename"`
+
+	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd
+
+	retval.Typename = v.Typename
+	retval.Matcher = v.Matcher
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw includes the requested fields of the GraphQL type TamperOperationHeaderRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw struct {
+	Typename *string                                                                                                                                                                    `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove includes the requested fields of the GraphQL type TamperOperationHeaderRemove.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove struct {
+	Typename *string                                                                                                                                                                         `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate includes the requested fields of the GraphQL type TamperOperationHeaderUpdate.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate struct {
+	Typename *string                                                                                                                                                                         `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer    `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate struct {
+	Typename *string `json:"__typename"`
+
+	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate
+
+	retval.Typename = v.Typename
+	retval.Matcher = v.Matcher
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod includes the requested fields of the GraphQL type TamperSectionRequestMethod.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod struct {
+	Typename  *string                                                                                                                                          `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethod.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod includes the requested fields of the GraphQL interface TamperOperationMethod.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationMethodUpdate":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationMethod.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate:
+		typename = "TamperOperationMethodUpdate"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethod: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate includes the requested fields of the GraphQL type TamperOperationMethodUpdate.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestMethodOperationTamperOperationMethodUpdate) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath includes the requested fields of the GraphQL type TamperSectionRequestPath.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath struct {
+	Typename  *string                                                                                                                                      `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPath.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath includes the requested fields of the GraphQL interface TamperOperationPath.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationPathRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationPath.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw:
+		typename = "TamperOperationPathRaw"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPath: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw includes the requested fields of the GraphQL type TamperOperationPathRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestPathOperationTamperOperationPathRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery includes the requested fields of the GraphQL type TamperSectionRequestQuery.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery struct {
+	Typename  *string                                                                                                                                        `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQuery.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery includes the requested fields of the GraphQL interface TamperOperationQuery.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationQueryAdd":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationQueryRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationQueryRemove":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationQueryUpdate":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationQuery.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd:
+		typename = "TamperOperationQueryAdd"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw:
+		typename = "TamperOperationQueryRaw"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove:
+		typename = "TamperOperationQueryRemove"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate:
+		typename = "TamperOperationQueryUpdate"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQuery: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd includes the requested fields of the GraphQL type TamperOperationQueryAdd.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryAdd) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw includes the requested fields of the GraphQL type TamperOperationQueryRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove includes the requested fields of the GraphQL type TamperOperationQueryRemove.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryRemove) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate includes the requested fields of the GraphQL type TamperOperationQueryUpdate.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestQueryOperationTamperOperationQueryUpdate) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI includes the requested fields of the GraphQL type TamperSectionRequestSNI.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI struct {
+	Typename  *string                                                                                                                                    `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNI.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI includes the requested fields of the GraphQL interface TamperOperationSNI.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationSNIRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationSNI.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw:
+		typename = "TamperOperationSNIRaw"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNI: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw includes the requested fields of the GraphQL type TamperOperationSNIRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestSNIOperationTamperOperationSNIRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll includes the requested fields of the GraphQL type TamperSectionResponseAll.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll struct {
+	Typename  *string                                                                                                                                     `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAll.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll includes the requested fields of the GraphQL interface TamperOperationAll.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationAllRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationAll.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw:
+		typename = "TamperOperationAllRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAll: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw includes the requested fields of the GraphQL type TamperOperationAllRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw struct {
+	Typename *string                                                                                                                                                               `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseAllOperationTamperOperationAllRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody includes the requested fields of the GraphQL type TamperSectionResponseBody.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody struct {
+	Typename  *string                                                                                                                                       `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBody.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody includes the requested fields of the GraphQL interface TamperOperationBody.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationBodyRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationBody.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw:
+		typename = "TamperOperationBodyRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBody: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw includes the requested fields of the GraphQL type TamperOperationBodyRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw struct {
+	Typename *string                                                                                                                                                                 `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseBodyOperationTamperOperationBodyRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine includes the requested fields of the GraphQL type TamperSectionResponseFirstLine.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine struct {
+	Typename  *string                                                                                                                                                 `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLine.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine includes the requested fields of the GraphQL interface TamperOperationFirstLine.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationFirstLineRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationFirstLine.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw:
+		typename = "TamperOperationFirstLineRaw"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLine: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw includes the requested fields of the GraphQL type TamperOperationFirstLineRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseFirstLineOperationTamperOperationFirstLineRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader includes the requested fields of the GraphQL type TamperSectionResponseHeader.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader struct {
+	Typename  *string                                                                                                                                           `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeader.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader includes the requested fields of the GraphQL interface TamperOperationHeader.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationHeaderAdd":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderRaw":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderRemove":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove)
+		return json.Unmarshal(b, *v)
+	case "TamperOperationHeaderUpdate":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationHeader.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd:
+		typename = "TamperOperationHeaderAdd"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw:
+		typename = "TamperOperationHeaderRaw"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove:
+		typename = "TamperOperationHeaderRemove"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate:
+		typename = "TamperOperationHeaderUpdate"
+
+		premarshaled, err := v.__premarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		result := struct {
+			TypeName string `json:"__typename"`
+			*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate
+		}{typename, premarshaled}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeader: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd includes the requested fields of the GraphQL type TamperOperationHeaderAdd.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd struct {
+	Typename *string                                                                                                                                                                       `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer    `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd struct {
+	Typename *string `json:"__typename"`
+
+	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd
+
+	retval.Typename = v.Typename
+	retval.Matcher = v.Matcher
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw includes the requested fields of the GraphQL type TamperOperationHeaderRaw.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw struct {
+	Typename *string                                                                                                                                                                     `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw `json:"-"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer  `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw
+		Matcher  json.RawMessage `json:"matcher"`
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Matcher
+		src := firstPass.Matcher
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Matcher: %w", err)
+			}
+		}
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw struct {
+	Typename *string `json:"__typename"`
+
+	Matcher json.RawMessage `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Matcher
+		src := v.Matcher
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Matcher: %w", err)
+		}
+	}
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRaw.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull includes the requested fields of the GraphQL type TamperMatcherFull.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull struct {
+	Typename *string `json:"__typename"`
+	Full     bool    `json:"full"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) GetTypename() *string {
+	return v.Typename
+}
+
+// GetFull returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull.Full, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) GetFull() bool {
+	return v.Full
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw includes the requested fields of the GraphQL interface TamperMatcherRaw.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperMatcherFull":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherRegex":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex)
+		return json.Unmarshal(b, *v)
+	case "TamperMatcherValue":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperMatcherRaw.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull:
+		typename = "TamperMatcherFull"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherFull
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex:
+		typename = "TamperMatcherRegex"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue:
+		typename = "TamperMatcherValue"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRaw: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex includes the requested fields of the GraphQL type TamperMatcherRegex.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex struct {
+	Typename *string `json:"__typename"`
+	Regex    string  `json:"regex"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) GetTypename() *string {
+	return v.Typename
+}
+
+// GetRegex returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex.Regex, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherRegex) GetRegex() string {
+	return v.Regex
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue includes the requested fields of the GraphQL type TamperMatcherValue.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue struct {
+	Typename *string `json:"__typename"`
+	Value    string  `json:"value"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) GetTypename() *string {
+	return v.Typename
+}
+
+// GetValue returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue.Value, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawMatcherTamperMatcherValue) GetValue() string {
+	return v.Value
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRawReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove includes the requested fields of the GraphQL type TamperOperationHeaderRemove.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove struct {
+	Typename *string                                                                                                                                                                          `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate includes the requested fields of the GraphQL type TamperOperationHeaderUpdate.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate struct {
+	Typename *string                                                                                                                                                                          `json:"__typename"`
+	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer    `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) GetTypename() *string {
+	return v.Typename
+}
+
+// GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Matcher, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
+	return v.Matcher
+}
+
+// GetReplacer returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Replacer, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) GetReplacer() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer {
+	return v.Replacer
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate
+		Replacer json.RawMessage `json:"replacer"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Replacer
+		src := firstPass.Replacer
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Replacer: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate struct {
+	Typename *string `json:"__typename"`
+
+	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+
+	Replacer json.RawMessage `json:"replacer"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate
+
+	retval.Typename = v.Typename
+	retval.Matcher = v.Matcher
+	{
+
+		dst := &retval.Replacer
+		src := v.Replacer
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Replacer: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName includes the requested fields of the GraphQL type TamperMatcherName.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName struct {
+	Name string `json:"name"`
+}
+
+// GetName returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName.Name, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName) GetName() string {
+	return v.Name
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer includes the requested fields of the GraphQL interface TamperReplacer.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer() {
+}
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperReplacerTerm":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm)
+		return json.Unmarshal(b, *v)
+	case "TamperReplacerWorkflow":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperReplacer.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm:
+		typename = "TamperReplacerTerm"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm
+		}{typename, v}
+		return json.Marshal(result)
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow:
+		typename = "TamperReplacerWorkflow"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm includes the requested fields of the GraphQL type TamperReplacerTerm.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm struct {
+	Typename *string `json:"__typename"`
+	Term     string  `json:"term"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) GetTypename() *string {
+	return v.Typename
+}
+
+// GetTerm returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm.Term, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerTerm) GetTerm() string {
+	return v.Term
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow includes the requested fields of the GraphQL type TamperReplacerWorkflow.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow struct {
+	Typename *string `json:"__typename"`
+	Id       string  `json:"id"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) GetTypename() *string {
+	return v.Typename
+}
+
+// GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacerWorkflow) GetId() string {
+	return v.Id
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode includes the requested fields of the GraphQL type TamperSectionResponseStatusCode.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode struct {
+	Typename  *string                                                                                                                                                   `json:"__typename"`
+	Operation ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode `json:"-"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) GetTypename() *string {
+	return v.Typename
+}
+
+// GetOperation returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode.Operation, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) GetOperation() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode {
+	return v.Operation
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode
+		Operation json.RawMessage `json:"operation"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Operation
+		src := firstPass.Operation
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode.Operation: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode struct {
+	Typename *string `json:"__typename"`
+
+	Operation json.RawMessage `json:"operation"`
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode) __premarshalJSON() (*__premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode, error) {
+	var retval __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode
+
+	retval.Typename = v.Typename
+	{
+
+		dst := &retval.Operation
+		src := v.Operation
+		var err error
+		*dst, err = __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCode.Operation: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode includes the requested fields of the GraphQL interface TamperOperationStatusCode.
+//
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode is implemented by the following types:
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode interface {
+	implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate) implementsGraphQLInterfaceListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode() {
+}
+
+func __unmarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode(b []byte, v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "TamperOperationStatusCodeUpdate":
+		*v = new(ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TamperOperationStatusCode.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode(v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate:
+		typename = "TamperOperationStatusCodeUpdate"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCode: "%T"`, v)
+	}
+}
+
+// ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate includes the requested fields of the GraphQL type TamperOperationStatusCodeUpdate.
+type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate.Typename, and is useful for accessing the field via an interface.
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseStatusCodeOperationTamperOperationStatusCodeUpdate) GetTypename() *string {
+	return v.Typename
+}
+
 // ListTasksResponse is returned by ListTasks on success.
 type ListTasksResponse struct {
 	Tasks []ListTasksTasksTask `json:"-"`
@@ -7865,7 +13807,7 @@ func (v *RenameWorkflowResponse) GetRenameWorkflow() *RenameWorkflowRenameWorkfl
 
 type ReplayEntrySettingsInput struct {
 	ConnectionClose     bool                      `json:"connectionClose"`
-	Placeholders        []*ReplayPlaceholderInput `json:"placeholders"`
+	Placeholders        []*ReplayPlaceholderInput `json:"placeholders,omitempty"`
 	UpdateContentLength bool                      `json:"updateContentLength"`
 }
 
@@ -8081,6 +14023,447 @@ type ResumeInterceptResumeInterceptResumeInterceptPayload struct {
 // GetStatus returns ResumeInterceptResumeInterceptResumeInterceptPayload.Status, and is useful for accessing the field via an interface.
 func (v *ResumeInterceptResumeInterceptResumeInterceptPayload) GetStatus() InterceptStatus {
 	return v.Status
+}
+
+type RunActiveWorkflowInput struct {
+	RequestId string `json:"requestId"`
+}
+
+// GetRequestId returns RunActiveWorkflowInput.RequestId, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowInput) GetRequestId() string { return v.RequestId }
+
+// RunActiveWorkflowResponse is returned by RunActiveWorkflow on success.
+type RunActiveWorkflowResponse struct {
+	RunActiveWorkflow *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload `json:"runActiveWorkflow"`
+}
+
+// GetRunActiveWorkflow returns RunActiveWorkflowResponse.RunActiveWorkflow, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowResponse) GetRunActiveWorkflow() *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload {
+	return v.RunActiveWorkflow
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload includes the requested fields of the GraphQL type RunActiveWorkflowPayload.
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload struct {
+	Error *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError `json:"-"`
+	Task  *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask            `json:"task"`
+}
+
+// GetError returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload) GetError() *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError {
+	return v.Error
+}
+
+// GetTask returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload.Task, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload) GetTask() *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask {
+	return v.Task
+}
+
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError)
+			err = __unmarshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Task *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask `json:"task"`
+}
+
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload) __premarshalJSON() (*__premarshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload, error) {
+	var retval __premarshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Task = v.Task
+	return &retval, nil
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError includes the requested fields of the GraphQL type PermissionDeniedUserError.
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError includes the requested fields of the GraphQL interface RunActiveWorkflowError.
+//
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError is implemented by the following types:
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError interface {
+	implementsGraphQLInterfaceRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError() {
+}
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError) implementsGraphQLInterfaceRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError() {
+}
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError() {
+}
+
+func __unmarshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError(b []byte, v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "PermissionDeniedUserError":
+		*v = new(RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing RunActiveWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalRunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError(v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError:
+		typename = "PermissionDeniedUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorPermissionDeniedUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorRunActiveWorkflowError: "%T"`, v)
+	}
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask includes the requested fields of the GraphQL type WorkflowTask.
+type RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask struct {
+	Id string `json:"id"`
+}
+
+// GetId returns RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask.Id, and is useful for accessing the field via an interface.
+func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowTask) GetId() string {
+	return v.Id
+}
+
+// RunConvertWorkflowResponse is returned by RunConvertWorkflow on success.
+type RunConvertWorkflowResponse struct {
+	RunConvertWorkflow *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload `json:"runConvertWorkflow"`
+}
+
+// GetRunConvertWorkflow returns RunConvertWorkflowResponse.RunConvertWorkflow, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowResponse) GetRunConvertWorkflow() *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload {
+	return v.RunConvertWorkflow
+}
+
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload includes the requested fields of the GraphQL type RunConvertWorkflowPayload.
+type RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload struct {
+	Error  *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError `json:"-"`
+	Output *string                                                                                    `json:"output"`
+}
+
+// GetError returns RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload) GetError() *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError {
+	return v.Error
+}
+
+// GetOutput returns RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload.Output, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload) GetOutput() *string {
+	return v.Output
+}
+
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError)
+			err = __unmarshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Output *string `json:"output"`
+}
+
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload) __premarshalJSON() (*__premarshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload, error) {
+	var retval __premarshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Output = v.Output
+	return &retval, nil
+}
+
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError includes the requested fields of the GraphQL type PermissionDeniedUserError.
+type RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError includes the requested fields of the GraphQL interface RunConvertWorkflowError.
+//
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError is implemented by the following types:
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError
+type RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError interface {
+	implementsGraphQLInterfaceRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError() {
+}
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError) implementsGraphQLInterfaceRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError() {
+}
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError) implementsGraphQLInterfaceRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError() {
+}
+
+func __unmarshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError(b []byte, v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "PermissionDeniedUserError":
+		*v = new(RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError)
+		return json.Unmarshal(b, *v)
+	case "WorkflowUserError":
+		*v = new(RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing RunConvertWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalRunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError(v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError:
+		typename = "PermissionDeniedUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorPermissionDeniedUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError:
+		typename = "WorkflowUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorRunConvertWorkflowError: "%T"`, v)
+	}
+}
+
+// RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError includes the requested fields of the GraphQL type WorkflowUserError.
+type RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkflowUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // SelectEnvironmentResponse is returned by SelectEnvironment on success.
@@ -9114,6 +15497,480 @@ func (v *StartReplayTaskStartReplayTaskStartReplayTaskPayloadTaskReplayTask) Get
 	return v.Id
 }
 
+type TamperMatcherFullInput struct {
+	Full bool `json:"full"`
+}
+
+// GetFull returns TamperMatcherFullInput.Full, and is useful for accessing the field via an interface.
+func (v *TamperMatcherFullInput) GetFull() bool { return v.Full }
+
+type TamperMatcherNameInput struct {
+	Name string `json:"name"`
+}
+
+// GetName returns TamperMatcherNameInput.Name, and is useful for accessing the field via an interface.
+func (v *TamperMatcherNameInput) GetName() string { return v.Name }
+
+type TamperMatcherRawInput struct {
+	Full  *TamperMatcherFullInput  `json:"full,omitempty"`
+	Regex *TamperMatcherRegexInput `json:"regex,omitempty"`
+	Value *TamperMatcherValueInput `json:"value,omitempty"`
+}
+
+// GetFull returns TamperMatcherRawInput.Full, and is useful for accessing the field via an interface.
+func (v *TamperMatcherRawInput) GetFull() *TamperMatcherFullInput { return v.Full }
+
+// GetRegex returns TamperMatcherRawInput.Regex, and is useful for accessing the field via an interface.
+func (v *TamperMatcherRawInput) GetRegex() *TamperMatcherRegexInput { return v.Regex }
+
+// GetValue returns TamperMatcherRawInput.Value, and is useful for accessing the field via an interface.
+func (v *TamperMatcherRawInput) GetValue() *TamperMatcherValueInput { return v.Value }
+
+type TamperMatcherRegexInput struct {
+	Regex string `json:"regex"`
+}
+
+// GetRegex returns TamperMatcherRegexInput.Regex, and is useful for accessing the field via an interface.
+func (v *TamperMatcherRegexInput) GetRegex() string { return v.Regex }
+
+type TamperMatcherValueInput struct {
+	Value string `json:"value"`
+}
+
+// GetValue returns TamperMatcherValueInput.Value, and is useful for accessing the field via an interface.
+func (v *TamperMatcherValueInput) GetValue() string { return v.Value }
+
+type TamperOperationAllInput struct {
+	Raw *TamperOperationAllRawInput `json:"raw,omitempty"`
+}
+
+// GetRaw returns TamperOperationAllInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationAllInput) GetRaw() *TamperOperationAllRawInput { return v.Raw }
+
+type TamperOperationAllRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationAllRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationAllRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationAllRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationAllRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationBodyInput struct {
+	Raw *TamperOperationBodyRawInput `json:"raw,omitempty"`
+}
+
+// GetRaw returns TamperOperationBodyInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationBodyInput) GetRaw() *TamperOperationBodyRawInput { return v.Raw }
+
+type TamperOperationBodyRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationBodyRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationBodyRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationBodyRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationBodyRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationFirstLineInput struct {
+	Raw *TamperOperationFirstLineRawInput `json:"raw,omitempty"`
+}
+
+// GetRaw returns TamperOperationFirstLineInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationFirstLineInput) GetRaw() *TamperOperationFirstLineRawInput { return v.Raw }
+
+type TamperOperationFirstLineRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationFirstLineRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationFirstLineRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationFirstLineRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationFirstLineRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationHeaderAddInput struct {
+	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationHeaderAddInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderAddInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationHeaderAddInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderAddInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationHeaderInput struct {
+	Add    *TamperOperationHeaderAddInput    `json:"add,omitempty"`
+	Raw    *TamperOperationHeaderRawInput    `json:"raw,omitempty"`
+	Remove *TamperOperationHeaderRemoveInput `json:"remove,omitempty"`
+	Update *TamperOperationHeaderUpdateInput `json:"update,omitempty"`
+}
+
+// GetAdd returns TamperOperationHeaderInput.Add, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderInput) GetAdd() *TamperOperationHeaderAddInput { return v.Add }
+
+// GetRaw returns TamperOperationHeaderInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderInput) GetRaw() *TamperOperationHeaderRawInput { return v.Raw }
+
+// GetRemove returns TamperOperationHeaderInput.Remove, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderInput) GetRemove() *TamperOperationHeaderRemoveInput { return v.Remove }
+
+// GetUpdate returns TamperOperationHeaderInput.Update, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderInput) GetUpdate() *TamperOperationHeaderUpdateInput { return v.Update }
+
+type TamperOperationHeaderRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationHeaderRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationHeaderRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationHeaderRemoveInput struct {
+	Matcher *TamperMatcherNameInput `json:"matcher,omitempty"`
+}
+
+// GetMatcher returns TamperOperationHeaderRemoveInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderRemoveInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+type TamperOperationHeaderUpdateInput struct {
+	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationHeaderUpdateInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderUpdateInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationHeaderUpdateInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationHeaderUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationMethodInput struct {
+	Update *TamperOperationMethodUpdateInput `json:"update,omitempty"`
+}
+
+// GetUpdate returns TamperOperationMethodInput.Update, and is useful for accessing the field via an interface.
+func (v *TamperOperationMethodInput) GetUpdate() *TamperOperationMethodUpdateInput { return v.Update }
+
+type TamperOperationMethodUpdateInput struct {
+	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+}
+
+// GetReplacer returns TamperOperationMethodUpdateInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationMethodUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationPathInput struct {
+	Raw *TamperOperationPathRawInput `json:"raw,omitempty"`
+}
+
+// GetRaw returns TamperOperationPathInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationPathInput) GetRaw() *TamperOperationPathRawInput { return v.Raw }
+
+type TamperOperationPathRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationPathRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationPathRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationPathRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationPathRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationQueryAddInput struct {
+	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationQueryAddInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryAddInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationQueryAddInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryAddInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationQueryInput struct {
+	Add    *TamperOperationQueryAddInput    `json:"add,omitempty"`
+	Raw    *TamperOperationQueryRawInput    `json:"raw,omitempty"`
+	Remove *TamperOperationQueryRemoveInput `json:"remove,omitempty"`
+	Update *TamperOperationQueryUpdateInput `json:"update,omitempty"`
+}
+
+// GetAdd returns TamperOperationQueryInput.Add, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryInput) GetAdd() *TamperOperationQueryAddInput { return v.Add }
+
+// GetRaw returns TamperOperationQueryInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryInput) GetRaw() *TamperOperationQueryRawInput { return v.Raw }
+
+// GetRemove returns TamperOperationQueryInput.Remove, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryInput) GetRemove() *TamperOperationQueryRemoveInput { return v.Remove }
+
+// GetUpdate returns TamperOperationQueryInput.Update, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryInput) GetUpdate() *TamperOperationQueryUpdateInput { return v.Update }
+
+type TamperOperationQueryRawInput struct {
+	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationQueryRawInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationQueryRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationQueryRemoveInput struct {
+	Matcher *TamperMatcherNameInput `json:"matcher,omitempty"`
+}
+
+// GetMatcher returns TamperOperationQueryRemoveInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryRemoveInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+type TamperOperationQueryUpdateInput struct {
+	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+}
+
+// GetMatcher returns TamperOperationQueryUpdateInput.Matcher, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryUpdateInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+
+// GetReplacer returns TamperOperationQueryUpdateInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationQueryUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationSNIInput struct {
+	Raw *TamperOperationSNIRawInput `json:"raw,omitempty"`
+}
+
+// GetRaw returns TamperOperationSNIInput.Raw, and is useful for accessing the field via an interface.
+func (v *TamperOperationSNIInput) GetRaw() *TamperOperationSNIRawInput { return v.Raw }
+
+type TamperOperationSNIRawInput struct {
+	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+}
+
+// GetReplacer returns TamperOperationSNIRawInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationSNIRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperOperationStatusCodeInput struct {
+	Update *TamperOperationStatusCodeUpdateInput `json:"update,omitempty"`
+}
+
+// GetUpdate returns TamperOperationStatusCodeInput.Update, and is useful for accessing the field via an interface.
+func (v *TamperOperationStatusCodeInput) GetUpdate() *TamperOperationStatusCodeUpdateInput {
+	return v.Update
+}
+
+type TamperOperationStatusCodeUpdateInput struct {
+	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+}
+
+// GetReplacer returns TamperOperationStatusCodeUpdateInput.Replacer, and is useful for accessing the field via an interface.
+func (v *TamperOperationStatusCodeUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+
+type TamperReplacerInput struct {
+	Term     *TamperReplacerTermInput     `json:"term,omitempty"`
+	Workflow *TamperReplacerWorkflowInput `json:"workflow,omitempty"`
+}
+
+// GetTerm returns TamperReplacerInput.Term, and is useful for accessing the field via an interface.
+func (v *TamperReplacerInput) GetTerm() *TamperReplacerTermInput { return v.Term }
+
+// GetWorkflow returns TamperReplacerInput.Workflow, and is useful for accessing the field via an interface.
+func (v *TamperReplacerInput) GetWorkflow() *TamperReplacerWorkflowInput { return v.Workflow }
+
+type TamperReplacerTermInput struct {
+	Term string `json:"term"`
+}
+
+// GetTerm returns TamperReplacerTermInput.Term, and is useful for accessing the field via an interface.
+func (v *TamperReplacerTermInput) GetTerm() string { return v.Term }
+
+type TamperReplacerWorkflowInput struct {
+	Id string `json:"id"`
+}
+
+// GetId returns TamperReplacerWorkflowInput.Id, and is useful for accessing the field via an interface.
+func (v *TamperReplacerWorkflowInput) GetId() string { return v.Id }
+
+type TamperSectionInput struct {
+	RequestAll         *TamperSectionRequestAllInput         `json:"requestAll,omitempty"`
+	RequestBody        *TamperSectionRequestBodyInput        `json:"requestBody,omitempty"`
+	RequestFirstLine   *TamperSectionRequestFirstLineInput   `json:"requestFirstLine,omitempty"`
+	RequestHeader      *TamperSectionRequestHeaderInput      `json:"requestHeader,omitempty"`
+	RequestMethod      *TamperSectionRequestMethodInput      `json:"requestMethod,omitempty"`
+	RequestPath        *TamperSectionRequestPathInput        `json:"requestPath,omitempty"`
+	RequestQuery       *TamperSectionRequestQueryInput       `json:"requestQuery,omitempty"`
+	RequestSNI         *TamperSectionRequestSNIInput         `json:"requestSNI,omitempty"`
+	ResponseAll        *TamperSectionResponseAllInput        `json:"responseAll,omitempty"`
+	ResponseBody       *TamperSectionResponseBodyInput       `json:"responseBody,omitempty"`
+	ResponseFirstLine  *TamperSectionResponseFirstLineInput  `json:"responseFirstLine,omitempty"`
+	ResponseHeader     *TamperSectionResponseHeaderInput     `json:"responseHeader,omitempty"`
+	ResponseStatusCode *TamperSectionResponseStatusCodeInput `json:"responseStatusCode,omitempty"`
+}
+
+// GetRequestAll returns TamperSectionInput.RequestAll, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestAll() *TamperSectionRequestAllInput { return v.RequestAll }
+
+// GetRequestBody returns TamperSectionInput.RequestBody, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestBody() *TamperSectionRequestBodyInput { return v.RequestBody }
+
+// GetRequestFirstLine returns TamperSectionInput.RequestFirstLine, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestFirstLine() *TamperSectionRequestFirstLineInput {
+	return v.RequestFirstLine
+}
+
+// GetRequestHeader returns TamperSectionInput.RequestHeader, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestHeader() *TamperSectionRequestHeaderInput {
+	return v.RequestHeader
+}
+
+// GetRequestMethod returns TamperSectionInput.RequestMethod, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestMethod() *TamperSectionRequestMethodInput {
+	return v.RequestMethod
+}
+
+// GetRequestPath returns TamperSectionInput.RequestPath, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestPath() *TamperSectionRequestPathInput { return v.RequestPath }
+
+// GetRequestQuery returns TamperSectionInput.RequestQuery, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestQuery() *TamperSectionRequestQueryInput { return v.RequestQuery }
+
+// GetRequestSNI returns TamperSectionInput.RequestSNI, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetRequestSNI() *TamperSectionRequestSNIInput { return v.RequestSNI }
+
+// GetResponseAll returns TamperSectionInput.ResponseAll, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetResponseAll() *TamperSectionResponseAllInput { return v.ResponseAll }
+
+// GetResponseBody returns TamperSectionInput.ResponseBody, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetResponseBody() *TamperSectionResponseBodyInput { return v.ResponseBody }
+
+// GetResponseFirstLine returns TamperSectionInput.ResponseFirstLine, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetResponseFirstLine() *TamperSectionResponseFirstLineInput {
+	return v.ResponseFirstLine
+}
+
+// GetResponseHeader returns TamperSectionInput.ResponseHeader, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetResponseHeader() *TamperSectionResponseHeaderInput {
+	return v.ResponseHeader
+}
+
+// GetResponseStatusCode returns TamperSectionInput.ResponseStatusCode, and is useful for accessing the field via an interface.
+func (v *TamperSectionInput) GetResponseStatusCode() *TamperSectionResponseStatusCodeInput {
+	return v.ResponseStatusCode
+}
+
+type TamperSectionRequestAllInput struct {
+	Operation *TamperOperationAllInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestAllInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestAllInput) GetOperation() *TamperOperationAllInput { return v.Operation }
+
+type TamperSectionRequestBodyInput struct {
+	Operation *TamperOperationBodyInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestBodyInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestBodyInput) GetOperation() *TamperOperationBodyInput { return v.Operation }
+
+type TamperSectionRequestFirstLineInput struct {
+	Operation *TamperOperationFirstLineInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestFirstLineInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestFirstLineInput) GetOperation() *TamperOperationFirstLineInput {
+	return v.Operation
+}
+
+type TamperSectionRequestHeaderInput struct {
+	Operation *TamperOperationHeaderInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestHeaderInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestHeaderInput) GetOperation() *TamperOperationHeaderInput {
+	return v.Operation
+}
+
+type TamperSectionRequestMethodInput struct {
+	Operation *TamperOperationMethodInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestMethodInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestMethodInput) GetOperation() *TamperOperationMethodInput {
+	return v.Operation
+}
+
+type TamperSectionRequestPathInput struct {
+	Operation *TamperOperationPathInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestPathInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestPathInput) GetOperation() *TamperOperationPathInput { return v.Operation }
+
+type TamperSectionRequestQueryInput struct {
+	Operation *TamperOperationQueryInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestQueryInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestQueryInput) GetOperation() *TamperOperationQueryInput {
+	return v.Operation
+}
+
+type TamperSectionRequestSNIInput struct {
+	Operation *TamperOperationSNIInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionRequestSNIInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionRequestSNIInput) GetOperation() *TamperOperationSNIInput { return v.Operation }
+
+type TamperSectionResponseAllInput struct {
+	Operation *TamperOperationAllInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionResponseAllInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionResponseAllInput) GetOperation() *TamperOperationAllInput { return v.Operation }
+
+type TamperSectionResponseBodyInput struct {
+	Operation *TamperOperationBodyInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionResponseBodyInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionResponseBodyInput) GetOperation() *TamperOperationBodyInput { return v.Operation }
+
+type TamperSectionResponseFirstLineInput struct {
+	Operation *TamperOperationFirstLineInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionResponseFirstLineInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionResponseFirstLineInput) GetOperation() *TamperOperationFirstLineInput {
+	return v.Operation
+}
+
+type TamperSectionResponseHeaderInput struct {
+	Operation *TamperOperationHeaderInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionResponseHeaderInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionResponseHeaderInput) GetOperation() *TamperOperationHeaderInput {
+	return v.Operation
+}
+
+type TamperSectionResponseStatusCodeInput struct {
+	Operation *TamperOperationStatusCodeInput `json:"operation,omitempty"`
+}
+
+// GetOperation returns TamperSectionResponseStatusCodeInput.Operation, and is useful for accessing the field via an interface.
+func (v *TamperSectionResponseStatusCodeInput) GetOperation() *TamperOperationStatusCodeInput {
+	return v.Operation
+}
+
 // TogglePluginResponse is returned by TogglePlugin on success.
 type TogglePluginResponse struct {
 	TogglePlugin *TogglePluginTogglePluginTogglePluginPayload `json:"togglePlugin"`
@@ -9351,6 +16208,709 @@ func (v *TogglePluginTogglePluginTogglePluginPayloadPluginPluginWorkflow) GetEna
 	return v.Enabled
 }
 
+// ToggleTamperRuleResponse is returned by ToggleTamperRule on success.
+type ToggleTamperRuleResponse struct {
+	ToggleTamperRule *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload `json:"toggleTamperRule"`
+}
+
+// GetToggleTamperRule returns ToggleTamperRuleResponse.ToggleTamperRule, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleResponse) GetToggleTamperRule() *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload {
+	return v.ToggleTamperRule
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload includes the requested fields of the GraphQL type ToggleTamperRulePayload.
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload struct {
+	Error *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError `json:"-"`
+	Rule  *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule             `json:"rule"`
+}
+
+// GetError returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload.Error, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload) GetError() *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError {
+	return v.Error
+}
+
+// GetRule returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload.Rule, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload) GetRule() *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule {
+	return v.Rule
+}
+
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError)
+			err = __unmarshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Rule *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule `json:"rule"`
+}
+
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload) __premarshalJSON() (*__premarshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayload, error) {
+	var retval __premarshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Rule = v.Rule
+	return &retval, nil
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError includes the requested fields of the GraphQL interface ToggleTamperRuleError.
+//
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError is implemented by the following types:
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError interface {
+	implementsGraphQLInterfaceToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError) implementsGraphQLInterfaceToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError() {
+}
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError) implementsGraphQLInterfaceToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError() {
+}
+
+func __unmarshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError(b []byte, v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing ToggleTamperRuleError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError(v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorToggleTamperRuleError: "%T"`, v)
+	}
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule includes the requested fields of the GraphQL type TamperRule.
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule struct {
+	Id     string                                                                       `json:"id"`
+	Name   string                                                                       `json:"name"`
+	Enable *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable `json:"enable"`
+}
+
+// GetId returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule.Id, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule) GetId() string {
+	return v.Id
+}
+
+// GetName returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule.Name, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule) GetName() string {
+	return v.Name
+}
+
+// GetEnable returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule.Enable, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRule) GetEnable() *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable {
+	return v.Enable
+}
+
+// ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable includes the requested fields of the GraphQL type TamperRuleEnable.
+type ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable struct {
+	Rank string `json:"rank"`
+}
+
+// GetRank returns ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable.Rank, and is useful for accessing the field via an interface.
+func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEnable) GetRank() string {
+	return v.Rank
+}
+
+// ToggleWorkflowResponse is returned by ToggleWorkflow on success.
+type ToggleWorkflowResponse struct {
+	ToggleWorkflow *ToggleWorkflowToggleWorkflowToggleWorkflowPayload `json:"toggleWorkflow"`
+}
+
+// GetToggleWorkflow returns ToggleWorkflowResponse.ToggleWorkflow, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowResponse) GetToggleWorkflow() *ToggleWorkflowToggleWorkflowToggleWorkflowPayload {
+	return v.ToggleWorkflow
+}
+
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayload includes the requested fields of the GraphQL type ToggleWorkflowPayload.
+type ToggleWorkflowToggleWorkflowToggleWorkflowPayload struct {
+	Error    *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError `json:"-"`
+	Workflow *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow                 `json:"workflow"`
+}
+
+// GetError returns ToggleWorkflowToggleWorkflowToggleWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayload) GetError() *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError {
+	return v.Error
+}
+
+// GetWorkflow returns ToggleWorkflowToggleWorkflowToggleWorkflowPayload.Workflow, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayload) GetWorkflow() *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow {
+	return v.Workflow
+}
+
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*ToggleWorkflowToggleWorkflowToggleWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.ToggleWorkflowToggleWorkflowToggleWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError)
+			err = __unmarshalToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal ToggleWorkflowToggleWorkflowToggleWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalToggleWorkflowToggleWorkflowToggleWorkflowPayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Workflow *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow `json:"workflow"`
+}
+
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayload) __premarshalJSON() (*__premarshalToggleWorkflowToggleWorkflowToggleWorkflowPayload, error) {
+	var retval __premarshalToggleWorkflowToggleWorkflowToggleWorkflowPayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal ToggleWorkflowToggleWorkflowToggleWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Workflow = v.Workflow
+	return &retval, nil
+}
+
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError includes the requested fields of the GraphQL interface ToggleWorkflowError.
+//
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError is implemented by the following types:
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError
+type ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError interface {
+	implementsGraphQLInterfaceToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError() {
+}
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError() {
+}
+
+func __unmarshalToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError(b []byte, v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing ToggleWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError(v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorToggleWorkflowError: "%T"`, v)
+	}
+}
+
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow includes the requested fields of the GraphQL type Workflow.
+type ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow struct {
+	Id      string       `json:"id"`
+	Name    string       `json:"name"`
+	Kind    WorkflowKind `json:"kind"`
+	Enabled bool         `json:"enabled"`
+}
+
+// GetId returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow.Id, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow) GetId() string { return v.Id }
+
+// GetName returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow.Name, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow) GetName() string { return v.Name }
+
+// GetKind returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow.Kind, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow) GetKind() WorkflowKind {
+	return v.Kind
+}
+
+// GetEnabled returns ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow.Enabled, and is useful for accessing the field via an interface.
+func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow) GetEnabled() bool {
+	return v.Enabled
+}
+
+type UpdateTamperRuleInput struct {
+	Condition *string             `json:"condition"`
+	Name      string              `json:"name"`
+	Section   *TamperSectionInput `json:"section,omitempty"`
+	Sources   []Source            `json:"sources"`
+}
+
+// GetCondition returns UpdateTamperRuleInput.Condition, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleInput) GetCondition() *string { return v.Condition }
+
+// GetName returns UpdateTamperRuleInput.Name, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleInput) GetName() string { return v.Name }
+
+// GetSection returns UpdateTamperRuleInput.Section, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleInput) GetSection() *TamperSectionInput { return v.Section }
+
+// GetSources returns UpdateTamperRuleInput.Sources, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleInput) GetSources() []Source { return v.Sources }
+
+// UpdateTamperRuleResponse is returned by UpdateTamperRule on success.
+type UpdateTamperRuleResponse struct {
+	UpdateTamperRule *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload `json:"updateTamperRule"`
+}
+
+// GetUpdateTamperRule returns UpdateTamperRuleResponse.UpdateTamperRule, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleResponse) GetUpdateTamperRule() *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload {
+	return v.UpdateTamperRule
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload includes the requested fields of the GraphQL type UpdateTamperRulePayload.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload struct {
+	Error *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError `json:"-"`
+	Rule  *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule             `json:"rule"`
+}
+
+// GetError returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload.Error, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload) GetError() *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError {
+	return v.Error
+}
+
+// GetRule returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload.Rule, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload) GetRule() *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule {
+	return v.Rule
+}
+
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError)
+			err = __unmarshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload struct {
+	Error json.RawMessage `json:"error"`
+
+	Rule *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule `json:"rule"`
+}
+
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload) __premarshalJSON() (*__premarshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload, error) {
+	var retval __premarshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload
+
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload.Error: %w", err)
+			}
+		}
+	}
+	retval.Rule = v.Rule
+	return &retval, nil
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError includes the requested fields of the GraphQL type InvalidHTTPQLUserError.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError.Typename, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError includes the requested fields of the GraphQL type InvalidRegexUserError.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError.Typename, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError includes the requested fields of the GraphQL interface UpdateTamperRuleError.
+//
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError is implemented by the following types:
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError interface {
+	implementsGraphQLInterfaceUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError) implementsGraphQLInterfaceUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError() {
+}
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError) implementsGraphQLInterfaceUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError() {
+}
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError) implementsGraphQLInterfaceUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError() {
+}
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError) implementsGraphQLInterfaceUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError() {
+}
+
+func __unmarshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError(b []byte, v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "InvalidHTTPQLUserError":
+		*v = new(UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError)
+		return json.Unmarshal(b, *v)
+	case "InvalidRegexUserError":
+		*v = new(UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError)
+		return json.Unmarshal(b, *v)
+	case "OtherUserError":
+		*v = new(UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing UpdateTamperRuleError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalUpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError(v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError:
+		typename = "InvalidHTTPQLUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidHTTPQLUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError:
+		typename = "InvalidRegexUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorInvalidRegexUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadErrorUpdateTamperRuleError: "%T"`, v)
+	}
+}
+
+// UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule includes the requested fields of the GraphQL type TamperRule.
+type UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// GetId returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule.Id, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule) GetId() string {
+	return v.Id
+}
+
+// GetName returns UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule.Name, and is useful for accessing the field via an interface.
+func (v *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayloadRuleTamperRule) GetName() string {
+	return v.Name
+}
+
 type WorkflowKind string
 
 const (
@@ -9450,6 +17010,24 @@ type __CreateScopeInput struct {
 
 // GetInput returns __CreateScopeInput.Input, and is useful for accessing the field via an interface.
 func (v *__CreateScopeInput) GetInput() *CreateScopeInput { return v.Input }
+
+// __CreateTamperRuleCollectionInput is used internally by genqlient
+type __CreateTamperRuleCollectionInput struct {
+	Input *CreateTamperRuleCollectionInput `json:"input,omitempty"`
+}
+
+// GetInput returns __CreateTamperRuleCollectionInput.Input, and is useful for accessing the field via an interface.
+func (v *__CreateTamperRuleCollectionInput) GetInput() *CreateTamperRuleCollectionInput {
+	return v.Input
+}
+
+// __CreateTamperRuleInput is used internally by genqlient
+type __CreateTamperRuleInput struct {
+	Input *CreateTamperRuleInput `json:"input,omitempty"`
+}
+
+// GetInput returns __CreateTamperRuleInput.Input, and is useful for accessing the field via an interface.
+func (v *__CreateTamperRuleInput) GetInput() *CreateTamperRuleInput { return v.Input }
 
 // __CreateWorkflowInput is used internally by genqlient
 type __CreateWorkflowInput struct {
@@ -9558,6 +17136,22 @@ type __DeleteSitemapEntriesInput struct {
 
 // GetIds returns __DeleteSitemapEntriesInput.Ids, and is useful for accessing the field via an interface.
 func (v *__DeleteSitemapEntriesInput) GetIds() []string { return v.Ids }
+
+// __DeleteTamperRuleCollectionInput is used internally by genqlient
+type __DeleteTamperRuleCollectionInput struct {
+	Id string `json:"id"`
+}
+
+// GetId returns __DeleteTamperRuleCollectionInput.Id, and is useful for accessing the field via an interface.
+func (v *__DeleteTamperRuleCollectionInput) GetId() string { return v.Id }
+
+// __DeleteTamperRuleInput is used internally by genqlient
+type __DeleteTamperRuleInput struct {
+	Id string `json:"id"`
+}
+
+// GetId returns __DeleteTamperRuleInput.Id, and is useful for accessing the field via an interface.
+func (v *__DeleteTamperRuleInput) GetId() string { return v.Id }
 
 // __DeleteUpstreamPluginInput is used internally by genqlient
 type __DeleteUpstreamPluginInput struct {
@@ -9730,6 +17324,14 @@ type __GetSitemapEntryInput struct {
 
 // GetId returns __GetSitemapEntryInput.Id, and is useful for accessing the field via an interface.
 func (v *__GetSitemapEntryInput) GetId() string { return v.Id }
+
+// __GetTamperRuleInput is used internally by genqlient
+type __GetTamperRuleInput struct {
+	Id string `json:"id"`
+}
+
+// GetId returns __GetTamperRuleInput.Id, and is useful for accessing the field via an interface.
+func (v *__GetTamperRuleInput) GetId() string { return v.Id }
 
 // __GetWorkflowInput is used internally by genqlient
 type __GetWorkflowInput struct {
@@ -10079,6 +17681,30 @@ type __ResumeAutomateTaskInput struct {
 // GetId returns __ResumeAutomateTaskInput.Id, and is useful for accessing the field via an interface.
 func (v *__ResumeAutomateTaskInput) GetId() string { return v.Id }
 
+// __RunActiveWorkflowInput is used internally by genqlient
+type __RunActiveWorkflowInput struct {
+	Id    string                  `json:"id"`
+	Input *RunActiveWorkflowInput `json:"input,omitempty"`
+}
+
+// GetId returns __RunActiveWorkflowInput.Id, and is useful for accessing the field via an interface.
+func (v *__RunActiveWorkflowInput) GetId() string { return v.Id }
+
+// GetInput returns __RunActiveWorkflowInput.Input, and is useful for accessing the field via an interface.
+func (v *__RunActiveWorkflowInput) GetInput() *RunActiveWorkflowInput { return v.Input }
+
+// __RunConvertWorkflowInput is used internally by genqlient
+type __RunConvertWorkflowInput struct {
+	Id    string `json:"id"`
+	Input string `json:"input"`
+}
+
+// GetId returns __RunConvertWorkflowInput.Id, and is useful for accessing the field via an interface.
+func (v *__RunConvertWorkflowInput) GetId() string { return v.Id }
+
+// GetInput returns __RunConvertWorkflowInput.Input, and is useful for accessing the field via an interface.
+func (v *__RunConvertWorkflowInput) GetInput() string { return v.Input }
+
 // __SelectEnvironmentInput is used internally by genqlient
 type __SelectEnvironmentInput struct {
 	Id *string `json:"id"`
@@ -10142,6 +17768,42 @@ func (v *__TogglePluginInput) GetId() string { return v.Id }
 
 // GetEnabled returns __TogglePluginInput.Enabled, and is useful for accessing the field via an interface.
 func (v *__TogglePluginInput) GetEnabled() bool { return v.Enabled }
+
+// __ToggleTamperRuleInput is used internally by genqlient
+type __ToggleTamperRuleInput struct {
+	Id      string `json:"id"`
+	Enabled bool   `json:"enabled"`
+}
+
+// GetId returns __ToggleTamperRuleInput.Id, and is useful for accessing the field via an interface.
+func (v *__ToggleTamperRuleInput) GetId() string { return v.Id }
+
+// GetEnabled returns __ToggleTamperRuleInput.Enabled, and is useful for accessing the field via an interface.
+func (v *__ToggleTamperRuleInput) GetEnabled() bool { return v.Enabled }
+
+// __ToggleWorkflowInput is used internally by genqlient
+type __ToggleWorkflowInput struct {
+	Id      string `json:"id"`
+	Enabled bool   `json:"enabled"`
+}
+
+// GetId returns __ToggleWorkflowInput.Id, and is useful for accessing the field via an interface.
+func (v *__ToggleWorkflowInput) GetId() string { return v.Id }
+
+// GetEnabled returns __ToggleWorkflowInput.Enabled, and is useful for accessing the field via an interface.
+func (v *__ToggleWorkflowInput) GetEnabled() bool { return v.Enabled }
+
+// __UpdateTamperRuleInput is used internally by genqlient
+type __UpdateTamperRuleInput struct {
+	Id    string                 `json:"id"`
+	Input *UpdateTamperRuleInput `json:"input,omitempty"`
+}
+
+// GetId returns __UpdateTamperRuleInput.Id, and is useful for accessing the field via an interface.
+func (v *__UpdateTamperRuleInput) GetId() string { return v.Id }
+
+// GetInput returns __UpdateTamperRuleInput.Input, and is useful for accessing the field via an interface.
+func (v *__UpdateTamperRuleInput) GetInput() *UpdateTamperRuleInput { return v.Input }
 
 // The mutation executed by CancelAutomateTask.
 const CancelAutomateTask_Operation = `
@@ -10548,6 +18210,83 @@ func CreateScope(
 	}
 
 	data_ = &CreateScopeResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by CreateTamperRule.
+const CreateTamperRule_Operation = `
+mutation CreateTamperRule ($input: CreateTamperRuleInput!) {
+	createTamperRule(input: $input) {
+		error {
+			__typename
+		}
+		rule {
+			id
+			name
+		}
+	}
+}
+`
+
+func CreateTamperRule(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	input *CreateTamperRuleInput,
+) (data_ *CreateTamperRuleResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "CreateTamperRule",
+		Query:  CreateTamperRule_Operation,
+		Variables: &__CreateTamperRuleInput{
+			Input: input,
+		},
+	}
+
+	data_ = &CreateTamperRuleResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by CreateTamperRuleCollection.
+const CreateTamperRuleCollection_Operation = `
+mutation CreateTamperRuleCollection ($input: CreateTamperRuleCollectionInput!) {
+	createTamperRuleCollection(input: $input) {
+		collection {
+			id
+			name
+		}
+	}
+}
+`
+
+func CreateTamperRuleCollection(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	input *CreateTamperRuleCollectionInput,
+) (data_ *CreateTamperRuleCollectionResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "CreateTamperRuleCollection",
+		Query:  CreateTamperRuleCollection_Operation,
+		Variables: &__CreateTamperRuleCollectionInput{
+			Input: input,
+		},
+	}
+
+	data_ = &CreateTamperRuleCollectionResponse{}
 	resp_ := &graphql.Response{Data: data_}
 
 	err_ = client_.MakeRequest(
@@ -11000,6 +18739,74 @@ func DeleteSitemapEntries(
 	}
 
 	data_ = &DeleteSitemapEntriesResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by DeleteTamperRule.
+const DeleteTamperRule_Operation = `
+mutation DeleteTamperRule ($id: ID!) {
+	deleteTamperRule(id: $id) {
+		deletedId
+	}
+}
+`
+
+func DeleteTamperRule(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+) (data_ *DeleteTamperRuleResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "DeleteTamperRule",
+		Query:  DeleteTamperRule_Operation,
+		Variables: &__DeleteTamperRuleInput{
+			Id: id,
+		},
+	}
+
+	data_ = &DeleteTamperRuleResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by DeleteTamperRuleCollection.
+const DeleteTamperRuleCollection_Operation = `
+mutation DeleteTamperRuleCollection ($id: ID!) {
+	deleteTamperRuleCollection(id: $id) {
+		deletedId
+	}
+}
+`
+
+func DeleteTamperRuleCollection(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+) (data_ *DeleteTamperRuleCollectionResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "DeleteTamperRuleCollection",
+		Query:  DeleteTamperRuleCollection_Operation,
+		Variables: &__DeleteTamperRuleCollectionInput{
+			Id: id,
+		},
+	}
+
+	data_ = &DeleteTamperRuleCollectionResponse{}
 	resp_ := &graphql.Response{Data: data_}
 
 	err_ = client_.MakeRequest(
@@ -12112,6 +19919,50 @@ func GetSitemapEntry(
 	return data_, err_
 }
 
+// The query executed by GetTamperRule.
+const GetTamperRule_Operation = `
+query GetTamperRule ($id: ID!) {
+	tamperRule(id: $id) {
+		id
+		name
+		condition
+		sources
+		enable {
+			rank
+		}
+		collection {
+			id
+			name
+		}
+	}
+}
+`
+
+func GetTamperRule(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+) (data_ *GetTamperRuleResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "GetTamperRule",
+		Query:  GetTamperRule_Operation,
+		Variables: &__GetTamperRuleInput{
+			Id: id,
+		},
+	}
+
+	data_ = &GetTamperRuleResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
 // The query executed by GetViewer.
 const GetViewer_Operation = `
 query GetViewer {
@@ -13092,6 +20943,318 @@ func ListSitemapRootEntries(
 	return data_, err_
 }
 
+// The query executed by ListTamperRuleCollections.
+const ListTamperRuleCollections_Operation = `
+query ListTamperRuleCollections {
+	tamperRuleCollections {
+		id
+		name
+		rules {
+			id
+			name
+			condition
+			sources
+			enable {
+				rank
+			}
+			section {
+				__typename
+				... on TamperSectionRequestHeader {
+					operation {
+						__typename
+						... on TamperOperationHeaderRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderAdd {
+							matcher {
+								name
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderUpdate {
+							matcher {
+								name
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderRemove {
+							matcher {
+								name
+							}
+						}
+					}
+				}
+				... on TamperSectionRequestBody {
+					operation {
+						__typename
+						... on TamperOperationBodyRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+					}
+				}
+				... on TamperSectionRequestPath {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionRequestQuery {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionRequestMethod {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionRequestFirstLine {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionRequestAll {
+					operation {
+						__typename
+						... on TamperOperationAllRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+					}
+				}
+				... on TamperSectionResponseBody {
+					operation {
+						__typename
+						... on TamperOperationBodyRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+					}
+				}
+				... on TamperSectionResponseStatusCode {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionResponseFirstLine {
+					operation {
+						__typename
+					}
+				}
+				... on TamperSectionResponseHeader {
+					operation {
+						__typename
+						... on TamperOperationHeaderRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderAdd {
+							matcher {
+								name
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderUpdate {
+							matcher {
+								name
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+						... on TamperOperationHeaderRemove {
+							matcher {
+								name
+							}
+						}
+					}
+				}
+				... on TamperSectionResponseAll {
+					operation {
+						__typename
+						... on TamperOperationAllRaw {
+							matcher {
+								__typename
+								... on TamperMatcherValue {
+									value
+								}
+								... on TamperMatcherRegex {
+									regex
+								}
+								... on TamperMatcherFull {
+									full
+								}
+							}
+							replacer {
+								__typename
+								... on TamperReplacerTerm {
+									term
+								}
+								... on TamperReplacerWorkflow {
+									id
+								}
+							}
+						}
+					}
+				}
+				... on TamperSectionRequestSNI {
+					operation {
+						__typename
+					}
+				}
+			}
+		}
+	}
+}
+`
+
+func ListTamperRuleCollections(
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *ListTamperRuleCollectionsResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "ListTamperRuleCollections",
+		Query:  ListTamperRuleCollections_Operation,
+	}
+
+	data_ = &ListTamperRuleCollectionsResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
 // The query executed by ListTasks.
 const ListTasks_Operation = `
 query ListTasks {
@@ -13718,6 +21881,86 @@ func ResumeIntercept(
 	return data_, err_
 }
 
+// The mutation executed by RunActiveWorkflow.
+const RunActiveWorkflow_Operation = `
+mutation RunActiveWorkflow ($id: ID!, $input: RunActiveWorkflowInput!) {
+	runActiveWorkflow(id: $id, input: $input) {
+		error {
+			__typename
+		}
+		task {
+			id
+		}
+	}
+}
+`
+
+func RunActiveWorkflow(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+	input *RunActiveWorkflowInput,
+) (data_ *RunActiveWorkflowResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "RunActiveWorkflow",
+		Query:  RunActiveWorkflow_Operation,
+		Variables: &__RunActiveWorkflowInput{
+			Id:    id,
+			Input: input,
+		},
+	}
+
+	data_ = &RunActiveWorkflowResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by RunConvertWorkflow.
+const RunConvertWorkflow_Operation = `
+mutation RunConvertWorkflow ($id: ID!, $input: Blob!) {
+	runConvertWorkflow(id: $id, input: $input) {
+		error {
+			__typename
+		}
+		output
+	}
+}
+`
+
+func RunConvertWorkflow(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+	input string,
+) (data_ *RunConvertWorkflowResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "RunConvertWorkflow",
+		Query:  RunConvertWorkflow_Operation,
+		Variables: &__RunConvertWorkflowInput{
+			Id:    id,
+			Input: input,
+		},
+	}
+
+	data_ = &RunConvertWorkflowResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
 // The mutation executed by SelectEnvironment.
 const SelectEnvironment_Operation = `
 mutation SelectEnvironment ($id: ID) {
@@ -14023,6 +22266,137 @@ func TogglePlugin(
 	}
 
 	data_ = &TogglePluginResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by ToggleTamperRule.
+const ToggleTamperRule_Operation = `
+mutation ToggleTamperRule ($id: ID!, $enabled: Boolean!) {
+	toggleTamperRule(id: $id, enabled: $enabled) {
+		error {
+			__typename
+		}
+		rule {
+			id
+			name
+			enable {
+				rank
+			}
+		}
+	}
+}
+`
+
+func ToggleTamperRule(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+	enabled bool,
+) (data_ *ToggleTamperRuleResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "ToggleTamperRule",
+		Query:  ToggleTamperRule_Operation,
+		Variables: &__ToggleTamperRuleInput{
+			Id:      id,
+			Enabled: enabled,
+		},
+	}
+
+	data_ = &ToggleTamperRuleResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by ToggleWorkflow.
+const ToggleWorkflow_Operation = `
+mutation ToggleWorkflow ($id: ID!, $enabled: Boolean!) {
+	toggleWorkflow(id: $id, enabled: $enabled) {
+		error {
+			__typename
+		}
+		workflow {
+			id
+			name
+			kind
+			enabled
+		}
+	}
+}
+`
+
+func ToggleWorkflow(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+	enabled bool,
+) (data_ *ToggleWorkflowResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "ToggleWorkflow",
+		Query:  ToggleWorkflow_Operation,
+		Variables: &__ToggleWorkflowInput{
+			Id:      id,
+			Enabled: enabled,
+		},
+	}
+
+	data_ = &ToggleWorkflowResponse{}
+	resp_ := &graphql.Response{Data: data_}
+
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
+	)
+
+	return data_, err_
+}
+
+// The mutation executed by UpdateTamperRule.
+const UpdateTamperRule_Operation = `
+mutation UpdateTamperRule ($id: ID!, $input: UpdateTamperRuleInput!) {
+	updateTamperRule(id: $id, input: $input) {
+		error {
+			__typename
+		}
+		rule {
+			id
+			name
+		}
+	}
+}
+`
+
+func UpdateTamperRule(
+	ctx_ context.Context,
+	client_ graphql.Client,
+	id string,
+	input *UpdateTamperRuleInput,
+) (data_ *UpdateTamperRuleResponse, err_ error) {
+	req_ := &graphql.Request{
+		OpName: "UpdateTamperRule",
+		Query:  UpdateTamperRule_Operation,
+		Variables: &__UpdateTamperRuleInput{
+			Id:    id,
+			Input: input,
+		},
+	}
+
+	data_ = &UpdateTamperRuleResponse{}
 	resp_ := &graphql.Response{Data: data_}
 
 	err_ = client_.MakeRequest(
