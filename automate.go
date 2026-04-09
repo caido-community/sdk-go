@@ -76,7 +76,7 @@ func (s *AutomateSDK) GetEntryRequests(
 func (s *AutomateSDK) CreateSession(
 	ctx context.Context, input *gen.CreateAutomateSessionInput,
 ) (*gen.CreateAutomateSessionResponse, error) {
-	return gen.CreateAutomateSession(ctx, s.client.GraphQL, input)
+	return gen.CreateAutomateSession(ctx, s.client.GraphQL, *input)
 }
 
 // RenameSession renames an Automate session.

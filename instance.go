@@ -29,5 +29,5 @@ func (s *InstanceSDK) GetSettings(
 func (s *InstanceSDK) SetSettings(
 	ctx context.Context, input *gen.SetInstanceSettingsInput,
 ) (*gen.SetInstanceSettingsResponse, error) {
-	return gen.SetInstanceSettings(ctx, s.client.GraphQL, input)
+	return gen.SetInstanceSettings(ctx, s.client.GraphQL, *input)
 }

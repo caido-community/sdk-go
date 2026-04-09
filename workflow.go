@@ -36,7 +36,7 @@ func (s *WorkflowSDK) ListNodeDefinitions(
 func (s *WorkflowSDK) Create(
 	ctx context.Context, input *gen.CreateWorkflowInput,
 ) (*gen.CreateWorkflowResponse, error) {
-	return gen.CreateWorkflow(ctx, s.client.GraphQL, input)
+	return gen.CreateWorkflow(ctx, s.client.GraphQL, *input)
 }
 
 // Rename renames a workflow.
@@ -72,7 +72,7 @@ func (s *WorkflowSDK) RunActive(
 	ctx context.Context, id string,
 	input *gen.RunActiveWorkflowInput,
 ) (*gen.RunActiveWorkflowResponse, error) {
-	return gen.RunActiveWorkflow(ctx, s.client.GraphQL, id, input)
+	return gen.RunActiveWorkflow(ctx, s.client.GraphQL, id, *input)
 }
 
 // RunConvert executes a convert workflow on input data.

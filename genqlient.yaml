@@ -3,7 +3,7 @@ operations:
   - graphql/operations/*.graphql
 generated: graphql/generated.go
 package: graphql
-optional: pointer_omitempty
+optional: pointer
 use_struct_references: false
 
 bindings:

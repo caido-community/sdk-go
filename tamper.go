@@ -30,7 +30,7 @@ func (s *TamperSDK) CreateCollection(
 	ctx context.Context, input *gen.CreateTamperRuleCollectionInput,
 ) (*gen.CreateTamperRuleCollectionResponse, error) {
 	return gen.CreateTamperRuleCollection(
-		ctx, s.client.GraphQL, input,
+		ctx, s.client.GraphQL, *input,
 	)
 }
 
@@ -38,14 +38,14 @@ func (s *TamperSDK) CreateCollection(
 func (s *TamperSDK) CreateRule(
 	ctx context.Context, input *gen.CreateTamperRuleInput,
 ) (*gen.CreateTamperRuleResponse, error) {
-	return gen.CreateTamperRule(ctx, s.client.GraphQL, input)
+	return gen.CreateTamperRule(ctx, s.client.GraphQL, *input)
 }
 
 // UpdateRule updates an existing tamper rule.
 func (s *TamperSDK) UpdateRule(
 	ctx context.Context, id string, input *gen.UpdateTamperRuleInput,
 ) (*gen.UpdateTamperRuleResponse, error) {
-	return gen.UpdateTamperRule(ctx, s.client.GraphQL, id, input)
+	return gen.UpdateTamperRule(ctx, s.client.GraphQL, id, *input)
 }
 
 // DeleteRule deletes a tamper rule.

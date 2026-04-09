@@ -94,7 +94,7 @@ func (s *InterceptSDK) Resume(
 func (s *InterceptSDK) SetOptions(
 	ctx context.Context, input *gen.InterceptOptionsInput,
 ) (*gen.SetInterceptOptionsResponse, error) {
-	return gen.SetInterceptOptions(ctx, s.client.GraphQL, input)
+	return gen.SetInterceptOptions(ctx, s.client.GraphQL, *input)
 }
 
 // DeleteEntries deletes intercept entries matching a filter.

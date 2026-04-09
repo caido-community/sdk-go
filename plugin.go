@@ -22,7 +22,7 @@ func (s *PluginSDK) ListPackages(
 func (s *PluginSDK) InstallPackage(
 	ctx context.Context, input *gen.InstallPluginPackageInput,
 ) (*gen.InstallPluginPackageResponse, error) {
-	return gen.InstallPluginPackage(ctx, s.client.GraphQL, input)
+	return gen.InstallPluginPackage(ctx, s.client.GraphQL, *input)
 }
 
 // DeleteUpstreamPlugin deletes an upstream plugin.

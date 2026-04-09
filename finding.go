@@ -53,7 +53,7 @@ func (s *FindingSDK) ListReporters(
 func (s *FindingSDK) Create(
 	ctx context.Context, requestID string, input *gen.CreateFindingInput,
 ) (*gen.CreateFindingResponse, error) {
-	return gen.CreateFinding(ctx, s.client.GraphQL, requestID, input)
+	return gen.CreateFinding(ctx, s.client.GraphQL, requestID, *input)
 }
 
 // Delete deletes findings.
@@ -67,5 +67,5 @@ func (s *FindingSDK) Delete(
 func (s *FindingSDK) Export(
 	ctx context.Context, input *gen.ExportFindingsInput,
 ) (*gen.ExportFindingsResponse, error) {
-	return gen.ExportFindings(ctx, s.client.GraphQL, input)
+	return gen.ExportFindings(ctx, s.client.GraphQL, *input)
 }

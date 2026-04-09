@@ -65,14 +65,14 @@ func (s *ReplaySDK) ListCollections(
 func (s *ReplaySDK) CreateSession(
 	ctx context.Context, input *gen.CreateReplaySessionInput,
 ) (*gen.CreateReplaySessionResponse, error) {
-	return gen.CreateReplaySession(ctx, s.client.GraphQL, input)
+	return gen.CreateReplaySession(ctx, s.client.GraphQL, *input)
 }
 
 // CreateCollection creates a new replay session collection.
 func (s *ReplaySDK) CreateCollection(
 	ctx context.Context, input *gen.CreateReplaySessionCollectionInput,
 ) (*gen.CreateReplaySessionCollectionResponse, error) {
-	return gen.CreateReplaySessionCollection(ctx, s.client.GraphQL, input)
+	return gen.CreateReplaySessionCollection(ctx, s.client.GraphQL, *input)
 }
 
 // RenameSession renames a replay session.
@@ -116,5 +116,5 @@ func (s *ReplaySDK) MoveSession(
 func (s *ReplaySDK) SendRequest(
 	ctx context.Context, sessionID string, input *gen.StartReplayTaskInput,
 ) (*gen.StartReplayTaskResponse, error) {
-	return gen.StartReplayTask(ctx, s.client.GraphQL, sessionID, input)
+	return gen.StartReplayTask(ctx, s.client.GraphQL, sessionID, *input)
 }

@@ -29,7 +29,7 @@ func (s *ScopeSDK) Get(
 func (s *ScopeSDK) Create(
 	ctx context.Context, input *gen.CreateScopeInput,
 ) (*gen.CreateScopeResponse, error) {
-	return gen.CreateScope(ctx, s.client.GraphQL, input)
+	return gen.CreateScope(ctx, s.client.GraphQL, *input)
 }
 
 // Rename renames a scope.

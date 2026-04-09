@@ -122,29 +122,201 @@ func (v *CancelAutomateTaskCancelAutomateTaskCancelAutomateTaskPayload) GetCance
 
 // CancelAutomateTaskResponse is returned by CancelAutomateTask on success.
 type CancelAutomateTaskResponse struct {
-	CancelAutomateTask *CancelAutomateTaskCancelAutomateTaskCancelAutomateTaskPayload `json:"cancelAutomateTask"`
+	CancelAutomateTask CancelAutomateTaskCancelAutomateTaskCancelAutomateTaskPayload `json:"cancelAutomateTask"`
 }
 
 // GetCancelAutomateTask returns CancelAutomateTaskResponse.CancelAutomateTask, and is useful for accessing the field via an interface.
-func (v *CancelAutomateTaskResponse) GetCancelAutomateTask() *CancelAutomateTaskCancelAutomateTaskCancelAutomateTaskPayload {
+func (v *CancelAutomateTaskResponse) GetCancelAutomateTask() CancelAutomateTaskCancelAutomateTaskCancelAutomateTaskPayload {
 	return v.CancelAutomateTask
 }
 
 // CancelTaskCancelTaskCancelTaskPayload includes the requested fields of the GraphQL type CancelTaskPayload.
 type CancelTaskCancelTaskCancelTaskPayload struct {
-	CancelledId *string `json:"cancelledId"`
+	CancelledId *string                                                    `json:"cancelledId"`
+	Error       *CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError `json:"-"`
 }
 
 // GetCancelledId returns CancelTaskCancelTaskCancelTaskPayload.CancelledId, and is useful for accessing the field via an interface.
 func (v *CancelTaskCancelTaskCancelTaskPayload) GetCancelledId() *string { return v.CancelledId }
 
+// GetError returns CancelTaskCancelTaskCancelTaskPayload.Error, and is useful for accessing the field via an interface.
+func (v *CancelTaskCancelTaskCancelTaskPayload) GetError() *CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError {
+	return v.Error
+}
+
+func (v *CancelTaskCancelTaskCancelTaskPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*CancelTaskCancelTaskCancelTaskPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.CancelTaskCancelTaskCancelTaskPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError)
+			err = __unmarshalCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal CancelTaskCancelTaskCancelTaskPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalCancelTaskCancelTaskCancelTaskPayload struct {
+	CancelledId *string `json:"cancelledId"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *CancelTaskCancelTaskCancelTaskPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *CancelTaskCancelTaskCancelTaskPayload) __premarshalJSON() (*__premarshalCancelTaskCancelTaskCancelTaskPayload, error) {
+	var retval __premarshalCancelTaskCancelTaskCancelTaskPayload
+
+	retval.CancelledId = v.CancelledId
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal CancelTaskCancelTaskCancelTaskPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError includes the requested fields of the GraphQL interface CancelTaskError.
+//
+// CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError is implemented by the following types:
+// CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError
+// CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError
+type CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError interface {
+	implementsGraphQLInterfaceCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError) implementsGraphQLInterfaceCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError() {
+}
+func (v *CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError() {
+}
+
+func __unmarshalCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError(b []byte, v *CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing CancelTaskError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalCancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError(v *CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for CancelTaskCancelTaskCancelTaskPayloadErrorCancelTaskError: "%T"`, v)
+	}
+}
+
+// CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *CancelTaskCancelTaskCancelTaskPayloadErrorOtherUserError) GetCode() string { return v.Code }
+
+// CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *CancelTaskCancelTaskCancelTaskPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
 // CancelTaskResponse is returned by CancelTask on success.
 type CancelTaskResponse struct {
-	CancelTask *CancelTaskCancelTaskCancelTaskPayload `json:"cancelTask"`
+	CancelTask CancelTaskCancelTaskCancelTaskPayload `json:"cancelTask"`
 }
 
 // GetCancelTask returns CancelTaskResponse.CancelTask, and is useful for accessing the field via an interface.
-func (v *CancelTaskResponse) GetCancelTask() *CancelTaskCancelTaskCancelTaskPayload {
+func (v *CancelTaskResponse) GetCancelTask() CancelTaskCancelTaskCancelTaskPayload {
 	return v.CancelTask
 }
 
@@ -160,11 +332,11 @@ func (v *ClearSitemapEntriesClearSitemapEntriesClearSitemapEntriesPayload) GetDe
 
 // ClearSitemapEntriesResponse is returned by ClearSitemapEntries on success.
 type ClearSitemapEntriesResponse struct {
-	ClearSitemapEntries *ClearSitemapEntriesClearSitemapEntriesClearSitemapEntriesPayload `json:"clearSitemapEntries"`
+	ClearSitemapEntries ClearSitemapEntriesClearSitemapEntriesClearSitemapEntriesPayload `json:"clearSitemapEntries"`
 }
 
 // GetClearSitemapEntries returns ClearSitemapEntriesResponse.ClearSitemapEntries, and is useful for accessing the field via an interface.
-func (v *ClearSitemapEntriesResponse) GetClearSitemapEntries() *ClearSitemapEntriesClearSitemapEntriesClearSitemapEntriesPayload {
+func (v *ClearSitemapEntriesResponse) GetClearSitemapEntries() ClearSitemapEntriesClearSitemapEntriesClearSitemapEntriesPayload {
 	return v.ClearSitemapEntries
 }
 
@@ -214,7 +386,7 @@ func (v *CreateAutomateSessionCreateAutomateSessionCreateAutomateSessionPayloadS
 }
 
 type CreateAutomateSessionInput struct {
-	RequestSource *RequestSourceInput `json:"requestSource,omitempty"`
+	RequestSource *RequestSourceInput `json:"requestSource"`
 }
 
 // GetRequestSource returns CreateAutomateSessionInput.RequestSource, and is useful for accessing the field via an interface.
@@ -222,11 +394,11 @@ func (v *CreateAutomateSessionInput) GetRequestSource() *RequestSourceInput { re
 
 // CreateAutomateSessionResponse is returned by CreateAutomateSession on success.
 type CreateAutomateSessionResponse struct {
-	CreateAutomateSession *CreateAutomateSessionCreateAutomateSessionCreateAutomateSessionPayload `json:"createAutomateSession"`
+	CreateAutomateSession CreateAutomateSessionCreateAutomateSessionCreateAutomateSessionPayload `json:"createAutomateSession"`
 }
 
 // GetCreateAutomateSession returns CreateAutomateSessionResponse.CreateAutomateSession, and is useful for accessing the field via an interface.
-func (v *CreateAutomateSessionResponse) GetCreateAutomateSession() *CreateAutomateSessionCreateAutomateSessionCreateAutomateSessionPayload {
+func (v *CreateAutomateSessionResponse) GetCreateAutomateSession() CreateAutomateSessionCreateAutomateSessionCreateAutomateSessionPayload {
 	return v.CreateAutomateSession
 }
 
@@ -473,23 +645,23 @@ func (v *CreateEnvironmentCreateEnvironmentCreateEnvironmentPayloadErrorPermissi
 }
 
 type CreateEnvironmentInput struct {
-	Name      string                      `json:"name"`
-	Variables []*EnvironmentVariableInput `json:"variables,omitempty"`
+	Name      string                     `json:"name"`
+	Variables []EnvironmentVariableInput `json:"variables"`
 }
 
 // GetName returns CreateEnvironmentInput.Name, and is useful for accessing the field via an interface.
 func (v *CreateEnvironmentInput) GetName() string { return v.Name }
 
 // GetVariables returns CreateEnvironmentInput.Variables, and is useful for accessing the field via an interface.
-func (v *CreateEnvironmentInput) GetVariables() []*EnvironmentVariableInput { return v.Variables }
+func (v *CreateEnvironmentInput) GetVariables() []EnvironmentVariableInput { return v.Variables }
 
 // CreateEnvironmentResponse is returned by CreateEnvironment on success.
 type CreateEnvironmentResponse struct {
-	CreateEnvironment *CreateEnvironmentCreateEnvironmentCreateEnvironmentPayload `json:"createEnvironment"`
+	CreateEnvironment CreateEnvironmentCreateEnvironmentCreateEnvironmentPayload `json:"createEnvironment"`
 }
 
 // GetCreateEnvironment returns CreateEnvironmentResponse.CreateEnvironment, and is useful for accessing the field via an interface.
-func (v *CreateEnvironmentResponse) GetCreateEnvironment() *CreateEnvironmentCreateEnvironmentCreateEnvironmentPayload {
+func (v *CreateEnvironmentResponse) GetCreateEnvironment() CreateEnvironmentCreateEnvironmentCreateEnvironmentPayload {
 	return v.CreateEnvironment
 }
 
@@ -782,11 +954,11 @@ func (v *CreateFilterPresetInput) GetName() string { return v.Name }
 
 // CreateFilterPresetResponse is returned by CreateFilterPreset on success.
 type CreateFilterPresetResponse struct {
-	CreateFilterPreset *CreateFilterPresetCreateFilterPresetCreateFilterPresetPayload `json:"createFilterPreset"`
+	CreateFilterPreset CreateFilterPresetCreateFilterPresetCreateFilterPresetPayload `json:"createFilterPreset"`
 }
 
 // GetCreateFilterPreset returns CreateFilterPresetResponse.CreateFilterPreset, and is useful for accessing the field via an interface.
-func (v *CreateFilterPresetResponse) GetCreateFilterPreset() *CreateFilterPresetCreateFilterPresetCreateFilterPresetPayload {
+func (v *CreateFilterPresetResponse) GetCreateFilterPreset() CreateFilterPresetCreateFilterPresetCreateFilterPresetPayload {
 	return v.CreateFilterPreset
 }
 
@@ -1021,11 +1193,11 @@ func (v *CreateFindingInput) GetTitle() string { return v.Title }
 
 // CreateFindingResponse is returned by CreateFinding on success.
 type CreateFindingResponse struct {
-	CreateFinding *CreateFindingCreateFindingCreateFindingPayload `json:"createFinding"`
+	CreateFinding CreateFindingCreateFindingCreateFindingPayload `json:"createFinding"`
 }
 
 // GetCreateFinding returns CreateFindingResponse.CreateFinding, and is useful for accessing the field via an interface.
-func (v *CreateFindingResponse) GetCreateFinding() *CreateFindingCreateFindingCreateFindingPayload {
+func (v *CreateFindingResponse) GetCreateFinding() CreateFindingCreateFindingCreateFindingPayload {
 	return v.CreateFinding
 }
 
@@ -1280,11 +1452,11 @@ func (v *CreateProjectInput) GetTemporary() bool { return v.Temporary }
 
 // CreateProjectResponse is returned by CreateProject on success.
 type CreateProjectResponse struct {
-	CreateProject *CreateProjectCreateProjectCreateProjectPayload `json:"createProject"`
+	CreateProject CreateProjectCreateProjectCreateProjectPayload `json:"createProject"`
 }
 
 // GetCreateProject returns CreateProjectResponse.CreateProject, and is useful for accessing the field via an interface.
-func (v *CreateProjectResponse) GetCreateProject() *CreateProjectCreateProjectCreateProjectPayload {
+func (v *CreateProjectResponse) GetCreateProject() CreateProjectCreateProjectCreateProjectPayload {
 	return v.CreateProject
 }
 
@@ -1323,11 +1495,11 @@ func (v *CreateReplaySessionCollectionInput) GetName() string { return v.Name }
 
 // CreateReplaySessionCollectionResponse is returned by CreateReplaySessionCollection on success.
 type CreateReplaySessionCollectionResponse struct {
-	CreateReplaySessionCollection *CreateReplaySessionCollectionCreateReplaySessionCollectionCreateReplaySessionCollectionPayload `json:"createReplaySessionCollection"`
+	CreateReplaySessionCollection CreateReplaySessionCollectionCreateReplaySessionCollectionCreateReplaySessionCollectionPayload `json:"createReplaySessionCollection"`
 }
 
 // GetCreateReplaySessionCollection returns CreateReplaySessionCollectionResponse.CreateReplaySessionCollection, and is useful for accessing the field via an interface.
-func (v *CreateReplaySessionCollectionResponse) GetCreateReplaySessionCollection() *CreateReplaySessionCollectionCreateReplaySessionCollectionCreateReplaySessionCollectionPayload {
+func (v *CreateReplaySessionCollectionResponse) GetCreateReplaySessionCollection() CreateReplaySessionCollectionCreateReplaySessionCollectionCreateReplaySessionCollectionPayload {
 	return v.CreateReplaySessionCollection
 }
 
@@ -1359,7 +1531,7 @@ func (v *CreateReplaySessionCreateReplaySessionCreateReplaySessionPayloadSession
 
 type CreateReplaySessionInput struct {
 	CollectionId  *string             `json:"collectionId"`
-	RequestSource *RequestSourceInput `json:"requestSource,omitempty"`
+	RequestSource *RequestSourceInput `json:"requestSource"`
 }
 
 // GetCollectionId returns CreateReplaySessionInput.CollectionId, and is useful for accessing the field via an interface.
@@ -1370,11 +1542,11 @@ func (v *CreateReplaySessionInput) GetRequestSource() *RequestSourceInput { retu
 
 // CreateReplaySessionResponse is returned by CreateReplaySession on success.
 type CreateReplaySessionResponse struct {
-	CreateReplaySession *CreateReplaySessionCreateReplaySessionCreateReplaySessionPayload `json:"createReplaySession"`
+	CreateReplaySession CreateReplaySessionCreateReplaySessionCreateReplaySessionPayload `json:"createReplaySession"`
 }
 
 // GetCreateReplaySession returns CreateReplaySessionResponse.CreateReplaySession, and is useful for accessing the field via an interface.
-func (v *CreateReplaySessionResponse) GetCreateReplaySession() *CreateReplaySessionCreateReplaySessionCreateReplaySessionPayload {
+func (v *CreateReplaySessionResponse) GetCreateReplaySession() CreateReplaySessionCreateReplaySessionCreateReplaySessionPayload {
 	return v.CreateReplaySession
 }
 
@@ -1585,11 +1757,11 @@ func (v *CreateScopeInput) GetName() string { return v.Name }
 
 // CreateScopeResponse is returned by CreateScope on success.
 type CreateScopeResponse struct {
-	CreateScope *CreateScopeCreateScopeCreateScopePayload `json:"createScope"`
+	CreateScope CreateScopeCreateScopeCreateScopePayload `json:"createScope"`
 }
 
 // GetCreateScope returns CreateScopeResponse.CreateScope, and is useful for accessing the field via an interface.
-func (v *CreateScopeResponse) GetCreateScope() *CreateScopeCreateScopeCreateScopePayload {
+func (v *CreateScopeResponse) GetCreateScope() CreateScopeCreateScopeCreateScopePayload {
 	return v.CreateScope
 }
 
@@ -1628,11 +1800,11 @@ func (v *CreateTamperRuleCollectionInput) GetName() string { return v.Name }
 
 // CreateTamperRuleCollectionResponse is returned by CreateTamperRuleCollection on success.
 type CreateTamperRuleCollectionResponse struct {
-	CreateTamperRuleCollection *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload `json:"createTamperRuleCollection"`
+	CreateTamperRuleCollection CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload `json:"createTamperRuleCollection"`
 }
 
 // GetCreateTamperRuleCollection returns CreateTamperRuleCollectionResponse.CreateTamperRuleCollection, and is useful for accessing the field via an interface.
-func (v *CreateTamperRuleCollectionResponse) GetCreateTamperRuleCollection() *CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload {
+func (v *CreateTamperRuleCollectionResponse) GetCreateTamperRuleCollection() CreateTamperRuleCollectionCreateTamperRuleCollectionCreateTamperRuleCollectionPayload {
 	return v.CreateTamperRuleCollection
 }
 
@@ -1855,11 +2027,11 @@ func (v *CreateTamperRuleCreateTamperRuleCreateTamperRulePayloadRuleTamperRule) 
 }
 
 type CreateTamperRuleInput struct {
-	CollectionId string              `json:"collectionId"`
-	Condition    *string             `json:"condition"`
-	Name         string              `json:"name"`
-	Section      *TamperSectionInput `json:"section,omitempty"`
-	Sources      []Source            `json:"sources"`
+	CollectionId string             `json:"collectionId"`
+	Condition    *string            `json:"condition"`
+	Name         string             `json:"name"`
+	Section      TamperSectionInput `json:"section"`
+	Sources      []Source           `json:"sources"`
 }
 
 // GetCollectionId returns CreateTamperRuleInput.CollectionId, and is useful for accessing the field via an interface.
@@ -1872,18 +2044,18 @@ func (v *CreateTamperRuleInput) GetCondition() *string { return v.Condition }
 func (v *CreateTamperRuleInput) GetName() string { return v.Name }
 
 // GetSection returns CreateTamperRuleInput.Section, and is useful for accessing the field via an interface.
-func (v *CreateTamperRuleInput) GetSection() *TamperSectionInput { return v.Section }
+func (v *CreateTamperRuleInput) GetSection() TamperSectionInput { return v.Section }
 
 // GetSources returns CreateTamperRuleInput.Sources, and is useful for accessing the field via an interface.
 func (v *CreateTamperRuleInput) GetSources() []Source { return v.Sources }
 
 // CreateTamperRuleResponse is returned by CreateTamperRule on success.
 type CreateTamperRuleResponse struct {
-	CreateTamperRule *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload `json:"createTamperRule"`
+	CreateTamperRule CreateTamperRuleCreateTamperRuleCreateTamperRulePayload `json:"createTamperRule"`
 }
 
 // GetCreateTamperRule returns CreateTamperRuleResponse.CreateTamperRule, and is useful for accessing the field via an interface.
-func (v *CreateTamperRuleResponse) GetCreateTamperRule() *CreateTamperRuleCreateTamperRuleCreateTamperRulePayload {
+func (v *CreateTamperRuleResponse) GetCreateTamperRule() CreateTamperRuleCreateTamperRuleCreateTamperRulePayload {
 	return v.CreateTamperRule
 }
 
@@ -2114,11 +2286,11 @@ func (v *CreateWorkflowInput) GetGlobal() bool { return v.Global }
 
 // CreateWorkflowResponse is returned by CreateWorkflow on success.
 type CreateWorkflowResponse struct {
-	CreateWorkflow *CreateWorkflowCreateWorkflowCreateWorkflowPayload `json:"createWorkflow"`
+	CreateWorkflow CreateWorkflowCreateWorkflowCreateWorkflowPayload `json:"createWorkflow"`
 }
 
 // GetCreateWorkflow returns CreateWorkflowResponse.CreateWorkflow, and is useful for accessing the field via an interface.
-func (v *CreateWorkflowResponse) GetCreateWorkflow() *CreateWorkflowCreateWorkflowCreateWorkflowPayload {
+func (v *CreateWorkflowResponse) GetCreateWorkflow() CreateWorkflowCreateWorkflowCreateWorkflowPayload {
 	return v.CreateWorkflow
 }
 
@@ -2134,17 +2306,18 @@ func (v *DeleteAutomateSessionDeleteAutomateSessionDeleteAutomateSessionPayload)
 
 // DeleteAutomateSessionResponse is returned by DeleteAutomateSession on success.
 type DeleteAutomateSessionResponse struct {
-	DeleteAutomateSession *DeleteAutomateSessionDeleteAutomateSessionDeleteAutomateSessionPayload `json:"deleteAutomateSession"`
+	DeleteAutomateSession DeleteAutomateSessionDeleteAutomateSessionDeleteAutomateSessionPayload `json:"deleteAutomateSession"`
 }
 
 // GetDeleteAutomateSession returns DeleteAutomateSessionResponse.DeleteAutomateSession, and is useful for accessing the field via an interface.
-func (v *DeleteAutomateSessionResponse) GetDeleteAutomateSession() *DeleteAutomateSessionDeleteAutomateSessionDeleteAutomateSessionPayload {
+func (v *DeleteAutomateSessionResponse) GetDeleteAutomateSession() DeleteAutomateSessionDeleteAutomateSessionDeleteAutomateSessionPayload {
 	return v.DeleteAutomateSession
 }
 
 // DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload includes the requested fields of the GraphQL type DeleteEnvironmentPayload.
 type DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload struct {
-	DeletedId *string `json:"deletedId"`
+	DeletedId *string                                                                                `json:"deletedId"`
+	Error     *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError `json:"-"`
 }
 
 // GetDeletedId returns DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload.DeletedId, and is useful for accessing the field via an interface.
@@ -2152,13 +2325,186 @@ func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload) GetDeletedI
 	return v.DeletedId
 }
 
+// GetError returns DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload.Error, and is useful for accessing the field via an interface.
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload) GetError() *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError {
+	return v.Error
+}
+
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError)
+			err = __unmarshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload struct {
+	DeletedId *string `json:"deletedId"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload) __premarshalJSON() (*__premarshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload, error) {
+	var retval __premarshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload
+
+	retval.DeletedId = v.DeletedId
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError includes the requested fields of the GraphQL interface DeleteEnvironmentError.
+//
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError is implemented by the following types:
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError
+type DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError interface {
+	implementsGraphQLInterfaceDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError) implementsGraphQLInterfaceDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError() {
+}
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError() {
+}
+
+func __unmarshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError(b []byte, v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing DeleteEnvironmentError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalDeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError(v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorDeleteEnvironmentError: "%T"`, v)
+	}
+}
+
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
 // DeleteEnvironmentResponse is returned by DeleteEnvironment on success.
 type DeleteEnvironmentResponse struct {
-	DeleteEnvironment *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload `json:"deleteEnvironment"`
+	DeleteEnvironment DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload `json:"deleteEnvironment"`
 }
 
 // GetDeleteEnvironment returns DeleteEnvironmentResponse.DeleteEnvironment, and is useful for accessing the field via an interface.
-func (v *DeleteEnvironmentResponse) GetDeleteEnvironment() *DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload {
+func (v *DeleteEnvironmentResponse) GetDeleteEnvironment() DeleteEnvironmentDeleteEnvironmentDeleteEnvironmentPayload {
 	return v.DeleteEnvironment
 }
 
@@ -2174,11 +2520,11 @@ func (v *DeleteFilterPresetDeleteFilterPresetDeleteFilterPresetPayload) GetDelet
 
 // DeleteFilterPresetResponse is returned by DeleteFilterPreset on success.
 type DeleteFilterPresetResponse struct {
-	DeleteFilterPreset *DeleteFilterPresetDeleteFilterPresetDeleteFilterPresetPayload `json:"deleteFilterPreset"`
+	DeleteFilterPreset DeleteFilterPresetDeleteFilterPresetDeleteFilterPresetPayload `json:"deleteFilterPreset"`
 }
 
 // GetDeleteFilterPreset returns DeleteFilterPresetResponse.DeleteFilterPreset, and is useful for accessing the field via an interface.
-func (v *DeleteFilterPresetResponse) GetDeleteFilterPreset() *DeleteFilterPresetDeleteFilterPresetDeleteFilterPresetPayload {
+func (v *DeleteFilterPresetResponse) GetDeleteFilterPreset() DeleteFilterPresetDeleteFilterPresetDeleteFilterPresetPayload {
 	return v.DeleteFilterPreset
 }
 
@@ -2205,11 +2551,11 @@ func (v *DeleteFindingsInput) GetReporter() *string { return v.Reporter }
 
 // DeleteFindingsResponse is returned by DeleteFindings on success.
 type DeleteFindingsResponse struct {
-	DeleteFindings *DeleteFindingsDeleteFindingsDeleteFindingsPayload `json:"deleteFindings"`
+	DeleteFindings DeleteFindingsDeleteFindingsDeleteFindingsPayload `json:"deleteFindings"`
 }
 
 // GetDeleteFindings returns DeleteFindingsResponse.DeleteFindings, and is useful for accessing the field via an interface.
-func (v *DeleteFindingsResponse) GetDeleteFindings() *DeleteFindingsDeleteFindingsDeleteFindingsPayload {
+func (v *DeleteFindingsResponse) GetDeleteFindings() DeleteFindingsDeleteFindingsDeleteFindingsPayload {
 	return v.DeleteFindings
 }
 
@@ -2225,11 +2571,11 @@ func (v *DeleteHostedFileDeleteHostedFileDeleteHostedFilePayload) GetDeletedId()
 
 // DeleteHostedFileResponse is returned by DeleteHostedFile on success.
 type DeleteHostedFileResponse struct {
-	DeleteHostedFile *DeleteHostedFileDeleteHostedFileDeleteHostedFilePayload `json:"deleteHostedFile"`
+	DeleteHostedFile DeleteHostedFileDeleteHostedFileDeleteHostedFilePayload `json:"deleteHostedFile"`
 }
 
 // GetDeleteHostedFile returns DeleteHostedFileResponse.DeleteHostedFile, and is useful for accessing the field via an interface.
-func (v *DeleteHostedFileResponse) GetDeleteHostedFile() *DeleteHostedFileDeleteHostedFileDeleteHostedFilePayload {
+func (v *DeleteHostedFileResponse) GetDeleteHostedFile() DeleteHostedFileDeleteHostedFileDeleteHostedFilePayload {
 	return v.DeleteHostedFile
 }
 
@@ -2255,11 +2601,11 @@ func (v *DeleteInterceptEntriesDeleteInterceptEntriesDeleteInterceptEntriesPaylo
 
 // DeleteInterceptEntriesResponse is returned by DeleteInterceptEntries on success.
 type DeleteInterceptEntriesResponse struct {
-	DeleteInterceptEntries *DeleteInterceptEntriesDeleteInterceptEntriesDeleteInterceptEntriesPayload `json:"deleteInterceptEntries"`
+	DeleteInterceptEntries DeleteInterceptEntriesDeleteInterceptEntriesDeleteInterceptEntriesPayload `json:"deleteInterceptEntries"`
 }
 
 // GetDeleteInterceptEntries returns DeleteInterceptEntriesResponse.DeleteInterceptEntries, and is useful for accessing the field via an interface.
-func (v *DeleteInterceptEntriesResponse) GetDeleteInterceptEntries() *DeleteInterceptEntriesDeleteInterceptEntriesDeleteInterceptEntriesPayload {
+func (v *DeleteInterceptEntriesResponse) GetDeleteInterceptEntries() DeleteInterceptEntriesDeleteInterceptEntriesDeleteInterceptEntriesPayload {
 	return v.DeleteInterceptEntries
 }
 
@@ -2275,29 +2621,227 @@ func (v *DeleteInterceptEntryDeleteInterceptEntryDeleteInterceptEntryPayload) Ge
 
 // DeleteInterceptEntryResponse is returned by DeleteInterceptEntry on success.
 type DeleteInterceptEntryResponse struct {
-	DeleteInterceptEntry *DeleteInterceptEntryDeleteInterceptEntryDeleteInterceptEntryPayload `json:"deleteInterceptEntry"`
+	DeleteInterceptEntry DeleteInterceptEntryDeleteInterceptEntryDeleteInterceptEntryPayload `json:"deleteInterceptEntry"`
 }
 
 // GetDeleteInterceptEntry returns DeleteInterceptEntryResponse.DeleteInterceptEntry, and is useful for accessing the field via an interface.
-func (v *DeleteInterceptEntryResponse) GetDeleteInterceptEntry() *DeleteInterceptEntryDeleteInterceptEntryDeleteInterceptEntryPayload {
+func (v *DeleteInterceptEntryResponse) GetDeleteInterceptEntry() DeleteInterceptEntryDeleteInterceptEntryDeleteInterceptEntryPayload {
 	return v.DeleteInterceptEntry
 }
 
 // DeleteProjectDeleteProjectDeleteProjectPayload includes the requested fields of the GraphQL type DeleteProjectPayload.
 type DeleteProjectDeleteProjectDeleteProjectPayload struct {
-	DeletedId *string `json:"deletedId"`
+	DeletedId *string                                              `json:"deletedId"`
+	Error     *DeleteProjectDeleteProjectDeleteProjectPayloadError `json:"-"`
 }
 
 // GetDeletedId returns DeleteProjectDeleteProjectDeleteProjectPayload.DeletedId, and is useful for accessing the field via an interface.
 func (v *DeleteProjectDeleteProjectDeleteProjectPayload) GetDeletedId() *string { return v.DeletedId }
 
+// GetError returns DeleteProjectDeleteProjectDeleteProjectPayload.Error, and is useful for accessing the field via an interface.
+func (v *DeleteProjectDeleteProjectDeleteProjectPayload) GetError() *DeleteProjectDeleteProjectDeleteProjectPayloadError {
+	return v.Error
+}
+
+func (v *DeleteProjectDeleteProjectDeleteProjectPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*DeleteProjectDeleteProjectDeleteProjectPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.DeleteProjectDeleteProjectDeleteProjectPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(DeleteProjectDeleteProjectDeleteProjectPayloadError)
+			err = __unmarshalDeleteProjectDeleteProjectDeleteProjectPayloadError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal DeleteProjectDeleteProjectDeleteProjectPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalDeleteProjectDeleteProjectDeleteProjectPayload struct {
+	DeletedId *string `json:"deletedId"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *DeleteProjectDeleteProjectDeleteProjectPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *DeleteProjectDeleteProjectDeleteProjectPayload) __premarshalJSON() (*__premarshalDeleteProjectDeleteProjectDeleteProjectPayload, error) {
+	var retval __premarshalDeleteProjectDeleteProjectDeleteProjectPayload
+
+	retval.DeletedId = v.DeletedId
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalDeleteProjectDeleteProjectDeleteProjectPayloadError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal DeleteProjectDeleteProjectDeleteProjectPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// DeleteProjectDeleteProjectDeleteProjectPayloadError includes the requested fields of the GraphQL interface DeleteProjectPayloadError.
+//
+// DeleteProjectDeleteProjectDeleteProjectPayloadError is implemented by the following types:
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError
+type DeleteProjectDeleteProjectDeleteProjectPayloadError interface {
+	implementsGraphQLInterfaceDeleteProjectDeleteProjectDeleteProjectPayloadError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError) implementsGraphQLInterfaceDeleteProjectDeleteProjectDeleteProjectPayloadError() {
+}
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError) implementsGraphQLInterfaceDeleteProjectDeleteProjectDeleteProjectPayloadError() {
+}
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceDeleteProjectDeleteProjectDeleteProjectPayloadError() {
+}
+
+func __unmarshalDeleteProjectDeleteProjectDeleteProjectPayloadError(b []byte, v *DeleteProjectDeleteProjectDeleteProjectPayloadError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "ProjectUserError":
+		*v = new(DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing DeleteProjectPayloadError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for DeleteProjectDeleteProjectDeleteProjectPayloadError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalDeleteProjectDeleteProjectDeleteProjectPayloadError(v *DeleteProjectDeleteProjectDeleteProjectPayloadError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError:
+		typename = "ProjectUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for DeleteProjectDeleteProjectDeleteProjectPayloadError: "%T"`, v)
+	}
+}
+
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError includes the requested fields of the GraphQL type ProjectUserError.
+type DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorProjectUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteProjectDeleteProjectDeleteProjectPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
 // DeleteProjectResponse is returned by DeleteProject on success.
 type DeleteProjectResponse struct {
-	DeleteProject *DeleteProjectDeleteProjectDeleteProjectPayload `json:"deleteProject"`
+	DeleteProject DeleteProjectDeleteProjectDeleteProjectPayload `json:"deleteProject"`
 }
 
 // GetDeleteProject returns DeleteProjectResponse.DeleteProject, and is useful for accessing the field via an interface.
-func (v *DeleteProjectResponse) GetDeleteProject() *DeleteProjectDeleteProjectDeleteProjectPayload {
+func (v *DeleteProjectResponse) GetDeleteProject() DeleteProjectDeleteProjectDeleteProjectPayload {
 	return v.DeleteProject
 }
 
@@ -2313,11 +2857,11 @@ func (v *DeleteReplaySessionCollectionDeleteReplaySessionCollectionDeleteReplayS
 
 // DeleteReplaySessionCollectionResponse is returned by DeleteReplaySessionCollection on success.
 type DeleteReplaySessionCollectionResponse struct {
-	DeleteReplaySessionCollection *DeleteReplaySessionCollectionDeleteReplaySessionCollectionDeleteReplaySessionCollectionPayload `json:"deleteReplaySessionCollection"`
+	DeleteReplaySessionCollection DeleteReplaySessionCollectionDeleteReplaySessionCollectionDeleteReplaySessionCollectionPayload `json:"deleteReplaySessionCollection"`
 }
 
 // GetDeleteReplaySessionCollection returns DeleteReplaySessionCollectionResponse.DeleteReplaySessionCollection, and is useful for accessing the field via an interface.
-func (v *DeleteReplaySessionCollectionResponse) GetDeleteReplaySessionCollection() *DeleteReplaySessionCollectionDeleteReplaySessionCollectionDeleteReplaySessionCollectionPayload {
+func (v *DeleteReplaySessionCollectionResponse) GetDeleteReplaySessionCollection() DeleteReplaySessionCollectionDeleteReplaySessionCollectionDeleteReplaySessionCollectionPayload {
 	return v.DeleteReplaySessionCollection
 }
 
@@ -2333,11 +2877,11 @@ func (v *DeleteReplaySessionsDeleteReplaySessionsDeleteReplaySessionsPayload) Ge
 
 // DeleteReplaySessionsResponse is returned by DeleteReplaySessions on success.
 type DeleteReplaySessionsResponse struct {
-	DeleteReplaySessions *DeleteReplaySessionsDeleteReplaySessionsDeleteReplaySessionsPayload `json:"deleteReplaySessions"`
+	DeleteReplaySessions DeleteReplaySessionsDeleteReplaySessionsDeleteReplaySessionsPayload `json:"deleteReplaySessions"`
 }
 
 // GetDeleteReplaySessions returns DeleteReplaySessionsResponse.DeleteReplaySessions, and is useful for accessing the field via an interface.
-func (v *DeleteReplaySessionsResponse) GetDeleteReplaySessions() *DeleteReplaySessionsDeleteReplaySessionsDeleteReplaySessionsPayload {
+func (v *DeleteReplaySessionsResponse) GetDeleteReplaySessions() DeleteReplaySessionsDeleteReplaySessionsDeleteReplaySessionsPayload {
 	return v.DeleteReplaySessions
 }
 
@@ -2351,11 +2895,11 @@ func (v *DeleteScopeDeleteScopeDeleteScopePayload) GetDeletedId() string { retur
 
 // DeleteScopeResponse is returned by DeleteScope on success.
 type DeleteScopeResponse struct {
-	DeleteScope *DeleteScopeDeleteScopeDeleteScopePayload `json:"deleteScope"`
+	DeleteScope DeleteScopeDeleteScopeDeleteScopePayload `json:"deleteScope"`
 }
 
 // GetDeleteScope returns DeleteScopeResponse.DeleteScope, and is useful for accessing the field via an interface.
-func (v *DeleteScopeResponse) GetDeleteScope() *DeleteScopeDeleteScopeDeleteScopePayload {
+func (v *DeleteScopeResponse) GetDeleteScope() DeleteScopeDeleteScopeDeleteScopePayload {
 	return v.DeleteScope
 }
 
@@ -2371,11 +2915,11 @@ func (v *DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload) Ge
 
 // DeleteSitemapEntriesResponse is returned by DeleteSitemapEntries on success.
 type DeleteSitemapEntriesResponse struct {
-	DeleteSitemapEntries *DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload `json:"deleteSitemapEntries"`
+	DeleteSitemapEntries DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload `json:"deleteSitemapEntries"`
 }
 
 // GetDeleteSitemapEntries returns DeleteSitemapEntriesResponse.DeleteSitemapEntries, and is useful for accessing the field via an interface.
-func (v *DeleteSitemapEntriesResponse) GetDeleteSitemapEntries() *DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload {
+func (v *DeleteSitemapEntriesResponse) GetDeleteSitemapEntries() DeleteSitemapEntriesDeleteSitemapEntriesDeleteSitemapEntriesPayload {
 	return v.DeleteSitemapEntries
 }
 
@@ -2391,11 +2935,11 @@ func (v *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCol
 
 // DeleteTamperRuleCollectionResponse is returned by DeleteTamperRuleCollection on success.
 type DeleteTamperRuleCollectionResponse struct {
-	DeleteTamperRuleCollection *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload `json:"deleteTamperRuleCollection"`
+	DeleteTamperRuleCollection DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload `json:"deleteTamperRuleCollection"`
 }
 
 // GetDeleteTamperRuleCollection returns DeleteTamperRuleCollectionResponse.DeleteTamperRuleCollection, and is useful for accessing the field via an interface.
-func (v *DeleteTamperRuleCollectionResponse) GetDeleteTamperRuleCollection() *DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload {
+func (v *DeleteTamperRuleCollectionResponse) GetDeleteTamperRuleCollection() DeleteTamperRuleCollectionDeleteTamperRuleCollectionDeleteTamperRuleCollectionPayload {
 	return v.DeleteTamperRuleCollection
 }
 
@@ -2411,11 +2955,11 @@ func (v *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload) GetDeletedId()
 
 // DeleteTamperRuleResponse is returned by DeleteTamperRule on success.
 type DeleteTamperRuleResponse struct {
-	DeleteTamperRule *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload `json:"deleteTamperRule"`
+	DeleteTamperRule DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload `json:"deleteTamperRule"`
 }
 
 // GetDeleteTamperRule returns DeleteTamperRuleResponse.DeleteTamperRule, and is useful for accessing the field via an interface.
-func (v *DeleteTamperRuleResponse) GetDeleteTamperRule() *DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload {
+func (v *DeleteTamperRuleResponse) GetDeleteTamperRule() DeleteTamperRuleDeleteTamperRuleDeleteTamperRulePayload {
 	return v.DeleteTamperRule
 }
 
@@ -2431,17 +2975,18 @@ func (v *DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload) Ge
 
 // DeleteUpstreamPluginResponse is returned by DeleteUpstreamPlugin on success.
 type DeleteUpstreamPluginResponse struct {
-	DeleteUpstreamPlugin *DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload `json:"deleteUpstreamPlugin"`
+	DeleteUpstreamPlugin DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload `json:"deleteUpstreamPlugin"`
 }
 
 // GetDeleteUpstreamPlugin returns DeleteUpstreamPluginResponse.DeleteUpstreamPlugin, and is useful for accessing the field via an interface.
-func (v *DeleteUpstreamPluginResponse) GetDeleteUpstreamPlugin() *DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload {
+func (v *DeleteUpstreamPluginResponse) GetDeleteUpstreamPlugin() DeleteUpstreamPluginDeleteUpstreamPluginDeleteUpstreamPluginPayload {
 	return v.DeleteUpstreamPlugin
 }
 
 // DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload includes the requested fields of the GraphQL type DeleteWorkflowPayload.
 type DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload struct {
-	DeletedId *string `json:"deletedId"`
+	DeletedId *string                                                                    `json:"deletedId"`
+	Error     *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError `json:"-"`
 }
 
 // GetDeletedId returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload.DeletedId, and is useful for accessing the field via an interface.
@@ -2449,13 +2994,210 @@ func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload) GetDeletedId() *stri
 	return v.DeletedId
 }
 
+// GetError returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload) GetError() *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError {
+	return v.Error
+}
+
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError)
+			err = __unmarshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayload struct {
+	DeletedId *string `json:"deletedId"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload) __premarshalJSON() (*__premarshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayload, error) {
+	var retval __premarshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayload
+
+	retval.DeletedId = v.DeletedId
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError includes the requested fields of the GraphQL interface DeleteWorkflowError.
+//
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError is implemented by the following types:
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError
+type DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError interface {
+	implementsGraphQLInterfaceDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError() {
+}
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError) implementsGraphQLInterfaceDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError() {
+}
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError() {
+}
+
+func __unmarshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError(b []byte, v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "ReadOnlyUserError":
+		*v = new(DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing DeleteWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalDeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError(v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError:
+		typename = "ReadOnlyUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorDeleteWorkflowError: "%T"`, v)
+	}
+}
+
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError includes the requested fields of the GraphQL type ReadOnlyUserError.
+type DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorReadOnlyUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
 // DeleteWorkflowResponse is returned by DeleteWorkflow on success.
 type DeleteWorkflowResponse struct {
-	DeleteWorkflow *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload `json:"deleteWorkflow"`
+	DeleteWorkflow DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload `json:"deleteWorkflow"`
 }
 
 // GetDeleteWorkflow returns DeleteWorkflowResponse.DeleteWorkflow, and is useful for accessing the field via an interface.
-func (v *DeleteWorkflowResponse) GetDeleteWorkflow() *DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload {
+func (v *DeleteWorkflowResponse) GetDeleteWorkflow() DeleteWorkflowDeleteWorkflowDeleteWorkflowPayload {
 	return v.DeleteWorkflow
 }
 
@@ -2471,11 +3213,11 @@ func (v *DropInterceptMessageDropInterceptMessageDropInterceptMessagePayload) Ge
 
 // DropInterceptMessageResponse is returned by DropInterceptMessage on success.
 type DropInterceptMessageResponse struct {
-	DropInterceptMessage *DropInterceptMessageDropInterceptMessageDropInterceptMessagePayload `json:"dropInterceptMessage"`
+	DropInterceptMessage DropInterceptMessageDropInterceptMessageDropInterceptMessagePayload `json:"dropInterceptMessage"`
 }
 
 // GetDropInterceptMessage returns DropInterceptMessageResponse.DropInterceptMessage, and is useful for accessing the field via an interface.
-func (v *DropInterceptMessageResponse) GetDropInterceptMessage() *DropInterceptMessageDropInterceptMessageDropInterceptMessagePayload {
+func (v *DropInterceptMessageResponse) GetDropInterceptMessage() DropInterceptMessageDropInterceptMessageDropInterceptMessagePayload {
 	return v.DropInterceptMessage
 }
 
@@ -2695,7 +3437,7 @@ func (v *ExportFindingsExportFindingsExportFindingsPayloadExportDataExportOnDema
 }
 
 type ExportFindingsInput struct {
-	Filter *FilterClauseFindingInput `json:"filter,omitempty"`
+	Filter *FilterClauseFindingInput `json:"filter"`
 	Ids    []string                  `json:"ids"`
 }
 
@@ -2707,11 +3449,11 @@ func (v *ExportFindingsInput) GetIds() []string { return v.Ids }
 
 // ExportFindingsResponse is returned by ExportFindings on success.
 type ExportFindingsResponse struct {
-	ExportFindings *ExportFindingsExportFindingsExportFindingsPayload `json:"exportFindings"`
+	ExportFindings ExportFindingsExportFindingsExportFindingsPayload `json:"exportFindings"`
 }
 
 // GetExportFindings returns ExportFindingsResponse.ExportFindings, and is useful for accessing the field via an interface.
-func (v *ExportFindingsResponse) GetExportFindings() *ExportFindingsExportFindingsExportFindingsPayload {
+func (v *ExportFindingsResponse) GetExportFindings() ExportFindingsExportFindingsExportFindingsPayload {
 	return v.ExportFindings
 }
 
@@ -2764,9 +3506,9 @@ func (v *ForwardInterceptMessageForwardInterceptMessageForwardInterceptMessagePa
 }
 
 type ForwardInterceptMessageInput struct {
-	Request  *ForwardInterceptRequestMessageInput  `json:"request,omitempty"`
-	Response *ForwardInterceptResponseMessageInput `json:"response,omitempty"`
-	StreamWs *ForwardInterceptStreamWsMessageInput `json:"streamWs,omitempty"`
+	Request  *ForwardInterceptRequestMessageInput  `json:"request"`
+	Response *ForwardInterceptResponseMessageInput `json:"response"`
+	StreamWs *ForwardInterceptStreamWsMessageInput `json:"streamWs"`
 }
 
 // GetRequest returns ForwardInterceptMessageInput.Request, and is useful for accessing the field via an interface.
@@ -2786,11 +3528,11 @@ func (v *ForwardInterceptMessageInput) GetStreamWs() *ForwardInterceptStreamWsMe
 
 // ForwardInterceptMessageResponse is returned by ForwardInterceptMessage on success.
 type ForwardInterceptMessageResponse struct {
-	ForwardInterceptMessage *ForwardInterceptMessageForwardInterceptMessageForwardInterceptMessagePayload `json:"forwardInterceptMessage"`
+	ForwardInterceptMessage ForwardInterceptMessageForwardInterceptMessageForwardInterceptMessagePayload `json:"forwardInterceptMessage"`
 }
 
 // GetForwardInterceptMessage returns ForwardInterceptMessageResponse.ForwardInterceptMessage, and is useful for accessing the field via an interface.
-func (v *ForwardInterceptMessageResponse) GetForwardInterceptMessage() *ForwardInterceptMessageForwardInterceptMessageForwardInterceptMessagePayload {
+func (v *ForwardInterceptMessageResponse) GetForwardInterceptMessage() ForwardInterceptMessageForwardInterceptMessageForwardInterceptMessagePayload {
 	return v.ForwardInterceptMessage
 }
 
@@ -2837,21 +3579,21 @@ func (v *GetAuthenticationStateAuthenticationState) GetAllowGuests() bool { retu
 
 // GetAuthenticationStateResponse is returned by GetAuthenticationState on success.
 type GetAuthenticationStateResponse struct {
-	AuthenticationState *GetAuthenticationStateAuthenticationState `json:"authenticationState"`
+	AuthenticationState GetAuthenticationStateAuthenticationState `json:"authenticationState"`
 }
 
 // GetAuthenticationState returns GetAuthenticationStateResponse.AuthenticationState, and is useful for accessing the field via an interface.
-func (v *GetAuthenticationStateResponse) GetAuthenticationState() *GetAuthenticationStateAuthenticationState {
+func (v *GetAuthenticationStateResponse) GetAuthenticationState() GetAuthenticationStateAuthenticationState {
 	return v.AuthenticationState
 }
 
 // GetAutomateEntryAutomateEntry includes the requested fields of the GraphQL type AutomateEntry.
 type GetAutomateEntryAutomateEntry struct {
-	Id         string                                                 `json:"id"`
-	Name       string                                                 `json:"name"`
-	CreatedAt  int64                                                  `json:"createdAt"`
-	Connection *GetAutomateEntryAutomateEntryConnectionConnectionInfo `json:"connection"`
-	Raw        string                                                 `json:"raw"`
+	Id         string                                                `json:"id"`
+	Name       string                                                `json:"name"`
+	CreatedAt  int64                                                 `json:"createdAt"`
+	Connection GetAutomateEntryAutomateEntryConnectionConnectionInfo `json:"connection"`
+	Raw        string                                                `json:"raw"`
 }
 
 // GetId returns GetAutomateEntryAutomateEntry.Id, and is useful for accessing the field via an interface.
@@ -2864,7 +3606,7 @@ func (v *GetAutomateEntryAutomateEntry) GetName() string { return v.Name }
 func (v *GetAutomateEntryAutomateEntry) GetCreatedAt() int64 { return v.CreatedAt }
 
 // GetConnection returns GetAutomateEntryAutomateEntry.Connection, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryAutomateEntry) GetConnection() *GetAutomateEntryAutomateEntryConnectionConnectionInfo {
+func (v *GetAutomateEntryAutomateEntry) GetConnection() GetAutomateEntryAutomateEntryConnectionConnectionInfo {
 	return v.Connection
 }
 
@@ -2889,9 +3631,9 @@ func (v *GetAutomateEntryAutomateEntryConnectionConnectionInfo) GetIsTLS() bool 
 
 // GetAutomateEntryRequestsAutomateEntry includes the requested fields of the GraphQL type AutomateEntry.
 type GetAutomateEntryRequestsAutomateEntry struct {
-	Id       string                                                                       `json:"id"`
-	Name     string                                                                       `json:"name"`
-	Requests *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection `json:"requests"`
+	Id       string                                                                      `json:"id"`
+	Name     string                                                                      `json:"name"`
+	Requests GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection `json:"requests"`
 }
 
 // GetId returns GetAutomateEntryRequestsAutomateEntry.Id, and is useful for accessing the field via an interface.
@@ -2901,31 +3643,31 @@ func (v *GetAutomateEntryRequestsAutomateEntry) GetId() string { return v.Id }
 func (v *GetAutomateEntryRequestsAutomateEntry) GetName() string { return v.Name }
 
 // GetRequests returns GetAutomateEntryRequestsAutomateEntry.Requests, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntry) GetRequests() *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection {
+func (v *GetAutomateEntryRequestsAutomateEntry) GetRequests() GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection {
 	return v.Requests
 }
 
 // GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection includes the requested fields of the GraphQL type AutomateEntryRequestConnection.
 type GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection struct {
 	// A list of edges.
-	Edges []*GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge `json:"edges"`
+	Edges []GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionPageInfo `json:"pageInfo"`
-	Count    *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionCount    `json:"count"`
+	PageInfo GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionPageInfo `json:"pageInfo"`
+	Count    GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionCount    `json:"count"`
 }
 
 // GetEdges returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection.Edges, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetEdges() []*GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetEdges() []GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetPageInfo() *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionPageInfo {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetPageInfo() GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection.Count, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetCount() *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionCount {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection) GetCount() GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionCount {
 	return v.Count
 }
 
@@ -2947,7 +3689,7 @@ type GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnection
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest `json:"node"`
+	Node GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest `json:"node"`
 }
 
 // GetCursor returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge.Cursor, and is useful for accessing the field via an interface.
@@ -2956,17 +3698,17 @@ func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnec
 }
 
 // GetNode returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge.Node, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge) GetNode() *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdge) GetNode() GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest {
 	return v.Node
 }
 
 // GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest includes the requested fields of the GraphQL type AutomateEntryRequest.
 type GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest struct {
-	AutomateEntryId string                                                                                                                                                                 `json:"automateEntryId"`
-	SequenceId      string                                                                                                                                                                 `json:"sequenceId"`
-	Error           *string                                                                                                                                                                `json:"error"`
-	Payloads        []*GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestPayloadsAutomateEntryRequestPayload `json:"payloads"`
-	Request         *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestRequest                               `json:"request"`
+	AutomateEntryId string                                                                                                                                                                `json:"automateEntryId"`
+	SequenceId      string                                                                                                                                                                `json:"sequenceId"`
+	Error           *string                                                                                                                                                               `json:"error"`
+	Payloads        []GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestPayloadsAutomateEntryRequestPayload `json:"payloads"`
+	Request         GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestRequest                               `json:"request"`
 }
 
 // GetAutomateEntryId returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest.AutomateEntryId, and is useful for accessing the field via an interface.
@@ -2985,12 +3727,12 @@ func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnec
 }
 
 // GetPayloads returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest.Payloads, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest) GetPayloads() []*GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestPayloadsAutomateEntryRequestPayload {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest) GetPayloads() []GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestPayloadsAutomateEntryRequestPayload {
 	return v.Payloads
 }
 
 // GetRequest returns GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest.Request, and is useful for accessing the field via an interface.
-func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest) GetRequest() *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestRequest {
+func (v *GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequest) GetRequest() GetAutomateEntryRequestsAutomateEntryRequestsAutomateEntryRequestConnectionEdgesAutomateEntryRequestEdgeNodeAutomateEntryRequestRequest {
 	return v.Request
 }
 
@@ -3171,12 +3913,12 @@ func (v *GetAutomateEntryResponse) GetAutomateEntry() *GetAutomateEntryAutomateE
 
 // GetAutomateSessionAutomateSession includes the requested fields of the GraphQL type AutomateSession.
 type GetAutomateSessionAutomateSession struct {
-	Id         string                                                     `json:"id"`
-	Name       string                                                     `json:"name"`
-	Connection *GetAutomateSessionAutomateSessionConnectionConnectionInfo `json:"connection"`
-	Raw        string                                                     `json:"raw"`
-	CreatedAt  int64                                                      `json:"createdAt"`
-	Entries    []*GetAutomateSessionAutomateSessionEntriesAutomateEntry   `json:"entries"`
+	Id         string                                                    `json:"id"`
+	Name       string                                                    `json:"name"`
+	Connection GetAutomateSessionAutomateSessionConnectionConnectionInfo `json:"connection"`
+	Raw        string                                                    `json:"raw"`
+	CreatedAt  int64                                                     `json:"createdAt"`
+	Entries    []GetAutomateSessionAutomateSessionEntriesAutomateEntry   `json:"entries"`
 }
 
 // GetId returns GetAutomateSessionAutomateSession.Id, and is useful for accessing the field via an interface.
@@ -3186,7 +3928,7 @@ func (v *GetAutomateSessionAutomateSession) GetId() string { return v.Id }
 func (v *GetAutomateSessionAutomateSession) GetName() string { return v.Name }
 
 // GetConnection returns GetAutomateSessionAutomateSession.Connection, and is useful for accessing the field via an interface.
-func (v *GetAutomateSessionAutomateSession) GetConnection() *GetAutomateSessionAutomateSessionConnectionConnectionInfo {
+func (v *GetAutomateSessionAutomateSession) GetConnection() GetAutomateSessionAutomateSessionConnectionConnectionInfo {
 	return v.Connection
 }
 
@@ -3197,7 +3939,7 @@ func (v *GetAutomateSessionAutomateSession) GetRaw() string { return v.Raw }
 func (v *GetAutomateSessionAutomateSession) GetCreatedAt() int64 { return v.CreatedAt }
 
 // GetEntries returns GetAutomateSessionAutomateSession.Entries, and is useful for accessing the field via an interface.
-func (v *GetAutomateSessionAutomateSession) GetEntries() []*GetAutomateSessionAutomateSessionEntriesAutomateEntry {
+func (v *GetAutomateSessionAutomateSession) GetEntries() []GetAutomateSessionAutomateSessionEntriesAutomateEntry {
 	return v.Entries
 }
 
@@ -3247,13 +3989,13 @@ func (v *GetAutomateSessionResponse) GetAutomateSession() *GetAutomateSessionAut
 
 // GetCurrentProjectCurrentProject includes the requested fields of the GraphQL type CurrentProject.
 type GetCurrentProjectCurrentProject struct {
-	Project *GetCurrentProjectCurrentProjectProject `json:"project"`
+	Project GetCurrentProjectCurrentProjectProject `json:"project"`
 	// Defines if the selected project is read-only
 	ReadOnly bool `json:"readOnly"`
 }
 
 // GetProject returns GetCurrentProjectCurrentProject.Project, and is useful for accessing the field via an interface.
-func (v *GetCurrentProjectCurrentProject) GetProject() *GetCurrentProjectCurrentProjectProject {
+func (v *GetCurrentProjectCurrentProject) GetProject() GetCurrentProjectCurrentProjectProject {
 	return v.Project
 }
 
@@ -3352,20 +4094,20 @@ func (v *GetEnvironmentContextEnvironmentContextSelectedEnvironment) GetName() s
 
 // GetEnvironmentContextResponse is returned by GetEnvironmentContext on success.
 type GetEnvironmentContextResponse struct {
-	EnvironmentContext *GetEnvironmentContextEnvironmentContext `json:"environmentContext"`
+	EnvironmentContext GetEnvironmentContextEnvironmentContext `json:"environmentContext"`
 }
 
 // GetEnvironmentContext returns GetEnvironmentContextResponse.EnvironmentContext, and is useful for accessing the field via an interface.
-func (v *GetEnvironmentContextResponse) GetEnvironmentContext() *GetEnvironmentContextEnvironmentContext {
+func (v *GetEnvironmentContextResponse) GetEnvironmentContext() GetEnvironmentContextEnvironmentContext {
 	return v.EnvironmentContext
 }
 
 // GetEnvironmentEnvironment includes the requested fields of the GraphQL type Environment.
 type GetEnvironmentEnvironment struct {
-	Id        string                                                   `json:"id"`
-	Name      string                                                   `json:"name"`
-	Version   int                                                      `json:"version"`
-	Variables []*GetEnvironmentEnvironmentVariablesEnvironmentVariable `json:"variables"`
+	Id        string                                                  `json:"id"`
+	Name      string                                                  `json:"name"`
+	Version   int                                                     `json:"version"`
+	Variables []GetEnvironmentEnvironmentVariablesEnvironmentVariable `json:"variables"`
 }
 
 // GetId returns GetEnvironmentEnvironment.Id, and is useful for accessing the field via an interface.
@@ -3378,7 +4120,7 @@ func (v *GetEnvironmentEnvironment) GetName() string { return v.Name }
 func (v *GetEnvironmentEnvironment) GetVersion() int { return v.Version }
 
 // GetVariables returns GetEnvironmentEnvironment.Variables, and is useful for accessing the field via an interface.
-func (v *GetEnvironmentEnvironment) GetVariables() []*GetEnvironmentEnvironmentVariablesEnvironmentVariable {
+func (v *GetEnvironmentEnvironment) GetVariables() []GetEnvironmentEnvironmentVariablesEnvironmentVariable {
 	return v.Variables
 }
 
@@ -3440,16 +4182,16 @@ func (v *GetFilterPresetResponse) GetFilterPreset() *GetFilterPresetFilterPreset
 
 // GetFindingFinding includes the requested fields of the GraphQL type Finding.
 type GetFindingFinding struct {
-	Id          string                    `json:"id"`
-	Title       string                    `json:"title"`
-	Description *string                   `json:"description"`
-	Host        string                    `json:"host"`
-	Path        string                    `json:"path"`
-	Reporter    string                    `json:"reporter"`
-	Hidden      bool                      `json:"hidden"`
-	DedupeKey   *string                   `json:"dedupeKey"`
-	CreatedAt   int64                     `json:"createdAt"`
-	Request     *GetFindingFindingRequest `json:"request"`
+	Id          string                   `json:"id"`
+	Title       string                   `json:"title"`
+	Description *string                  `json:"description"`
+	Host        string                   `json:"host"`
+	Path        string                   `json:"path"`
+	Reporter    string                   `json:"reporter"`
+	Hidden      bool                     `json:"hidden"`
+	DedupeKey   *string                  `json:"dedupeKey"`
+	CreatedAt   int64                    `json:"createdAt"`
+	Request     GetFindingFindingRequest `json:"request"`
 }
 
 // GetId returns GetFindingFinding.Id, and is useful for accessing the field via an interface.
@@ -3480,7 +4222,7 @@ func (v *GetFindingFinding) GetDedupeKey() *string { return v.DedupeKey }
 func (v *GetFindingFinding) GetCreatedAt() int64 { return v.CreatedAt }
 
 // GetRequest returns GetFindingFinding.Request, and is useful for accessing the field via an interface.
-func (v *GetFindingFinding) GetRequest() *GetFindingFindingRequest { return v.Request }
+func (v *GetFindingFinding) GetRequest() GetFindingFindingRequest { return v.Request }
 
 // GetFindingFindingRequest includes the requested fields of the GraphQL type Request.
 type GetFindingFindingRequest struct {
@@ -3524,11 +4266,11 @@ func (v *GetFindingResponse) GetFinding() *GetFindingFinding { return v.Finding 
 
 // GetInstanceSettingsInstanceSettings includes the requested fields of the GraphQL type InstanceSettings.
 type GetInstanceSettingsInstanceSettings struct {
-	Onboarding *GetInstanceSettingsInstanceSettingsOnboardingOnboardingState `json:"onboarding"`
+	Onboarding GetInstanceSettingsInstanceSettingsOnboardingOnboardingState `json:"onboarding"`
 }
 
 // GetOnboarding returns GetInstanceSettingsInstanceSettings.Onboarding, and is useful for accessing the field via an interface.
-func (v *GetInstanceSettingsInstanceSettings) GetOnboarding() *GetInstanceSettingsInstanceSettingsOnboardingOnboardingState {
+func (v *GetInstanceSettingsInstanceSettings) GetOnboarding() GetInstanceSettingsInstanceSettingsOnboardingOnboardingState {
 	return v.Onboarding
 }
 
@@ -3544,25 +4286,25 @@ func (v *GetInstanceSettingsInstanceSettingsOnboardingOnboardingState) GetAnalyt
 
 // GetInstanceSettingsResponse is returned by GetInstanceSettings on success.
 type GetInstanceSettingsResponse struct {
-	InstanceSettings *GetInstanceSettingsInstanceSettings `json:"instanceSettings"`
+	InstanceSettings GetInstanceSettingsInstanceSettings `json:"instanceSettings"`
 }
 
 // GetInstanceSettings returns GetInstanceSettingsResponse.InstanceSettings, and is useful for accessing the field via an interface.
-func (v *GetInstanceSettingsResponse) GetInstanceSettings() *GetInstanceSettingsInstanceSettings {
+func (v *GetInstanceSettingsResponse) GetInstanceSettings() GetInstanceSettingsInstanceSettings {
 	return v.InstanceSettings
 }
 
 // GetInterceptEntryInterceptEntry includes the requested fields of the GraphQL type InterceptEntry.
 type GetInterceptEntryInterceptEntry struct {
-	Id      string                                  `json:"id"`
-	Request *GetInterceptEntryInterceptEntryRequest `json:"request"`
+	Id      string                                 `json:"id"`
+	Request GetInterceptEntryInterceptEntryRequest `json:"request"`
 }
 
 // GetId returns GetInterceptEntryInterceptEntry.Id, and is useful for accessing the field via an interface.
 func (v *GetInterceptEntryInterceptEntry) GetId() string { return v.Id }
 
 // GetRequest returns GetInterceptEntryInterceptEntry.Request, and is useful for accessing the field via an interface.
-func (v *GetInterceptEntryInterceptEntry) GetRequest() *GetInterceptEntryInterceptEntryRequest {
+func (v *GetInterceptEntryInterceptEntry) GetRequest() GetInterceptEntryInterceptEntryRequest {
 	return v.Request
 }
 
@@ -3654,18 +4396,18 @@ func (v *GetInterceptEntryResponse) GetInterceptEntry() *GetInterceptEntryInterc
 
 // GetInterceptOptionsInterceptOptions includes the requested fields of the GraphQL type InterceptOptions.
 type GetInterceptOptionsInterceptOptions struct {
-	Request  *GetInterceptOptionsInterceptOptionsRequestInterceptRequestOptions   `json:"request"`
-	Response *GetInterceptOptionsInterceptOptionsResponseInterceptResponseOptions `json:"response"`
-	Scope    *GetInterceptOptionsInterceptOptionsScopeInterceptScopeOptions       `json:"scope"`
+	Request  GetInterceptOptionsInterceptOptionsRequestInterceptRequestOptions   `json:"request"`
+	Response GetInterceptOptionsInterceptOptionsResponseInterceptResponseOptions `json:"response"`
+	Scope    *GetInterceptOptionsInterceptOptionsScopeInterceptScopeOptions      `json:"scope"`
 }
 
 // GetRequest returns GetInterceptOptionsInterceptOptions.Request, and is useful for accessing the field via an interface.
-func (v *GetInterceptOptionsInterceptOptions) GetRequest() *GetInterceptOptionsInterceptOptionsRequestInterceptRequestOptions {
+func (v *GetInterceptOptionsInterceptOptions) GetRequest() GetInterceptOptionsInterceptOptionsRequestInterceptRequestOptions {
 	return v.Request
 }
 
 // GetResponse returns GetInterceptOptionsInterceptOptions.Response, and is useful for accessing the field via an interface.
-func (v *GetInterceptOptionsInterceptOptions) GetResponse() *GetInterceptOptionsInterceptOptionsResponseInterceptResponseOptions {
+func (v *GetInterceptOptionsInterceptOptions) GetResponse() GetInterceptOptionsInterceptOptionsResponseInterceptResponseOptions {
 	return v.Response
 }
 
@@ -3706,11 +4448,11 @@ func (v *GetInterceptOptionsInterceptOptionsScopeInterceptScopeOptions) GetScope
 
 // GetInterceptOptionsResponse is returned by GetInterceptOptions on success.
 type GetInterceptOptionsResponse struct {
-	InterceptOptions *GetInterceptOptionsInterceptOptions `json:"interceptOptions"`
+	InterceptOptions GetInterceptOptionsInterceptOptions `json:"interceptOptions"`
 }
 
 // GetInterceptOptions returns GetInterceptOptionsResponse.InterceptOptions, and is useful for accessing the field via an interface.
-func (v *GetInterceptOptionsResponse) GetInterceptOptions() *GetInterceptOptionsInterceptOptions {
+func (v *GetInterceptOptionsResponse) GetInterceptOptions() GetInterceptOptionsInterceptOptions {
 	return v.InterceptOptions
 }
 
@@ -3724,13 +4466,13 @@ func (v *GetInterceptStatusResponse) GetInterceptStatus() InterceptStatus { retu
 
 // GetReplayEntryReplayEntry includes the requested fields of the GraphQL type ReplayEntry.
 type GetReplayEntryReplayEntry struct {
-	Id         string                                             `json:"id"`
-	Raw        string                                             `json:"raw"`
-	Error      *string                                            `json:"error"`
-	CreatedAt  int64                                              `json:"createdAt"`
-	Connection *GetReplayEntryReplayEntryConnectionConnectionInfo `json:"connection"`
-	Settings   *GetReplayEntryReplayEntrySettings                 `json:"settings"`
-	Request    *GetReplayEntryReplayEntryRequest                  `json:"request"`
+	Id         string                                            `json:"id"`
+	Raw        string                                            `json:"raw"`
+	Error      *string                                           `json:"error"`
+	CreatedAt  int64                                             `json:"createdAt"`
+	Connection GetReplayEntryReplayEntryConnectionConnectionInfo `json:"connection"`
+	Settings   GetReplayEntryReplayEntrySettings                 `json:"settings"`
+	Request    *GetReplayEntryReplayEntryRequest                 `json:"request"`
 }
 
 // GetId returns GetReplayEntryReplayEntry.Id, and is useful for accessing the field via an interface.
@@ -3746,12 +4488,12 @@ func (v *GetReplayEntryReplayEntry) GetError() *string { return v.Error }
 func (v *GetReplayEntryReplayEntry) GetCreatedAt() int64 { return v.CreatedAt }
 
 // GetConnection returns GetReplayEntryReplayEntry.Connection, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntry) GetConnection() *GetReplayEntryReplayEntryConnectionConnectionInfo {
+func (v *GetReplayEntryReplayEntry) GetConnection() GetReplayEntryReplayEntryConnectionConnectionInfo {
 	return v.Connection
 }
 
 // GetSettings returns GetReplayEntryReplayEntry.Settings, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntry) GetSettings() *GetReplayEntryReplayEntrySettings {
+func (v *GetReplayEntryReplayEntry) GetSettings() GetReplayEntryReplayEntrySettings {
 	return v.Settings
 }
 
@@ -3846,33 +4588,33 @@ func (v *GetReplayEntryReplayEntryRequestResponse) GetLength() int { return v.Le
 
 // GetReplayEntryReplayEntrySettings includes the requested fields of the GraphQL type ReplayEntrySettings.
 type GetReplayEntryReplayEntrySettings struct {
-	Placeholders []*GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder `json:"placeholders"`
+	Placeholders []GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder `json:"placeholders"`
 }
 
 // GetPlaceholders returns GetReplayEntryReplayEntrySettings.Placeholders, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntrySettings) GetPlaceholders() []*GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder {
+func (v *GetReplayEntryReplayEntrySettings) GetPlaceholders() []GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder {
 	return v.Placeholders
 }
 
 // GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder includes the requested fields of the GraphQL type ReplayPlaceholder.
 type GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder struct {
-	InputRange    *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderInputRange                        `json:"inputRange"`
-	OutputRange   *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderOutputRange                       `json:"outputRange"`
-	Preprocessors []*GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderPreprocessorsReplayPreprocessor `json:"preprocessors"`
+	InputRange    GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderInputRange                        `json:"inputRange"`
+	OutputRange   GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderOutputRange                       `json:"outputRange"`
+	Preprocessors []GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderPreprocessorsReplayPreprocessor `json:"preprocessors"`
 }
 
 // GetInputRange returns GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder.InputRange, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetInputRange() *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderInputRange {
+func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetInputRange() GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderInputRange {
 	return v.InputRange
 }
 
 // GetOutputRange returns GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder.OutputRange, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetOutputRange() *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderOutputRange {
+func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetOutputRange() GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderOutputRange {
 	return v.OutputRange
 }
 
 // GetPreprocessors returns GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder.Preprocessors, and is useful for accessing the field via an interface.
-func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetPreprocessors() []*GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderPreprocessorsReplayPreprocessor {
+func (v *GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholder) GetPreprocessors() []GetReplayEntryReplayEntrySettingsPlaceholdersReplayPlaceholderPreprocessorsReplayPreprocessor {
 	return v.Preprocessors
 }
 
@@ -4168,11 +4910,11 @@ func (v *GetReplayEntryResponse) GetReplayEntry() *GetReplayEntryReplayEntry { r
 
 // GetReplaySessionReplaySession includes the requested fields of the GraphQL type ReplaySession.
 type GetReplaySessionReplaySession struct {
-	Id          string                                                     `json:"id"`
-	Name        string                                                     `json:"name"`
-	ActiveEntry *GetReplaySessionReplaySessionActiveEntryReplayEntry       `json:"activeEntry"`
-	Collection  *GetReplaySessionReplaySessionCollection                   `json:"collection"`
-	Entries     *GetReplaySessionReplaySessionEntriesReplayEntryConnection `json:"entries"`
+	Id          string                                                    `json:"id"`
+	Name        string                                                    `json:"name"`
+	ActiveEntry *GetReplaySessionReplaySessionActiveEntryReplayEntry      `json:"activeEntry"`
+	Collection  GetReplaySessionReplaySessionCollection                   `json:"collection"`
+	Entries     GetReplaySessionReplaySessionEntriesReplayEntryConnection `json:"entries"`
 }
 
 // GetId returns GetReplaySessionReplaySession.Id, and is useful for accessing the field via an interface.
@@ -4187,12 +4929,12 @@ func (v *GetReplaySessionReplaySession) GetActiveEntry() *GetReplaySessionReplay
 }
 
 // GetCollection returns GetReplaySessionReplaySession.Collection, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySession) GetCollection() *GetReplaySessionReplaySessionCollection {
+func (v *GetReplaySessionReplaySession) GetCollection() GetReplaySessionReplaySessionCollection {
 	return v.Collection
 }
 
 // GetEntries returns GetReplaySessionReplaySession.Entries, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySession) GetEntries() *GetReplaySessionReplaySessionEntriesReplayEntryConnection {
+func (v *GetReplaySessionReplaySession) GetEntries() GetReplaySessionReplaySessionEntriesReplayEntryConnection {
 	return v.Entries
 }
 
@@ -4219,18 +4961,18 @@ func (v *GetReplaySessionReplaySessionCollection) GetName() string { return v.Na
 // GetReplaySessionReplaySessionEntriesReplayEntryConnection includes the requested fields of the GraphQL type ReplayEntryConnection.
 type GetReplaySessionReplaySessionEntriesReplayEntryConnection struct {
 	// A list of edges.
-	Edges []*GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge `json:"edges"`
+	Edges []GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *GetReplaySessionReplaySessionEntriesReplayEntryConnectionPageInfo `json:"pageInfo"`
+	PageInfo GetReplaySessionReplaySessionEntriesReplayEntryConnectionPageInfo `json:"pageInfo"`
 }
 
 // GetEdges returns GetReplaySessionReplaySessionEntriesReplayEntryConnection.Edges, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnection) GetEdges() []*GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge {
+func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnection) GetEdges() []GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns GetReplaySessionReplaySessionEntriesReplayEntryConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnection) GetPageInfo() *GetReplaySessionReplaySessionEntriesReplayEntryConnectionPageInfo {
+func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnection) GetPageInfo() GetReplaySessionReplaySessionEntriesReplayEntryConnectionPageInfo {
 	return v.PageInfo
 }
 
@@ -4240,19 +4982,19 @@ func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnection) GetPageInfo(
 // An edge in a connection.
 type GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge struct {
 	// The item at the end of the edge
-	Node *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry `json:"node"`
+	Node GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry `json:"node"`
 }
 
 // GetNode returns GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge.Node, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge) GetNode() *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry {
+func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdge) GetNode() GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry {
 	return v.Node
 }
 
 // GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry includes the requested fields of the GraphQL type ReplayEntry.
 type GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry struct {
-	Id         string                                                                                                                `json:"id"`
-	Raw        string                                                                                                                `json:"raw"`
-	Connection *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntryConnectionConnectionInfo `json:"connection"`
+	Id         string                                                                                                               `json:"id"`
+	Raw        string                                                                                                               `json:"raw"`
+	Connection GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntryConnectionConnectionInfo `json:"connection"`
 }
 
 // GetId returns GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry.Id, and is useful for accessing the field via an interface.
@@ -4266,7 +5008,7 @@ func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEnt
 }
 
 // GetConnection returns GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry.Connection, and is useful for accessing the field via an interface.
-func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry) GetConnection() *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntryConnectionConnectionInfo {
+func (v *GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntry) GetConnection() GetReplaySessionReplaySessionEntriesReplayEntryConnectionEdgesReplayEntryEdgeNodeReplayEntryConnectionConnectionInfo {
 	return v.Connection
 }
 
@@ -4519,11 +5261,11 @@ func (v *GetRequestResponse) GetRequest() *GetRequestRequest { return v.Request 
 
 // GetRuntimeResponse is returned by GetRuntime on success.
 type GetRuntimeResponse struct {
-	Runtime *GetRuntimeRuntime `json:"runtime"`
+	Runtime GetRuntimeRuntime `json:"runtime"`
 }
 
 // GetRuntime returns GetRuntimeResponse.Runtime, and is useful for accessing the field via an interface.
-func (v *GetRuntimeResponse) GetRuntime() *GetRuntimeRuntime { return v.Runtime }
+func (v *GetRuntimeResponse) GetRuntime() GetRuntimeRuntime { return v.Runtime }
 
 // GetRuntimeRuntime includes the requested fields of the GraphQL type Runtime.
 type GetRuntimeRuntime struct {
@@ -4617,12 +5359,12 @@ func (v *GetTamperRuleResponse) GetTamperRule() *GetTamperRuleTamperRule { retur
 
 // GetTamperRuleTamperRule includes the requested fields of the GraphQL type TamperRule.
 type GetTamperRuleTamperRule struct {
-	Id         string                             `json:"id"`
-	Name       string                             `json:"name"`
-	Condition  *string                            `json:"condition"`
-	Sources    []Source                           `json:"sources"`
-	Enable     *GetTamperRuleTamperRuleEnable     `json:"enable"`
-	Collection *GetTamperRuleTamperRuleCollection `json:"collection"`
+	Id         string                            `json:"id"`
+	Name       string                            `json:"name"`
+	Condition  *string                           `json:"condition"`
+	Sources    []Source                          `json:"sources"`
+	Enable     *GetTamperRuleTamperRuleEnable    `json:"enable"`
+	Collection GetTamperRuleTamperRuleCollection `json:"collection"`
 }
 
 // GetId returns GetTamperRuleTamperRule.Id, and is useful for accessing the field via an interface.
@@ -4641,7 +5383,7 @@ func (v *GetTamperRuleTamperRule) GetSources() []Source { return v.Sources }
 func (v *GetTamperRuleTamperRule) GetEnable() *GetTamperRuleTamperRuleEnable { return v.Enable }
 
 // GetCollection returns GetTamperRuleTamperRule.Collection, and is useful for accessing the field via an interface.
-func (v *GetTamperRuleTamperRule) GetCollection() *GetTamperRuleTamperRuleCollection {
+func (v *GetTamperRuleTamperRule) GetCollection() GetTamperRuleTamperRuleCollection {
 	return v.Collection
 }
 
@@ -4738,9 +5480,9 @@ func (v *GetViewerResponse) __premarshalJSON() (*__premarshalGetViewerResponse, 
 
 // GetViewerViewerCloudUser includes the requested fields of the GraphQL type CloudUser.
 type GetViewerViewerCloudUser struct {
-	Typename *string                          `json:"__typename"`
-	Id       string                           `json:"id"`
-	Profile  *GetViewerViewerCloudUserProfile `json:"profile"`
+	Typename *string                         `json:"__typename"`
+	Id       string                          `json:"id"`
+	Profile  GetViewerViewerCloudUserProfile `json:"profile"`
 }
 
 // GetTypename returns GetViewerViewerCloudUser.Typename, and is useful for accessing the field via an interface.
@@ -4750,15 +5492,15 @@ func (v *GetViewerViewerCloudUser) GetTypename() *string { return v.Typename }
 func (v *GetViewerViewerCloudUser) GetId() string { return v.Id }
 
 // GetProfile returns GetViewerViewerCloudUser.Profile, and is useful for accessing the field via an interface.
-func (v *GetViewerViewerCloudUser) GetProfile() *GetViewerViewerCloudUserProfile { return v.Profile }
+func (v *GetViewerViewerCloudUser) GetProfile() GetViewerViewerCloudUserProfile { return v.Profile }
 
 // GetViewerViewerCloudUserProfile includes the requested fields of the GraphQL type UserProfile.
 type GetViewerViewerCloudUserProfile struct {
-	Identity *GetViewerViewerCloudUserProfileIdentityUserIdentity `json:"identity"`
+	Identity GetViewerViewerCloudUserProfileIdentityUserIdentity `json:"identity"`
 }
 
 // GetIdentity returns GetViewerViewerCloudUserProfile.Identity, and is useful for accessing the field via an interface.
-func (v *GetViewerViewerCloudUserProfile) GetIdentity() *GetViewerViewerCloudUserProfileIdentityUserIdentity {
+func (v *GetViewerViewerCloudUserProfile) GetIdentity() GetViewerViewerCloudUserProfileIdentityUserIdentity {
 	return v.Identity
 }
 
@@ -4924,12 +5666,234 @@ func (v *GetWorkflowWorkflow) GetUpdatedAt() string { return v.UpdatedAt }
 
 // GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload includes the requested fields of the GraphQL type GlobalizeWorkflowPayload.
 type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload struct {
-	Workflow *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow `json:"workflow"`
+	Workflow *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow                    `json:"workflow"`
+	Error    *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError `json:"-"`
 }
 
 // GetWorkflow returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload.Workflow, and is useful for accessing the field via an interface.
 func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload) GetWorkflow() *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow {
 	return v.Workflow
+}
+
+// GetError returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload) GetError() *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError {
+	return v.Error
+}
+
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError)
+			err = __unmarshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload struct {
+	Workflow *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow `json:"workflow"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload) __premarshalJSON() (*__premarshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload, error) {
+	var retval __premarshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload
+
+	retval.Workflow = v.Workflow
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError includes the requested fields of the GraphQL interface GlobalizeWorkflowError.
+//
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError is implemented by the following types:
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError
+type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError interface {
+	implementsGraphQLInterfaceGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError() {
+}
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError) implementsGraphQLInterfaceGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError() {
+}
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError() {
+}
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError) implementsGraphQLInterfaceGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError() {
+}
+
+func __unmarshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError(b []byte, v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "ReadOnlyUserError":
+		*v = new(GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "WorkflowUserError":
+		*v = new(GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing GlobalizeWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalGlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError(v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError:
+		typename = "ReadOnlyUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError:
+		typename = "WorkflowUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorGlobalizeWorkflowError: "%T"`, v)
+	}
+}
+
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError includes the requested fields of the GraphQL type ReadOnlyUserError.
+type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError.Typename, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorReadOnlyUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError includes the requested fields of the GraphQL type WorkflowUserError.
+type GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError.Typename, and is useful for accessing the field via an interface.
+func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadErrorWorkflowUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow includes the requested fields of the GraphQL type Workflow.
@@ -4956,11 +5920,11 @@ func (v *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayloadWorkflow) Get
 
 // GlobalizeWorkflowResponse is returned by GlobalizeWorkflow on success.
 type GlobalizeWorkflowResponse struct {
-	GlobalizeWorkflow *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload `json:"globalizeWorkflow"`
+	GlobalizeWorkflow GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload `json:"globalizeWorkflow"`
 }
 
 // GetGlobalizeWorkflow returns GlobalizeWorkflowResponse.GlobalizeWorkflow, and is useful for accessing the field via an interface.
-func (v *GlobalizeWorkflowResponse) GetGlobalizeWorkflow() *GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload {
+func (v *GlobalizeWorkflowResponse) GetGlobalizeWorkflow() GlobalizeWorkflowGlobalizeWorkflowGlobalizeWorkflowPayload {
 	return v.GlobalizeWorkflow
 }
 
@@ -4977,15 +5941,15 @@ var AllHostedFileStatus = []HostedFileStatus{
 }
 
 type InstallPluginPackageInput struct {
-	Force  *bool                `json:"force"`
-	Source *PluginPackageSource `json:"source,omitempty"`
+	Force  *bool               `json:"force"`
+	Source PluginPackageSource `json:"source"`
 }
 
 // GetForce returns InstallPluginPackageInput.Force, and is useful for accessing the field via an interface.
 func (v *InstallPluginPackageInput) GetForce() *bool { return v.Force }
 
 // GetSource returns InstallPluginPackageInput.Source, and is useful for accessing the field via an interface.
-func (v *InstallPluginPackageInput) GetSource() *PluginPackageSource { return v.Source }
+func (v *InstallPluginPackageInput) GetSource() PluginPackageSource { return v.Source }
 
 // InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload includes the requested fields of the GraphQL type InstallPluginPackagePayload.
 type InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload struct {
@@ -5231,11 +6195,11 @@ func (v *InstallPluginPackageInstallPluginPackageInstallPluginPackagePayloadPack
 
 // InstallPluginPackageResponse is returned by InstallPluginPackage on success.
 type InstallPluginPackageResponse struct {
-	InstallPluginPackage *InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload `json:"installPluginPackage"`
+	InstallPluginPackage InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload `json:"installPluginPackage"`
 }
 
 // GetInstallPluginPackage returns InstallPluginPackageResponse.InstallPluginPackage, and is useful for accessing the field via an interface.
-func (v *InstallPluginPackageResponse) GetInstallPluginPackage() *InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload {
+func (v *InstallPluginPackageResponse) GetInstallPluginPackage() InstallPluginPackageInstallPluginPackageInstallPluginPackagePayload {
 	return v.InstallPluginPackage
 }
 
@@ -5279,23 +6243,23 @@ func (v *InterceptEntryOrderInput) GetBy() InterceptEntryOrderBy { return v.By }
 func (v *InterceptEntryOrderInput) GetOrdering() Ordering { return v.Ordering }
 
 type InterceptOptionsInput struct {
-	Request  *InterceptRequestOptionsInput  `json:"request,omitempty"`
-	Response *InterceptResponseOptionsInput `json:"response,omitempty"`
-	Scope    *InterceptScopeOptionsInput    `json:"scope,omitempty"`
-	StreamWs *InterceptStreamWsOptionsInput `json:"streamWs,omitempty"`
+	Request  InterceptRequestOptionsInput  `json:"request"`
+	Response InterceptResponseOptionsInput `json:"response"`
+	Scope    *InterceptScopeOptionsInput   `json:"scope"`
+	StreamWs InterceptStreamWsOptionsInput `json:"streamWs"`
 }
 
 // GetRequest returns InterceptOptionsInput.Request, and is useful for accessing the field via an interface.
-func (v *InterceptOptionsInput) GetRequest() *InterceptRequestOptionsInput { return v.Request }
+func (v *InterceptOptionsInput) GetRequest() InterceptRequestOptionsInput { return v.Request }
 
 // GetResponse returns InterceptOptionsInput.Response, and is useful for accessing the field via an interface.
-func (v *InterceptOptionsInput) GetResponse() *InterceptResponseOptionsInput { return v.Response }
+func (v *InterceptOptionsInput) GetResponse() InterceptResponseOptionsInput { return v.Response }
 
 // GetScope returns InterceptOptionsInput.Scope, and is useful for accessing the field via an interface.
 func (v *InterceptOptionsInput) GetScope() *InterceptScopeOptionsInput { return v.Scope }
 
 // GetStreamWs returns InterceptOptionsInput.StreamWs, and is useful for accessing the field via an interface.
-func (v *InterceptOptionsInput) GetStreamWs() *InterceptStreamWsOptionsInput { return v.StreamWs }
+func (v *InterceptOptionsInput) GetStreamWs() InterceptStreamWsOptionsInput { return v.StreamWs }
 
 type InterceptRequestOptionsInput struct {
 	Enabled bool    `json:"enabled"`
@@ -5348,24 +6312,24 @@ func (v *InterceptStreamWsOptionsInput) GetEnabled() bool { return v.Enabled }
 // ListAutomateSessionsAutomateSessionsAutomateSessionConnection includes the requested fields of the GraphQL type AutomateSessionConnection.
 type ListAutomateSessionsAutomateSessionsAutomateSessionConnection struct {
 	// A list of edges.
-	Edges []*ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge `json:"edges"`
+	Edges []ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionPageInfo `json:"pageInfo"`
-	Count    *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionCount    `json:"count"`
+	PageInfo ListAutomateSessionsAutomateSessionsAutomateSessionConnectionPageInfo `json:"pageInfo"`
+	Count    ListAutomateSessionsAutomateSessionsAutomateSessionConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListAutomateSessionsAutomateSessionsAutomateSessionConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetEdges() []*ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge {
+func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetEdges() []ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListAutomateSessionsAutomateSessionsAutomateSessionConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetPageInfo() *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionPageInfo {
+func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetPageInfo() ListAutomateSessionsAutomateSessionsAutomateSessionConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListAutomateSessionsAutomateSessionsAutomateSessionConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetCount() *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionCount {
+func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnection) GetCount() ListAutomateSessionsAutomateSessionsAutomateSessionConnectionCount {
 	return v.Count
 }
 
@@ -5387,7 +6351,7 @@ type ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateS
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdgeNodeAutomateSession `json:"node"`
+	Node ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdgeNodeAutomateSession `json:"node"`
 }
 
 // GetCursor returns ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge.Cursor, and is useful for accessing the field via an interface.
@@ -5396,7 +6360,7 @@ func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutom
 }
 
 // GetNode returns ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge) GetNode() *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdgeNodeAutomateSession {
+func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdge) GetNode() ListAutomateSessionsAutomateSessionsAutomateSessionConnectionEdgesAutomateSessionEdgeNodeAutomateSession {
 	return v.Node
 }
 
@@ -5459,20 +6423,20 @@ func (v *ListAutomateSessionsAutomateSessionsAutomateSessionConnectionPageInfo) 
 
 // ListAutomateSessionsResponse is returned by ListAutomateSessions on success.
 type ListAutomateSessionsResponse struct {
-	AutomateSessions *ListAutomateSessionsAutomateSessionsAutomateSessionConnection `json:"automateSessions"`
+	AutomateSessions ListAutomateSessionsAutomateSessionsAutomateSessionConnection `json:"automateSessions"`
 }
 
 // GetAutomateSessions returns ListAutomateSessionsResponse.AutomateSessions, and is useful for accessing the field via an interface.
-func (v *ListAutomateSessionsResponse) GetAutomateSessions() *ListAutomateSessionsAutomateSessionsAutomateSessionConnection {
+func (v *ListAutomateSessionsResponse) GetAutomateSessions() ListAutomateSessionsAutomateSessionsAutomateSessionConnection {
 	return v.AutomateSessions
 }
 
 // ListEnvironmentsEnvironmentsEnvironment includes the requested fields of the GraphQL type Environment.
 type ListEnvironmentsEnvironmentsEnvironment struct {
-	Id        string                                                                 `json:"id"`
-	Name      string                                                                 `json:"name"`
-	Version   int                                                                    `json:"version"`
-	Variables []*ListEnvironmentsEnvironmentsEnvironmentVariablesEnvironmentVariable `json:"variables"`
+	Id        string                                                                `json:"id"`
+	Name      string                                                                `json:"name"`
+	Version   int                                                                   `json:"version"`
+	Variables []ListEnvironmentsEnvironmentsEnvironmentVariablesEnvironmentVariable `json:"variables"`
 }
 
 // GetId returns ListEnvironmentsEnvironmentsEnvironment.Id, and is useful for accessing the field via an interface.
@@ -5485,7 +6449,7 @@ func (v *ListEnvironmentsEnvironmentsEnvironment) GetName() string { return v.Na
 func (v *ListEnvironmentsEnvironmentsEnvironment) GetVersion() int { return v.Version }
 
 // GetVariables returns ListEnvironmentsEnvironmentsEnvironment.Variables, and is useful for accessing the field via an interface.
-func (v *ListEnvironmentsEnvironmentsEnvironment) GetVariables() []*ListEnvironmentsEnvironmentsEnvironmentVariablesEnvironmentVariable {
+func (v *ListEnvironmentsEnvironmentsEnvironment) GetVariables() []ListEnvironmentsEnvironmentsEnvironmentVariablesEnvironmentVariable {
 	return v.Variables
 }
 
@@ -5513,11 +6477,11 @@ func (v *ListEnvironmentsEnvironmentsEnvironmentVariablesEnvironmentVariable) Ge
 
 // ListEnvironmentsResponse is returned by ListEnvironments on success.
 type ListEnvironmentsResponse struct {
-	Environments []*ListEnvironmentsEnvironmentsEnvironment `json:"environments"`
+	Environments []ListEnvironmentsEnvironmentsEnvironment `json:"environments"`
 }
 
 // GetEnvironments returns ListEnvironmentsResponse.Environments, and is useful for accessing the field via an interface.
-func (v *ListEnvironmentsResponse) GetEnvironments() []*ListEnvironmentsEnvironmentsEnvironment {
+func (v *ListEnvironmentsResponse) GetEnvironments() []ListEnvironmentsEnvironmentsEnvironment {
 	return v.Environments
 }
 
@@ -5543,11 +6507,11 @@ func (v *ListFilterPresetsFilterPresetsFilterPreset) GetClause() string { return
 
 // ListFilterPresetsResponse is returned by ListFilterPresets on success.
 type ListFilterPresetsResponse struct {
-	FilterPresets []*ListFilterPresetsFilterPresetsFilterPreset `json:"filterPresets"`
+	FilterPresets []ListFilterPresetsFilterPresetsFilterPreset `json:"filterPresets"`
 }
 
 // GetFilterPresets returns ListFilterPresetsResponse.FilterPresets, and is useful for accessing the field via an interface.
-func (v *ListFilterPresetsResponse) GetFilterPresets() []*ListFilterPresetsFilterPresetsFilterPreset {
+func (v *ListFilterPresetsResponse) GetFilterPresets() []ListFilterPresetsFilterPresetsFilterPreset {
 	return v.FilterPresets
 }
 
@@ -5562,24 +6526,24 @@ func (v *ListFindingReportersResponse) GetFindingReporters() []string { return v
 // ListFindingsFindingsFindingConnection includes the requested fields of the GraphQL type FindingConnection.
 type ListFindingsFindingsFindingConnection struct {
 	// A list of edges.
-	Edges []*ListFindingsFindingsFindingConnectionEdgesFindingEdge `json:"edges"`
+	Edges []ListFindingsFindingsFindingConnectionEdgesFindingEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListFindingsFindingsFindingConnectionPageInfo `json:"pageInfo"`
-	Count    *ListFindingsFindingsFindingConnectionCount    `json:"count"`
+	PageInfo ListFindingsFindingsFindingConnectionPageInfo `json:"pageInfo"`
+	Count    ListFindingsFindingsFindingConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListFindingsFindingsFindingConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListFindingsFindingsFindingConnection) GetEdges() []*ListFindingsFindingsFindingConnectionEdgesFindingEdge {
+func (v *ListFindingsFindingsFindingConnection) GetEdges() []ListFindingsFindingsFindingConnectionEdgesFindingEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListFindingsFindingsFindingConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListFindingsFindingsFindingConnection) GetPageInfo() *ListFindingsFindingsFindingConnectionPageInfo {
+func (v *ListFindingsFindingsFindingConnection) GetPageInfo() ListFindingsFindingsFindingConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListFindingsFindingsFindingConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListFindingsFindingsFindingConnection) GetCount() *ListFindingsFindingsFindingConnectionCount {
+func (v *ListFindingsFindingsFindingConnection) GetCount() ListFindingsFindingsFindingConnectionCount {
 	return v.Count
 }
 
@@ -5599,29 +6563,29 @@ type ListFindingsFindingsFindingConnectionEdgesFindingEdge struct {
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding `json:"node"`
+	Node ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding `json:"node"`
 }
 
 // GetCursor returns ListFindingsFindingsFindingConnectionEdgesFindingEdge.Cursor, and is useful for accessing the field via an interface.
 func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdge) GetCursor() string { return v.Cursor }
 
 // GetNode returns ListFindingsFindingsFindingConnectionEdgesFindingEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdge) GetNode() *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding {
+func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdge) GetNode() ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding {
 	return v.Node
 }
 
 // ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding includes the requested fields of the GraphQL type Finding.
 type ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding struct {
-	Id          string                                                                   `json:"id"`
-	Title       string                                                                   `json:"title"`
-	Description *string                                                                  `json:"description"`
-	Host        string                                                                   `json:"host"`
-	Path        string                                                                   `json:"path"`
-	Reporter    string                                                                   `json:"reporter"`
-	Hidden      bool                                                                     `json:"hidden"`
-	DedupeKey   *string                                                                  `json:"dedupeKey"`
-	CreatedAt   int64                                                                    `json:"createdAt"`
-	Request     *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFindingRequest `json:"request"`
+	Id          string                                                                  `json:"id"`
+	Title       string                                                                  `json:"title"`
+	Description *string                                                                 `json:"description"`
+	Host        string                                                                  `json:"host"`
+	Path        string                                                                  `json:"path"`
+	Reporter    string                                                                  `json:"reporter"`
+	Hidden      bool                                                                    `json:"hidden"`
+	DedupeKey   *string                                                                 `json:"dedupeKey"`
+	CreatedAt   int64                                                                   `json:"createdAt"`
+	Request     ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFindingRequest `json:"request"`
 }
 
 // GetId returns ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding.Id, and is useful for accessing the field via an interface.
@@ -5670,7 +6634,7 @@ func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding) GetCr
 }
 
 // GetRequest returns ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding.Request, and is useful for accessing the field via an interface.
-func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding) GetRequest() *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFindingRequest {
+func (v *ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFinding) GetRequest() ListFindingsFindingsFindingConnectionEdgesFindingEdgeNodeFindingRequest {
 	return v.Request
 }
 
@@ -5717,13 +6681,11 @@ func (v *ListFindingsFindingsFindingConnectionPageInfo) GetEndCursor() *string {
 
 // ListFindingsResponse is returned by ListFindings on success.
 type ListFindingsResponse struct {
-	Findings *ListFindingsFindingsFindingConnection `json:"findings"`
+	Findings ListFindingsFindingsFindingConnection `json:"findings"`
 }
 
 // GetFindings returns ListFindingsResponse.Findings, and is useful for accessing the field via an interface.
-func (v *ListFindingsResponse) GetFindings() *ListFindingsFindingsFindingConnection {
-	return v.Findings
-}
+func (v *ListFindingsResponse) GetFindings() ListFindingsFindingsFindingConnection { return v.Findings }
 
 // ListHostedFilesHostedFilesHostedFile includes the requested fields of the GraphQL type HostedFile.
 type ListHostedFilesHostedFilesHostedFile struct {
@@ -5759,35 +6721,35 @@ func (v *ListHostedFilesHostedFilesHostedFile) GetUpdatedAt() string { return v.
 
 // ListHostedFilesResponse is returned by ListHostedFiles on success.
 type ListHostedFilesResponse struct {
-	HostedFiles []*ListHostedFilesHostedFilesHostedFile `json:"hostedFiles"`
+	HostedFiles []ListHostedFilesHostedFilesHostedFile `json:"hostedFiles"`
 }
 
 // GetHostedFiles returns ListHostedFilesResponse.HostedFiles, and is useful for accessing the field via an interface.
-func (v *ListHostedFilesResponse) GetHostedFiles() []*ListHostedFilesHostedFilesHostedFile {
+func (v *ListHostedFilesResponse) GetHostedFiles() []ListHostedFilesHostedFilesHostedFile {
 	return v.HostedFiles
 }
 
 // ListInterceptEntriesInterceptEntriesInterceptEntryConnection includes the requested fields of the GraphQL type InterceptEntryConnection.
 type ListInterceptEntriesInterceptEntriesInterceptEntryConnection struct {
 	// A list of edges.
-	Edges []*ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge `json:"edges"`
+	Edges []ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionPageInfo `json:"pageInfo"`
-	Count    *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionCount    `json:"count"`
+	PageInfo ListInterceptEntriesInterceptEntriesInterceptEntryConnectionPageInfo `json:"pageInfo"`
+	Count    ListInterceptEntriesInterceptEntriesInterceptEntryConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListInterceptEntriesInterceptEntriesInterceptEntryConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetEdges() []*ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge {
+func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetEdges() []ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListInterceptEntriesInterceptEntriesInterceptEntryConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetPageInfo() *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionPageInfo {
+func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetPageInfo() ListInterceptEntriesInterceptEntriesInterceptEntryConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListInterceptEntriesInterceptEntriesInterceptEntryConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetCount() *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionCount {
+func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnection) GetCount() ListInterceptEntriesInterceptEntriesInterceptEntryConnectionCount {
 	return v.Count
 }
 
@@ -5809,7 +6771,7 @@ type ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptE
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry `json:"node"`
+	Node ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry `json:"node"`
 }
 
 // GetCursor returns ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge.Cursor, and is useful for accessing the field via an interface.
@@ -5818,14 +6780,14 @@ func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterc
 }
 
 // GetNode returns ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge) GetNode() *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry {
+func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdge) GetNode() ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry {
 	return v.Node
 }
 
 // ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry includes the requested fields of the GraphQL type InterceptEntry.
 type ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry struct {
-	Id      string                                                                                                        `json:"id"`
-	Request *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntryRequest `json:"request"`
+	Id      string                                                                                                       `json:"id"`
+	Request ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntryRequest `json:"request"`
 }
 
 // GetId returns ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry.Id, and is useful for accessing the field via an interface.
@@ -5834,7 +6796,7 @@ func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterc
 }
 
 // GetRequest returns ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry.Request, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry) GetRequest() *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntryRequest {
+func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntry) GetRequest() ListInterceptEntriesInterceptEntriesInterceptEntryConnectionEdgesInterceptEntryEdgeNodeInterceptEntryRequest {
 	return v.Request
 }
 
@@ -5967,11 +6929,11 @@ func (v *ListInterceptEntriesInterceptEntriesInterceptEntryConnectionPageInfo) G
 
 // ListInterceptEntriesResponse is returned by ListInterceptEntries on success.
 type ListInterceptEntriesResponse struct {
-	InterceptEntries *ListInterceptEntriesInterceptEntriesInterceptEntryConnection `json:"interceptEntries"`
+	InterceptEntries ListInterceptEntriesInterceptEntriesInterceptEntryConnection `json:"interceptEntries"`
 }
 
 // GetInterceptEntries returns ListInterceptEntriesResponse.InterceptEntries, and is useful for accessing the field via an interface.
-func (v *ListInterceptEntriesResponse) GetInterceptEntries() *ListInterceptEntriesInterceptEntriesInterceptEntryConnection {
+func (v *ListInterceptEntriesResponse) GetInterceptEntries() ListInterceptEntriesInterceptEntriesInterceptEntryConnection {
 	return v.InterceptEntries
 }
 
@@ -6294,11 +7256,11 @@ func (v *ListPluginPackagesPluginPackagesPluginPackagePluginsPluginWorkflow) Get
 
 // ListPluginPackagesResponse is returned by ListPluginPackages on success.
 type ListPluginPackagesResponse struct {
-	PluginPackages []*ListPluginPackagesPluginPackagesPluginPackage `json:"pluginPackages"`
+	PluginPackages []ListPluginPackagesPluginPackagesPluginPackage `json:"pluginPackages"`
 }
 
 // GetPluginPackages returns ListPluginPackagesResponse.PluginPackages, and is useful for accessing the field via an interface.
-func (v *ListPluginPackagesResponse) GetPluginPackages() []*ListPluginPackagesPluginPackagesPluginPackage {
+func (v *ListPluginPackagesResponse) GetPluginPackages() []ListPluginPackagesPluginPackagesPluginPackage {
 	return v.PluginPackages
 }
 
@@ -6344,33 +7306,33 @@ func (v *ListProjectsProjectsProject) GetVersion() string { return v.Version }
 
 // ListProjectsResponse is returned by ListProjects on success.
 type ListProjectsResponse struct {
-	Projects []*ListProjectsProjectsProject `json:"projects"`
+	Projects []ListProjectsProjectsProject `json:"projects"`
 }
 
 // GetProjects returns ListProjectsResponse.Projects, and is useful for accessing the field via an interface.
-func (v *ListProjectsResponse) GetProjects() []*ListProjectsProjectsProject { return v.Projects }
+func (v *ListProjectsResponse) GetProjects() []ListProjectsProjectsProject { return v.Projects }
 
 // ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection includes the requested fields of the GraphQL type ReplaySessionCollectionConnection.
 type ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection struct {
 	// A list of edges.
-	Edges []*ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge `json:"edges"`
+	Edges []ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionPageInfo `json:"pageInfo"`
-	Count    *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionCount    `json:"count"`
+	PageInfo ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionPageInfo `json:"pageInfo"`
+	Count    ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetEdges() []*ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge {
+func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetEdges() []ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetPageInfo() *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionPageInfo {
+func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetPageInfo() ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetCount() *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionCount {
+func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection) GetCount() ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionCount {
 	return v.Count
 }
 
@@ -6392,7 +7354,7 @@ type ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollection
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection `json:"node"`
+	Node ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection `json:"node"`
 }
 
 // GetCursor returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge.Cursor, and is useful for accessing the field via an interface.
@@ -6401,15 +7363,15 @@ func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollec
 }
 
 // GetNode returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge) GetNode() *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection {
+func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdge) GetNode() ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection {
 	return v.Node
 }
 
 // ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection includes the requested fields of the GraphQL type ReplaySessionCollection.
 type ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection struct {
-	Id       string                                                                                                                                                                   `json:"id"`
-	Name     string                                                                                                                                                                   `json:"name"`
-	Sessions []*ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollectionSessionsReplaySession `json:"sessions"`
+	Id       string                                                                                                                                                                  `json:"id"`
+	Name     string                                                                                                                                                                  `json:"name"`
+	Sessions []ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollectionSessionsReplaySession `json:"sessions"`
 }
 
 // GetId returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection.Id, and is useful for accessing the field via an interface.
@@ -6423,7 +7385,7 @@ func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollec
 }
 
 // GetSessions returns ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection.Sessions, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection) GetSessions() []*ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollectionSessionsReplaySession {
+func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollection) GetSessions() []ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnectionEdgesReplaySessionCollectionEdgeNodeReplaySessionCollectionSessionsReplaySession {
 	return v.Sessions
 }
 
@@ -6480,35 +7442,35 @@ func (v *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollec
 
 // ListReplaySessionCollectionsResponse is returned by ListReplaySessionCollections on success.
 type ListReplaySessionCollectionsResponse struct {
-	ReplaySessionCollections *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection `json:"replaySessionCollections"`
+	ReplaySessionCollections ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection `json:"replaySessionCollections"`
 }
 
 // GetReplaySessionCollections returns ListReplaySessionCollectionsResponse.ReplaySessionCollections, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionCollectionsResponse) GetReplaySessionCollections() *ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection {
+func (v *ListReplaySessionCollectionsResponse) GetReplaySessionCollections() ListReplaySessionCollectionsReplaySessionCollectionsReplaySessionCollectionConnection {
 	return v.ReplaySessionCollections
 }
 
 // ListReplaySessionsReplaySessionsReplaySessionConnection includes the requested fields of the GraphQL type ReplaySessionConnection.
 type ListReplaySessionsReplaySessionsReplaySessionConnection struct {
 	// A list of edges.
-	Edges []*ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge `json:"edges"`
+	Edges []ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListReplaySessionsReplaySessionsReplaySessionConnectionPageInfo `json:"pageInfo"`
-	Count    *ListReplaySessionsReplaySessionsReplaySessionConnectionCount    `json:"count"`
+	PageInfo ListReplaySessionsReplaySessionsReplaySessionConnectionPageInfo `json:"pageInfo"`
+	Count    ListReplaySessionsReplaySessionsReplaySessionConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListReplaySessionsReplaySessionsReplaySessionConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetEdges() []*ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge {
+func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetEdges() []ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListReplaySessionsReplaySessionsReplaySessionConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetPageInfo() *ListReplaySessionsReplaySessionsReplaySessionConnectionPageInfo {
+func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetPageInfo() ListReplaySessionsReplaySessionsReplaySessionConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListReplaySessionsReplaySessionsReplaySessionConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetCount() *ListReplaySessionsReplaySessionsReplaySessionConnectionCount {
+func (v *ListReplaySessionsReplaySessionsReplaySessionConnection) GetCount() ListReplaySessionsReplaySessionsReplaySessionConnectionCount {
 	return v.Count
 }
 
@@ -6528,7 +7490,7 @@ type ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEd
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession `json:"node"`
+	Node ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession `json:"node"`
 }
 
 // GetCursor returns ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge.Cursor, and is useful for accessing the field via an interface.
@@ -6537,7 +7499,7 @@ func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessi
 }
 
 // GetNode returns ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge) GetNode() *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession {
+func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdge) GetNode() ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession {
 	return v.Node
 }
 
@@ -6546,7 +7508,7 @@ type ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEd
 	Id          string                                                                                                                `json:"id"`
 	Name        string                                                                                                                `json:"name"`
 	ActiveEntry *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySessionActiveEntryReplayEntry `json:"activeEntry"`
-	Collection  *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySessionCollection             `json:"collection"`
+	Collection  ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySessionCollection              `json:"collection"`
 }
 
 // GetId returns ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession.Id, and is useful for accessing the field via an interface.
@@ -6565,7 +7527,7 @@ func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessi
 }
 
 // GetCollection returns ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession.Collection, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession) GetCollection() *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySessionCollection {
+func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySession) GetCollection() ListReplaySessionsReplaySessionsReplaySessionConnectionEdgesReplaySessionEdgeNodeReplaySessionCollection {
 	return v.Collection
 }
 
@@ -6632,35 +7594,35 @@ func (v *ListReplaySessionsReplaySessionsReplaySessionConnectionPageInfo) GetEnd
 
 // ListReplaySessionsResponse is returned by ListReplaySessions on success.
 type ListReplaySessionsResponse struct {
-	ReplaySessions *ListReplaySessionsReplaySessionsReplaySessionConnection `json:"replaySessions"`
+	ReplaySessions ListReplaySessionsReplaySessionsReplaySessionConnection `json:"replaySessions"`
 }
 
 // GetReplaySessions returns ListReplaySessionsResponse.ReplaySessions, and is useful for accessing the field via an interface.
-func (v *ListReplaySessionsResponse) GetReplaySessions() *ListReplaySessionsReplaySessionsReplaySessionConnection {
+func (v *ListReplaySessionsResponse) GetReplaySessions() ListReplaySessionsReplaySessionsReplaySessionConnection {
 	return v.ReplaySessions
 }
 
 // ListRequestsByOffsetRequestsByOffsetRequestConnection includes the requested fields of the GraphQL type RequestConnection.
 type ListRequestsByOffsetRequestsByOffsetRequestConnection struct {
 	// A list of edges.
-	Edges []*ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge `json:"edges"`
+	Edges []ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListRequestsByOffsetRequestsByOffsetRequestConnectionPageInfo `json:"pageInfo"`
-	Count    *ListRequestsByOffsetRequestsByOffsetRequestConnectionCount    `json:"count"`
+	PageInfo ListRequestsByOffsetRequestsByOffsetRequestConnectionPageInfo `json:"pageInfo"`
+	Count    ListRequestsByOffsetRequestsByOffsetRequestConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListRequestsByOffsetRequestsByOffsetRequestConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetEdges() []*ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge {
+func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetEdges() []ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListRequestsByOffsetRequestsByOffsetRequestConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetPageInfo() *ListRequestsByOffsetRequestsByOffsetRequestConnectionPageInfo {
+func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetPageInfo() ListRequestsByOffsetRequestsByOffsetRequestConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListRequestsByOffsetRequestsByOffsetRequestConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetCount() *ListRequestsByOffsetRequestsByOffsetRequestConnectionCount {
+func (v *ListRequestsByOffsetRequestsByOffsetRequestConnection) GetCount() ListRequestsByOffsetRequestsByOffsetRequestConnectionCount {
 	return v.Count
 }
 
@@ -6680,7 +7642,7 @@ type ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge struc
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdgeNodeRequest `json:"node"`
+	Node ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdgeNodeRequest `json:"node"`
 }
 
 // GetCursor returns ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge.Cursor, and is useful for accessing the field via an interface.
@@ -6689,7 +7651,7 @@ func (v *ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge) 
 }
 
 // GetNode returns ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge) GetNode() *ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdgeNodeRequest {
+func (v *ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdge) GetNode() ListRequestsByOffsetRequestsByOffsetRequestConnectionEdgesRequestEdgeNodeRequest {
 	return v.Node
 }
 
@@ -6852,35 +7814,35 @@ func (v *ListRequestsByOffsetRequestsByOffsetRequestConnectionPageInfo) GetEndCu
 
 // ListRequestsByOffsetResponse is returned by ListRequestsByOffset on success.
 type ListRequestsByOffsetResponse struct {
-	RequestsByOffset *ListRequestsByOffsetRequestsByOffsetRequestConnection `json:"requestsByOffset"`
+	RequestsByOffset ListRequestsByOffsetRequestsByOffsetRequestConnection `json:"requestsByOffset"`
 }
 
 // GetRequestsByOffset returns ListRequestsByOffsetResponse.RequestsByOffset, and is useful for accessing the field via an interface.
-func (v *ListRequestsByOffsetResponse) GetRequestsByOffset() *ListRequestsByOffsetRequestsByOffsetRequestConnection {
+func (v *ListRequestsByOffsetResponse) GetRequestsByOffset() ListRequestsByOffsetRequestsByOffsetRequestConnection {
 	return v.RequestsByOffset
 }
 
 // ListRequestsRequestsRequestConnection includes the requested fields of the GraphQL type RequestConnection.
 type ListRequestsRequestsRequestConnection struct {
 	// A list of edges.
-	Edges []*ListRequestsRequestsRequestConnectionEdgesRequestEdge `json:"edges"`
+	Edges []ListRequestsRequestsRequestConnectionEdgesRequestEdge `json:"edges"`
 	// Information to aid in pagination.
-	PageInfo *ListRequestsRequestsRequestConnectionPageInfo `json:"pageInfo"`
-	Count    *ListRequestsRequestsRequestConnectionCount    `json:"count"`
+	PageInfo ListRequestsRequestsRequestConnectionPageInfo `json:"pageInfo"`
+	Count    ListRequestsRequestsRequestConnectionCount    `json:"count"`
 }
 
 // GetEdges returns ListRequestsRequestsRequestConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListRequestsRequestsRequestConnection) GetEdges() []*ListRequestsRequestsRequestConnectionEdgesRequestEdge {
+func (v *ListRequestsRequestsRequestConnection) GetEdges() []ListRequestsRequestsRequestConnectionEdgesRequestEdge {
 	return v.Edges
 }
 
 // GetPageInfo returns ListRequestsRequestsRequestConnection.PageInfo, and is useful for accessing the field via an interface.
-func (v *ListRequestsRequestsRequestConnection) GetPageInfo() *ListRequestsRequestsRequestConnectionPageInfo {
+func (v *ListRequestsRequestsRequestConnection) GetPageInfo() ListRequestsRequestsRequestConnectionPageInfo {
 	return v.PageInfo
 }
 
 // GetCount returns ListRequestsRequestsRequestConnection.Count, and is useful for accessing the field via an interface.
-func (v *ListRequestsRequestsRequestConnection) GetCount() *ListRequestsRequestsRequestConnectionCount {
+func (v *ListRequestsRequestsRequestConnection) GetCount() ListRequestsRequestsRequestConnectionCount {
 	return v.Count
 }
 
@@ -6900,14 +7862,14 @@ type ListRequestsRequestsRequestConnectionEdgesRequestEdge struct {
 	// A cursor for use in pagination
 	Cursor string `json:"cursor"`
 	// The item at the end of the edge
-	Node *ListRequestsRequestsRequestConnectionEdgesRequestEdgeNodeRequest `json:"node"`
+	Node ListRequestsRequestsRequestConnectionEdgesRequestEdgeNodeRequest `json:"node"`
 }
 
 // GetCursor returns ListRequestsRequestsRequestConnectionEdgesRequestEdge.Cursor, and is useful for accessing the field via an interface.
 func (v *ListRequestsRequestsRequestConnectionEdgesRequestEdge) GetCursor() string { return v.Cursor }
 
 // GetNode returns ListRequestsRequestsRequestConnectionEdgesRequestEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListRequestsRequestsRequestConnectionEdgesRequestEdge) GetNode() *ListRequestsRequestsRequestConnectionEdgesRequestEdgeNodeRequest {
+func (v *ListRequestsRequestsRequestConnectionEdgesRequestEdge) GetNode() ListRequestsRequestsRequestConnectionEdgesRequestEdgeNodeRequest {
 	return v.Node
 }
 
@@ -7066,21 +8028,19 @@ func (v *ListRequestsRequestsRequestConnectionPageInfo) GetEndCursor() *string {
 
 // ListRequestsResponse is returned by ListRequests on success.
 type ListRequestsResponse struct {
-	Requests *ListRequestsRequestsRequestConnection `json:"requests"`
+	Requests ListRequestsRequestsRequestConnection `json:"requests"`
 }
 
 // GetRequests returns ListRequestsResponse.Requests, and is useful for accessing the field via an interface.
-func (v *ListRequestsResponse) GetRequests() *ListRequestsRequestsRequestConnection {
-	return v.Requests
-}
+func (v *ListRequestsResponse) GetRequests() ListRequestsRequestsRequestConnection { return v.Requests }
 
 // ListScopesResponse is returned by ListScopes on success.
 type ListScopesResponse struct {
-	Scopes []*ListScopesScopesScope `json:"scopes"`
+	Scopes []ListScopesScopesScope `json:"scopes"`
 }
 
 // GetScopes returns ListScopesResponse.Scopes, and is useful for accessing the field via an interface.
-func (v *ListScopesResponse) GetScopes() []*ListScopesScopesScope { return v.Scopes }
+func (v *ListScopesResponse) GetScopes() []ListScopesScopesScope { return v.Scopes }
 
 // ListScopesScopesScope includes the requested fields of the GraphQL type Scope.
 type ListScopesScopesScope struct {
@@ -7108,22 +8068,22 @@ func (v *ListScopesScopesScope) GetIndexed() bool { return v.Indexed }
 
 // ListSitemapDescendantEntriesResponse is returned by ListSitemapDescendantEntries on success.
 type ListSitemapDescendantEntriesResponse struct {
-	SitemapDescendantEntries *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection `json:"sitemapDescendantEntries"`
+	SitemapDescendantEntries ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection `json:"sitemapDescendantEntries"`
 }
 
 // GetSitemapDescendantEntries returns ListSitemapDescendantEntriesResponse.SitemapDescendantEntries, and is useful for accessing the field via an interface.
-func (v *ListSitemapDescendantEntriesResponse) GetSitemapDescendantEntries() *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection {
+func (v *ListSitemapDescendantEntriesResponse) GetSitemapDescendantEntries() ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection {
 	return v.SitemapDescendantEntries
 }
 
 // ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection includes the requested fields of the GraphQL type SitemapEntryConnection.
 type ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection struct {
 	// A list of edges.
-	Edges []*ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge `json:"edges"`
+	Edges []ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge `json:"edges"`
 }
 
 // GetEdges returns ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection) GetEdges() []*ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge {
+func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnection) GetEdges() []ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge {
 	return v.Edges
 }
 
@@ -7133,11 +8093,11 @@ func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnect
 // An edge in a connection.
 type ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge struct {
 	// The item at the end of the edge
-	Node *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry `json:"node"`
+	Node ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry `json:"node"`
 }
 
 // GetNode returns ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge) GetNode() *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry {
+func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdge) GetNode() ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry {
 	return v.Node
 }
 
@@ -7221,22 +8181,22 @@ func (v *ListSitemapDescendantEntriesSitemapDescendantEntriesSitemapEntryConnect
 
 // ListSitemapRootEntriesResponse is returned by ListSitemapRootEntries on success.
 type ListSitemapRootEntriesResponse struct {
-	SitemapRootEntries *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection `json:"sitemapRootEntries"`
+	SitemapRootEntries ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection `json:"sitemapRootEntries"`
 }
 
 // GetSitemapRootEntries returns ListSitemapRootEntriesResponse.SitemapRootEntries, and is useful for accessing the field via an interface.
-func (v *ListSitemapRootEntriesResponse) GetSitemapRootEntries() *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection {
+func (v *ListSitemapRootEntriesResponse) GetSitemapRootEntries() ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection {
 	return v.SitemapRootEntries
 }
 
 // ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection includes the requested fields of the GraphQL type SitemapEntryConnection.
 type ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection struct {
 	// A list of edges.
-	Edges []*ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge `json:"edges"`
+	Edges []ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge `json:"edges"`
 }
 
 // GetEdges returns ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection.Edges, and is useful for accessing the field via an interface.
-func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection) GetEdges() []*ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge {
+func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection) GetEdges() []ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge {
 	return v.Edges
 }
 
@@ -7246,11 +8206,11 @@ func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnection) GetEdge
 // An edge in a connection.
 type ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge struct {
 	// The item at the end of the edge
-	Node *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry `json:"node"`
+	Node ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry `json:"node"`
 }
 
 // GetNode returns ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge.Node, and is useful for accessing the field via an interface.
-func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge) GetNode() *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry {
+func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdge) GetNode() ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSitemapEntryEdgeNodeSitemapEntry {
 	return v.Node
 }
 
@@ -7284,19 +8244,19 @@ func (v *ListSitemapRootEntriesSitemapRootEntriesSitemapEntryConnectionEdgesSite
 
 // ListTamperRuleCollectionsResponse is returned by ListTamperRuleCollections on success.
 type ListTamperRuleCollectionsResponse struct {
-	TamperRuleCollections []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection `json:"tamperRuleCollections"`
+	TamperRuleCollections []ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection `json:"tamperRuleCollections"`
 }
 
 // GetTamperRuleCollections returns ListTamperRuleCollectionsResponse.TamperRuleCollections, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsResponse) GetTamperRuleCollections() []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection {
+func (v *ListTamperRuleCollectionsResponse) GetTamperRuleCollections() []ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection {
 	return v.TamperRuleCollections
 }
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection includes the requested fields of the GraphQL type TamperRuleCollection.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection struct {
-	Id    string                                                                               `json:"id"`
-	Name  string                                                                               `json:"name"`
-	Rules []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule `json:"rules"`
+	Id    string                                                                              `json:"id"`
+	Name  string                                                                              `json:"name"`
+	Rules []ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule `json:"rules"`
 }
 
 // GetId returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection.Id, and is useful for accessing the field via an interface.
@@ -7310,7 +8270,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) Get
 }
 
 // GetRules returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection.Rules, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) GetRules() []*ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection) GetRules() []ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRule {
 	return v.Rules
 }
 
@@ -9071,9 +10031,9 @@ func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd includes the requested fields of the GraphQL type TamperOperationHeaderAdd.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd struct {
-	Typename *string                                                                                                                                                                      `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
-	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer    `json:"-"`
+	Typename *string                                                                                                                                                                     `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer   `json:"-"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Typename, and is useful for accessing the field via an interface.
@@ -9082,7 +10042,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -9127,7 +10087,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAdd struct {
 	Typename *string `json:"__typename"`
 
-	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Matcher ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
 
 	Replacer json.RawMessage `json:"replacer"`
 }
@@ -9633,8 +10593,8 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove includes the requested fields of the GraphQL type TamperOperationHeaderRemove.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove struct {
-	Typename *string                                                                                                                                                                         `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
+	Typename *string                                                                                                                                                                        `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove.Typename, and is useful for accessing the field via an interface.
@@ -9643,7 +10603,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemove) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -9659,9 +10619,9 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate includes the requested fields of the GraphQL type TamperOperationHeaderUpdate.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate struct {
-	Typename *string                                                                                                                                                                         `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
-	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer    `json:"-"`
+	Typename *string                                                                                                                                                                        `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer   `json:"-"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Typename, and is useful for accessing the field via an interface.
@@ -9670,7 +10630,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -9715,7 +10675,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdate struct {
 	Typename *string `json:"__typename"`
 
-	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Matcher ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionRequestHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
 
 	Replacer json.RawMessage `json:"replacer"`
 }
@@ -11889,9 +12849,9 @@ func __marshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollection
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd includes the requested fields of the GraphQL type TamperOperationHeaderAdd.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd struct {
-	Typename *string                                                                                                                                                                       `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
-	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer    `json:"-"`
+	Typename *string                                                                                                                                                                      `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddReplacerTamperReplacer   `json:"-"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Typename, and is useful for accessing the field via an interface.
@@ -11900,7 +12860,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -11945,7 +12905,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAdd struct {
 	Typename *string `json:"__typename"`
 
-	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
+	Matcher ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderAddMatcherTamperMatcherName `json:"matcher"`
 
 	Replacer json.RawMessage `json:"replacer"`
 }
@@ -12451,8 +13411,8 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove includes the requested fields of the GraphQL type TamperOperationHeaderRemove.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove struct {
-	Typename *string                                                                                                                                                                          `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
+	Typename *string                                                                                                                                                                         `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName `json:"matcher"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove.Typename, and is useful for accessing the field via an interface.
@@ -12461,7 +13421,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemove) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderRemoveMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -12477,9 +13437,9 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 
 // ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate includes the requested fields of the GraphQL type TamperOperationHeaderUpdate.
 type ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate struct {
-	Typename *string                                                                                                                                                                          `json:"__typename"`
-	Matcher  *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
-	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer    `json:"-"`
+	Typename *string                                                                                                                                                                         `json:"__typename"`
+	Matcher  ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Replacer ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateReplacerTamperReplacer   `json:"-"`
 }
 
 // GetTypename returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Typename, and is useful for accessing the field via an interface.
@@ -12488,7 +13448,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 }
 
 // GetMatcher returns ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate.Matcher, and is useful for accessing the field via an interface.
-func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) GetMatcher() *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
+func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate) GetMatcher() ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName {
 	return v.Matcher
 }
 
@@ -12533,7 +13493,7 @@ func (v *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRules
 type __premarshalListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdate struct {
 	Typename *string `json:"__typename"`
 
-	Matcher *ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
+	Matcher ListTamperRuleCollectionsTamperRuleCollectionsTamperRuleCollectionRulesTamperRuleSectionTamperSectionResponseHeaderOperationTamperOperationHeaderUpdateMatcherTamperMatcherName `json:"matcher"`
 
 	Replacer json.RawMessage `json:"replacer"`
 }
@@ -13039,11 +13999,11 @@ func (v *ListTasksTasksWorkflowTask) GetId() string { return v.Id }
 
 // ListWorkflowNodeDefinitionsResponse is returned by ListWorkflowNodeDefinitions on success.
 type ListWorkflowNodeDefinitionsResponse struct {
-	WorkflowNodeDefinitions []*ListWorkflowNodeDefinitionsWorkflowNodeDefinitionsWorkflowNodeDefinition `json:"workflowNodeDefinitions"`
+	WorkflowNodeDefinitions []ListWorkflowNodeDefinitionsWorkflowNodeDefinitionsWorkflowNodeDefinition `json:"workflowNodeDefinitions"`
 }
 
 // GetWorkflowNodeDefinitions returns ListWorkflowNodeDefinitionsResponse.WorkflowNodeDefinitions, and is useful for accessing the field via an interface.
-func (v *ListWorkflowNodeDefinitionsResponse) GetWorkflowNodeDefinitions() []*ListWorkflowNodeDefinitionsWorkflowNodeDefinitionsWorkflowNodeDefinition {
+func (v *ListWorkflowNodeDefinitionsResponse) GetWorkflowNodeDefinitions() []ListWorkflowNodeDefinitionsWorkflowNodeDefinitionsWorkflowNodeDefinition {
 	return v.WorkflowNodeDefinitions
 }
 
@@ -13059,11 +14019,11 @@ func (v *ListWorkflowNodeDefinitionsWorkflowNodeDefinitionsWorkflowNodeDefinitio
 
 // ListWorkflowsResponse is returned by ListWorkflows on success.
 type ListWorkflowsResponse struct {
-	Workflows []*ListWorkflowsWorkflowsWorkflow `json:"workflows"`
+	Workflows []ListWorkflowsWorkflowsWorkflow `json:"workflows"`
 }
 
 // GetWorkflows returns ListWorkflowsResponse.Workflows, and is useful for accessing the field via an interface.
-func (v *ListWorkflowsResponse) GetWorkflows() []*ListWorkflowsWorkflowsWorkflow { return v.Workflows }
+func (v *ListWorkflowsResponse) GetWorkflows() []ListWorkflowsWorkflowsWorkflow { return v.Workflows }
 
 // ListWorkflowsWorkflowsWorkflow includes the requested fields of the GraphQL type Workflow.
 type ListWorkflowsWorkflowsWorkflow struct {
@@ -13103,12 +14063,234 @@ func (v *ListWorkflowsWorkflowsWorkflow) GetUpdatedAt() string { return v.Update
 
 // LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload includes the requested fields of the GraphQL type LocalizeWorkflowPayload.
 type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload struct {
-	Workflow *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow `json:"workflow"`
+	Workflow *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow                   `json:"workflow"`
+	Error    *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError `json:"-"`
 }
 
 // GetWorkflow returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload.Workflow, and is useful for accessing the field via an interface.
 func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload) GetWorkflow() *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow {
 	return v.Workflow
+}
+
+// GetError returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload) GetError() *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError {
+	return v.Error
+}
+
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError)
+			err = __unmarshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload struct {
+	Workflow *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow `json:"workflow"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload) __premarshalJSON() (*__premarshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload, error) {
+	var retval __premarshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload
+
+	retval.Workflow = v.Workflow
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError includes the requested fields of the GraphQL interface LocalizeWorkflowError.
+//
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError is implemented by the following types:
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError
+type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError interface {
+	implementsGraphQLInterfaceLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError() {
+}
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError) implementsGraphQLInterfaceLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError() {
+}
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError() {
+}
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError) implementsGraphQLInterfaceLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError() {
+}
+
+func __unmarshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError(b []byte, v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "ReadOnlyUserError":
+		*v = new(LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "WorkflowUserError":
+		*v = new(LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing LocalizeWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalLocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError(v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError:
+		typename = "ReadOnlyUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError:
+		typename = "WorkflowUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorLocalizeWorkflowError: "%T"`, v)
+	}
+}
+
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError includes the requested fields of the GraphQL type ReadOnlyUserError.
+type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError.Typename, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorReadOnlyUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError includes the requested fields of the GraphQL type WorkflowUserError.
+type LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError.Typename, and is useful for accessing the field via an interface.
+func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadErrorWorkflowUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow includes the requested fields of the GraphQL type Workflow.
@@ -13133,11 +14315,11 @@ func (v *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayloadWorkflow) GetGlo
 
 // LocalizeWorkflowResponse is returned by LocalizeWorkflow on success.
 type LocalizeWorkflowResponse struct {
-	LocalizeWorkflow *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload `json:"localizeWorkflow"`
+	LocalizeWorkflow LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload `json:"localizeWorkflow"`
 }
 
 // GetLocalizeWorkflow returns LocalizeWorkflowResponse.LocalizeWorkflow, and is useful for accessing the field via an interface.
-func (v *LocalizeWorkflowResponse) GetLocalizeWorkflow() *LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload {
+func (v *LocalizeWorkflowResponse) GetLocalizeWorkflow() LocalizeWorkflowLocalizeWorkflowLocalizeWorkflowPayload {
 	return v.LocalizeWorkflow
 }
 
@@ -13153,9 +14335,9 @@ func (v *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayload) GetSession(
 
 // MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession includes the requested fields of the GraphQL type ReplaySession.
 type MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession struct {
-	Id         string                                                                                    `json:"id"`
-	Name       string                                                                                    `json:"name"`
-	Collection *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySessionCollection `json:"collection"`
+	Id         string                                                                                   `json:"id"`
+	Name       string                                                                                   `json:"name"`
+	Collection MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySessionCollection `json:"collection"`
 }
 
 // GetId returns MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession.Id, and is useful for accessing the field via an interface.
@@ -13169,7 +14351,7 @@ func (v *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplay
 }
 
 // GetCollection returns MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession.Collection, and is useful for accessing the field via an interface.
-func (v *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession) GetCollection() *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySessionCollection {
+func (v *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySession) GetCollection() MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplaySessionCollection {
 	return v.Collection
 }
 
@@ -13191,11 +14373,11 @@ func (v *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayloadSessionReplay
 
 // MoveReplaySessionResponse is returned by MoveReplaySession on success.
 type MoveReplaySessionResponse struct {
-	MoveReplaySession *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayload `json:"moveReplaySession"`
+	MoveReplaySession MoveReplaySessionMoveReplaySessionMoveReplaySessionPayload `json:"moveReplaySession"`
 }
 
 // GetMoveReplaySession returns MoveReplaySessionResponse.MoveReplaySession, and is useful for accessing the field via an interface.
-func (v *MoveReplaySessionResponse) GetMoveReplaySession() *MoveReplaySessionMoveReplaySessionMoveReplaySessionPayload {
+func (v *MoveReplaySessionResponse) GetMoveReplaySession() MoveReplaySessionMoveReplaySessionMoveReplaySessionPayload {
 	return v.MoveReplaySession
 }
 
@@ -13233,11 +14415,11 @@ func (v *PauseAutomateTaskPauseAutomateTaskPauseAutomateTaskPayloadAutomateTask)
 
 // PauseAutomateTaskResponse is returned by PauseAutomateTask on success.
 type PauseAutomateTaskResponse struct {
-	PauseAutomateTask *PauseAutomateTaskPauseAutomateTaskPauseAutomateTaskPayload `json:"pauseAutomateTask"`
+	PauseAutomateTask PauseAutomateTaskPauseAutomateTaskPauseAutomateTaskPayload `json:"pauseAutomateTask"`
 }
 
 // GetPauseAutomateTask returns PauseAutomateTaskResponse.PauseAutomateTask, and is useful for accessing the field via an interface.
-func (v *PauseAutomateTaskResponse) GetPauseAutomateTask() *PauseAutomateTaskPauseAutomateTaskPauseAutomateTaskPayload {
+func (v *PauseAutomateTaskResponse) GetPauseAutomateTask() PauseAutomateTaskPauseAutomateTaskPauseAutomateTaskPayload {
 	return v.PauseAutomateTask
 }
 
@@ -13253,11 +14435,11 @@ func (v *PauseInterceptPauseInterceptPauseInterceptPayload) GetStatus() Intercep
 
 // PauseInterceptResponse is returned by PauseIntercept on success.
 type PauseInterceptResponse struct {
-	PauseIntercept *PauseInterceptPauseInterceptPauseInterceptPayload `json:"pauseIntercept"`
+	PauseIntercept PauseInterceptPauseInterceptPauseInterceptPayload `json:"pauseIntercept"`
 }
 
 // GetPauseIntercept returns PauseInterceptResponse.PauseIntercept, and is useful for accessing the field via an interface.
-func (v *PauseInterceptResponse) GetPauseIntercept() *PauseInterceptPauseInterceptPauseInterceptPayload {
+func (v *PauseInterceptResponse) GetPauseIntercept() PauseInterceptPauseInterceptPauseInterceptPayload {
 	return v.PauseIntercept
 }
 
@@ -13557,11 +14739,11 @@ func (v *RefreshAuthenticationTokenRefreshAuthenticationTokenRefreshAuthenticati
 
 // RefreshAuthenticationTokenResponse is returned by RefreshAuthenticationToken on success.
 type RefreshAuthenticationTokenResponse struct {
-	RefreshAuthenticationToken *RefreshAuthenticationTokenRefreshAuthenticationTokenRefreshAuthenticationTokenPayload `json:"refreshAuthenticationToken"`
+	RefreshAuthenticationToken RefreshAuthenticationTokenRefreshAuthenticationTokenRefreshAuthenticationTokenPayload `json:"refreshAuthenticationToken"`
 }
 
 // GetRefreshAuthenticationToken returns RefreshAuthenticationTokenResponse.RefreshAuthenticationToken, and is useful for accessing the field via an interface.
-func (v *RefreshAuthenticationTokenResponse) GetRefreshAuthenticationToken() *RefreshAuthenticationTokenRefreshAuthenticationTokenRefreshAuthenticationTokenPayload {
+func (v *RefreshAuthenticationTokenResponse) GetRefreshAuthenticationToken() RefreshAuthenticationTokenRefreshAuthenticationTokenRefreshAuthenticationTokenPayload {
 	return v.RefreshAuthenticationToken
 }
 
@@ -13593,11 +14775,11 @@ func (v *RenameAutomateSessionRenameAutomateSessionRenameAutomateSessionPayloadS
 
 // RenameAutomateSessionResponse is returned by RenameAutomateSession on success.
 type RenameAutomateSessionResponse struct {
-	RenameAutomateSession *RenameAutomateSessionRenameAutomateSessionRenameAutomateSessionPayload `json:"renameAutomateSession"`
+	RenameAutomateSession RenameAutomateSessionRenameAutomateSessionRenameAutomateSessionPayload `json:"renameAutomateSession"`
 }
 
 // GetRenameAutomateSession returns RenameAutomateSessionResponse.RenameAutomateSession, and is useful for accessing the field via an interface.
-func (v *RenameAutomateSessionResponse) GetRenameAutomateSession() *RenameAutomateSessionRenameAutomateSessionRenameAutomateSessionPayload {
+func (v *RenameAutomateSessionResponse) GetRenameAutomateSession() RenameAutomateSessionRenameAutomateSessionRenameAutomateSessionPayload {
 	return v.RenameAutomateSession
 }
 
@@ -13629,22 +14811,220 @@ func (v *RenameHostedFileRenameHostedFileRenameHostedFilePayloadHostedFile) GetN
 
 // RenameHostedFileResponse is returned by RenameHostedFile on success.
 type RenameHostedFileResponse struct {
-	RenameHostedFile *RenameHostedFileRenameHostedFileRenameHostedFilePayload `json:"renameHostedFile"`
+	RenameHostedFile RenameHostedFileRenameHostedFileRenameHostedFilePayload `json:"renameHostedFile"`
 }
 
 // GetRenameHostedFile returns RenameHostedFileResponse.RenameHostedFile, and is useful for accessing the field via an interface.
-func (v *RenameHostedFileResponse) GetRenameHostedFile() *RenameHostedFileRenameHostedFileRenameHostedFilePayload {
+func (v *RenameHostedFileResponse) GetRenameHostedFile() RenameHostedFileRenameHostedFileRenameHostedFilePayload {
 	return v.RenameHostedFile
 }
 
 // RenameProjectRenameProjectRenameProjectPayload includes the requested fields of the GraphQL type RenameProjectPayload.
 type RenameProjectRenameProjectRenameProjectPayload struct {
 	Project *RenameProjectRenameProjectRenameProjectPayloadProject `json:"project"`
+	Error   *RenameProjectRenameProjectRenameProjectPayloadError   `json:"-"`
 }
 
 // GetProject returns RenameProjectRenameProjectRenameProjectPayload.Project, and is useful for accessing the field via an interface.
 func (v *RenameProjectRenameProjectRenameProjectPayload) GetProject() *RenameProjectRenameProjectRenameProjectPayloadProject {
 	return v.Project
+}
+
+// GetError returns RenameProjectRenameProjectRenameProjectPayload.Error, and is useful for accessing the field via an interface.
+func (v *RenameProjectRenameProjectRenameProjectPayload) GetError() *RenameProjectRenameProjectRenameProjectPayloadError {
+	return v.Error
+}
+
+func (v *RenameProjectRenameProjectRenameProjectPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*RenameProjectRenameProjectRenameProjectPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.RenameProjectRenameProjectRenameProjectPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(RenameProjectRenameProjectRenameProjectPayloadError)
+			err = __unmarshalRenameProjectRenameProjectRenameProjectPayloadError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal RenameProjectRenameProjectRenameProjectPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalRenameProjectRenameProjectRenameProjectPayload struct {
+	Project *RenameProjectRenameProjectRenameProjectPayloadProject `json:"project"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *RenameProjectRenameProjectRenameProjectPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *RenameProjectRenameProjectRenameProjectPayload) __premarshalJSON() (*__premarshalRenameProjectRenameProjectRenameProjectPayload, error) {
+	var retval __premarshalRenameProjectRenameProjectRenameProjectPayload
+
+	retval.Project = v.Project
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalRenameProjectRenameProjectRenameProjectPayloadError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal RenameProjectRenameProjectRenameProjectPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// RenameProjectRenameProjectRenameProjectPayloadError includes the requested fields of the GraphQL interface RenameProjectPayloadError.
+//
+// RenameProjectRenameProjectRenameProjectPayloadError is implemented by the following types:
+// RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError
+// RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError
+// RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError
+type RenameProjectRenameProjectRenameProjectPayloadError interface {
+	implementsGraphQLInterfaceRenameProjectRenameProjectRenameProjectPayloadError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError) implementsGraphQLInterfaceRenameProjectRenameProjectRenameProjectPayloadError() {
+}
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError) implementsGraphQLInterfaceRenameProjectRenameProjectRenameProjectPayloadError() {
+}
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceRenameProjectRenameProjectRenameProjectPayloadError() {
+}
+
+func __unmarshalRenameProjectRenameProjectRenameProjectPayloadError(b []byte, v *RenameProjectRenameProjectRenameProjectPayloadError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "NameTakenUserError":
+		*v = new(RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError)
+		return json.Unmarshal(b, *v)
+	case "OtherUserError":
+		*v = new(RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing RenameProjectPayloadError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for RenameProjectRenameProjectRenameProjectPayloadError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalRenameProjectRenameProjectRenameProjectPayloadError(v *RenameProjectRenameProjectRenameProjectPayloadError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError:
+		typename = "NameTakenUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for RenameProjectRenameProjectRenameProjectPayloadError: "%T"`, v)
+	}
+}
+
+// RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError includes the requested fields of the GraphQL type NameTakenUserError.
+type RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorNameTakenUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameProjectRenameProjectRenameProjectPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // RenameProjectRenameProjectRenameProjectPayloadProject includes the requested fields of the GraphQL type Project.
@@ -13661,11 +15041,11 @@ func (v *RenameProjectRenameProjectRenameProjectPayloadProject) GetName() string
 
 // RenameProjectResponse is returned by RenameProject on success.
 type RenameProjectResponse struct {
-	RenameProject *RenameProjectRenameProjectRenameProjectPayload `json:"renameProject"`
+	RenameProject RenameProjectRenameProjectRenameProjectPayload `json:"renameProject"`
 }
 
 // GetRenameProject returns RenameProjectResponse.RenameProject, and is useful for accessing the field via an interface.
-func (v *RenameProjectResponse) GetRenameProject() *RenameProjectRenameProjectRenameProjectPayload {
+func (v *RenameProjectResponse) GetRenameProject() RenameProjectRenameProjectRenameProjectPayload {
 	return v.RenameProject
 }
 
@@ -13697,11 +15077,11 @@ func (v *RenameReplaySessionCollectionRenameReplaySessionCollectionRenameReplayS
 
 // RenameReplaySessionCollectionResponse is returned by RenameReplaySessionCollection on success.
 type RenameReplaySessionCollectionResponse struct {
-	RenameReplaySessionCollection *RenameReplaySessionCollectionRenameReplaySessionCollectionRenameReplaySessionCollectionPayload `json:"renameReplaySessionCollection"`
+	RenameReplaySessionCollection RenameReplaySessionCollectionRenameReplaySessionCollectionRenameReplaySessionCollectionPayload `json:"renameReplaySessionCollection"`
 }
 
 // GetRenameReplaySessionCollection returns RenameReplaySessionCollectionResponse.RenameReplaySessionCollection, and is useful for accessing the field via an interface.
-func (v *RenameReplaySessionCollectionResponse) GetRenameReplaySessionCollection() *RenameReplaySessionCollectionRenameReplaySessionCollectionRenameReplaySessionCollectionPayload {
+func (v *RenameReplaySessionCollectionResponse) GetRenameReplaySessionCollection() RenameReplaySessionCollectionRenameReplaySessionCollectionRenameReplaySessionCollectionPayload {
 	return v.RenameReplaySessionCollection
 }
 
@@ -13733,21 +15113,21 @@ func (v *RenameReplaySessionRenameReplaySessionRenameReplaySessionPayloadSession
 
 // RenameReplaySessionResponse is returned by RenameReplaySession on success.
 type RenameReplaySessionResponse struct {
-	RenameReplaySession *RenameReplaySessionRenameReplaySessionRenameReplaySessionPayload `json:"renameReplaySession"`
+	RenameReplaySession RenameReplaySessionRenameReplaySessionRenameReplaySessionPayload `json:"renameReplaySession"`
 }
 
 // GetRenameReplaySession returns RenameReplaySessionResponse.RenameReplaySession, and is useful for accessing the field via an interface.
-func (v *RenameReplaySessionResponse) GetRenameReplaySession() *RenameReplaySessionRenameReplaySessionRenameReplaySessionPayload {
+func (v *RenameReplaySessionResponse) GetRenameReplaySession() RenameReplaySessionRenameReplaySessionRenameReplaySessionPayload {
 	return v.RenameReplaySession
 }
 
 // RenameScopeRenameScopeRenameScopePayload includes the requested fields of the GraphQL type RenameScopePayload.
 type RenameScopeRenameScopeRenameScopePayload struct {
-	Scope *RenameScopeRenameScopeRenameScopePayloadScope `json:"scope"`
+	Scope RenameScopeRenameScopeRenameScopePayloadScope `json:"scope"`
 }
 
 // GetScope returns RenameScopeRenameScopeRenameScopePayload.Scope, and is useful for accessing the field via an interface.
-func (v *RenameScopeRenameScopeRenameScopePayload) GetScope() *RenameScopeRenameScopeRenameScopePayloadScope {
+func (v *RenameScopeRenameScopeRenameScopePayload) GetScope() RenameScopeRenameScopeRenameScopePayloadScope {
 	return v.Scope
 }
 
@@ -13765,22 +15145,220 @@ func (v *RenameScopeRenameScopeRenameScopePayloadScope) GetName() string { retur
 
 // RenameScopeResponse is returned by RenameScope on success.
 type RenameScopeResponse struct {
-	RenameScope *RenameScopeRenameScopeRenameScopePayload `json:"renameScope"`
+	RenameScope RenameScopeRenameScopeRenameScopePayload `json:"renameScope"`
 }
 
 // GetRenameScope returns RenameScopeResponse.RenameScope, and is useful for accessing the field via an interface.
-func (v *RenameScopeResponse) GetRenameScope() *RenameScopeRenameScopeRenameScopePayload {
+func (v *RenameScopeResponse) GetRenameScope() RenameScopeRenameScopeRenameScopePayload {
 	return v.RenameScope
 }
 
 // RenameWorkflowRenameWorkflowRenameWorkflowPayload includes the requested fields of the GraphQL type RenameWorkflowPayload.
 type RenameWorkflowRenameWorkflowRenameWorkflowPayload struct {
-	Workflow *RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow `json:"workflow"`
+	Workflow *RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow                 `json:"workflow"`
+	Error    *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError `json:"-"`
 }
 
 // GetWorkflow returns RenameWorkflowRenameWorkflowRenameWorkflowPayload.Workflow, and is useful for accessing the field via an interface.
 func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayload) GetWorkflow() *RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow {
 	return v.Workflow
+}
+
+// GetError returns RenameWorkflowRenameWorkflowRenameWorkflowPayload.Error, and is useful for accessing the field via an interface.
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayload) GetError() *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError {
+	return v.Error
+}
+
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*RenameWorkflowRenameWorkflowRenameWorkflowPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.RenameWorkflowRenameWorkflowRenameWorkflowPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError)
+			err = __unmarshalRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal RenameWorkflowRenameWorkflowRenameWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalRenameWorkflowRenameWorkflowRenameWorkflowPayload struct {
+	Workflow *RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow `json:"workflow"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayload) __premarshalJSON() (*__premarshalRenameWorkflowRenameWorkflowRenameWorkflowPayload, error) {
+	var retval __premarshalRenameWorkflowRenameWorkflowRenameWorkflowPayload
+
+	retval.Workflow = v.Workflow
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal RenameWorkflowRenameWorkflowRenameWorkflowPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
+}
+
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError includes the requested fields of the GraphQL type ReadOnlyUserError.
+type RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError includes the requested fields of the GraphQL interface RenameWorkflowError.
+//
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError is implemented by the following types:
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError
+type RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError interface {
+	implementsGraphQLInterfaceRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError) implementsGraphQLInterfaceRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError() {
+}
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError) implementsGraphQLInterfaceRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError() {
+}
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError() {
+}
+
+func __unmarshalRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError(b []byte, v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "ReadOnlyUserError":
+		*v = new(RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing RenameWorkflowError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalRenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError(v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError:
+		typename = "ReadOnlyUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorReadOnlyUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorRenameWorkflowError: "%T"`, v)
+	}
+}
+
+// RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow includes the requested fields of the GraphQL type Workflow.
@@ -13797,25 +15375,25 @@ func (v *RenameWorkflowRenameWorkflowRenameWorkflowPayloadWorkflow) GetName() st
 
 // RenameWorkflowResponse is returned by RenameWorkflow on success.
 type RenameWorkflowResponse struct {
-	RenameWorkflow *RenameWorkflowRenameWorkflowRenameWorkflowPayload `json:"renameWorkflow"`
+	RenameWorkflow RenameWorkflowRenameWorkflowRenameWorkflowPayload `json:"renameWorkflow"`
 }
 
 // GetRenameWorkflow returns RenameWorkflowResponse.RenameWorkflow, and is useful for accessing the field via an interface.
-func (v *RenameWorkflowResponse) GetRenameWorkflow() *RenameWorkflowRenameWorkflowRenameWorkflowPayload {
+func (v *RenameWorkflowResponse) GetRenameWorkflow() RenameWorkflowRenameWorkflowRenameWorkflowPayload {
 	return v.RenameWorkflow
 }
 
 type ReplayEntrySettingsInput struct {
-	ConnectionClose     bool                      `json:"connectionClose"`
-	Placeholders        []*ReplayPlaceholderInput `json:"placeholders,omitempty"`
-	UpdateContentLength bool                      `json:"updateContentLength"`
+	ConnectionClose     bool                     `json:"connectionClose"`
+	Placeholders        []ReplayPlaceholderInput `json:"placeholders"`
+	UpdateContentLength bool                     `json:"updateContentLength"`
 }
 
 // GetConnectionClose returns ReplayEntrySettingsInput.ConnectionClose, and is useful for accessing the field via an interface.
 func (v *ReplayEntrySettingsInput) GetConnectionClose() bool { return v.ConnectionClose }
 
 // GetPlaceholders returns ReplayEntrySettingsInput.Placeholders, and is useful for accessing the field via an interface.
-func (v *ReplayEntrySettingsInput) GetPlaceholders() []*ReplayPlaceholderInput { return v.Placeholders }
+func (v *ReplayEntrySettingsInput) GetPlaceholders() []ReplayPlaceholderInput { return v.Placeholders }
 
 // GetUpdateContentLength returns ReplayEntrySettingsInput.UpdateContentLength, and is useful for accessing the field via an interface.
 func (v *ReplayEntrySettingsInput) GetUpdateContentLength() bool { return v.UpdateContentLength }
@@ -13828,21 +15406,19 @@ type ReplayEnvironmentPreprocessorInput struct {
 func (v *ReplayEnvironmentPreprocessorInput) GetVariableName() string { return v.VariableName }
 
 type ReplayPlaceholderInput struct {
-	InputRange    *RangeInput                `json:"inputRange,omitempty"`
-	OutputRange   *RangeInput                `json:"outputRange,omitempty"`
-	Preprocessors []*ReplayPreprocessorInput `json:"preprocessors,omitempty"`
+	InputRange    RangeInput                `json:"inputRange"`
+	OutputRange   RangeInput                `json:"outputRange"`
+	Preprocessors []ReplayPreprocessorInput `json:"preprocessors"`
 }
 
 // GetInputRange returns ReplayPlaceholderInput.InputRange, and is useful for accessing the field via an interface.
-func (v *ReplayPlaceholderInput) GetInputRange() *RangeInput { return v.InputRange }
+func (v *ReplayPlaceholderInput) GetInputRange() RangeInput { return v.InputRange }
 
 // GetOutputRange returns ReplayPlaceholderInput.OutputRange, and is useful for accessing the field via an interface.
-func (v *ReplayPlaceholderInput) GetOutputRange() *RangeInput { return v.OutputRange }
+func (v *ReplayPlaceholderInput) GetOutputRange() RangeInput { return v.OutputRange }
 
 // GetPreprocessors returns ReplayPlaceholderInput.Preprocessors, and is useful for accessing the field via an interface.
-func (v *ReplayPlaceholderInput) GetPreprocessors() []*ReplayPreprocessorInput {
-	return v.Preprocessors
-}
+func (v *ReplayPlaceholderInput) GetPreprocessors() []ReplayPreprocessorInput { return v.Preprocessors }
 
 type ReplayPrefixPreprocessorInput struct {
 	Value string `json:"value"`
@@ -13852,18 +15428,18 @@ type ReplayPrefixPreprocessorInput struct {
 func (v *ReplayPrefixPreprocessorInput) GetValue() string { return v.Value }
 
 type ReplayPreprocessorInput struct {
-	Options *ReplayPreprocessorOptionsInput `json:"options,omitempty"`
+	Options ReplayPreprocessorOptionsInput `json:"options"`
 }
 
 // GetOptions returns ReplayPreprocessorInput.Options, and is useful for accessing the field via an interface.
-func (v *ReplayPreprocessorInput) GetOptions() *ReplayPreprocessorOptionsInput { return v.Options }
+func (v *ReplayPreprocessorInput) GetOptions() ReplayPreprocessorOptionsInput { return v.Options }
 
 type ReplayPreprocessorOptionsInput struct {
-	Environment *ReplayEnvironmentPreprocessorInput `json:"environment,omitempty"`
-	Prefix      *ReplayPrefixPreprocessorInput      `json:"prefix,omitempty"`
-	Suffix      *ReplaySuffixPreprocessorInput      `json:"suffix,omitempty"`
-	UrlEncode   *ReplayUrlEncodePreprocessorInput   `json:"urlEncode,omitempty"`
-	Workflow    *ReplayWorkflowPreprocessorInput    `json:"workflow,omitempty"`
+	Environment *ReplayEnvironmentPreprocessorInput `json:"environment"`
+	Prefix      *ReplayPrefixPreprocessorInput      `json:"prefix"`
+	Suffix      *ReplaySuffixPreprocessorInput      `json:"suffix"`
+	UrlEncode   *ReplayUrlEncodePreprocessorInput   `json:"urlEncode"`
+	Workflow    *ReplayWorkflowPreprocessorInput    `json:"workflow"`
 }
 
 // GetEnvironment returns ReplayPreprocessorOptionsInput.Environment, and is useful for accessing the field via an interface.
@@ -13913,12 +15489,12 @@ type ReplayWorkflowPreprocessorInput struct {
 func (v *ReplayWorkflowPreprocessorInput) GetId() string { return v.Id }
 
 type RequestRawInput struct {
-	ConnectionInfo *ConnectionInfoInput `json:"connectionInfo,omitempty"`
-	Raw            string               `json:"raw"`
+	ConnectionInfo ConnectionInfoInput `json:"connectionInfo"`
+	Raw            string              `json:"raw"`
 }
 
 // GetConnectionInfo returns RequestRawInput.ConnectionInfo, and is useful for accessing the field via an interface.
-func (v *RequestRawInput) GetConnectionInfo() *ConnectionInfoInput { return v.ConnectionInfo }
+func (v *RequestRawInput) GetConnectionInfo() ConnectionInfoInput { return v.ConnectionInfo }
 
 // GetRaw returns RequestRawInput.Raw, and is useful for accessing the field via an interface.
 func (v *RequestRawInput) GetRaw() string { return v.Raw }
@@ -13966,7 +15542,7 @@ func (v *RequestResponseOrderInput) GetOrdering() Ordering { return v.Ordering }
 
 type RequestSourceInput struct {
 	Id  *string          `json:"id"`
-	Raw *RequestRawInput `json:"raw,omitempty"`
+	Raw *RequestRawInput `json:"raw"`
 }
 
 // GetId returns RequestSourceInput.Id, and is useful for accessing the field via an interface.
@@ -13977,11 +15553,11 @@ func (v *RequestSourceInput) GetRaw() *RequestRawInput { return v.Raw }
 
 // ResumeAutomateTaskResponse is returned by ResumeAutomateTask on success.
 type ResumeAutomateTaskResponse struct {
-	ResumeAutomateTask *ResumeAutomateTaskResumeAutomateTaskResumeAutomateTaskPayload `json:"resumeAutomateTask"`
+	ResumeAutomateTask ResumeAutomateTaskResumeAutomateTaskResumeAutomateTaskPayload `json:"resumeAutomateTask"`
 }
 
 // GetResumeAutomateTask returns ResumeAutomateTaskResponse.ResumeAutomateTask, and is useful for accessing the field via an interface.
-func (v *ResumeAutomateTaskResponse) GetResumeAutomateTask() *ResumeAutomateTaskResumeAutomateTaskResumeAutomateTaskPayload {
+func (v *ResumeAutomateTaskResponse) GetResumeAutomateTask() ResumeAutomateTaskResumeAutomateTaskResumeAutomateTaskPayload {
 	return v.ResumeAutomateTask
 }
 
@@ -14007,11 +15583,11 @@ func (v *ResumeAutomateTaskResumeAutomateTaskResumeAutomateTaskPayloadAutomateTa
 
 // ResumeInterceptResponse is returned by ResumeIntercept on success.
 type ResumeInterceptResponse struct {
-	ResumeIntercept *ResumeInterceptResumeInterceptResumeInterceptPayload `json:"resumeIntercept"`
+	ResumeIntercept ResumeInterceptResumeInterceptResumeInterceptPayload `json:"resumeIntercept"`
 }
 
 // GetResumeIntercept returns ResumeInterceptResponse.ResumeIntercept, and is useful for accessing the field via an interface.
-func (v *ResumeInterceptResponse) GetResumeIntercept() *ResumeInterceptResumeInterceptResumeInterceptPayload {
+func (v *ResumeInterceptResponse) GetResumeIntercept() ResumeInterceptResumeInterceptResumeInterceptPayload {
 	return v.ResumeIntercept
 }
 
@@ -14034,11 +15610,11 @@ func (v *RunActiveWorkflowInput) GetRequestId() string { return v.RequestId }
 
 // RunActiveWorkflowResponse is returned by RunActiveWorkflow on success.
 type RunActiveWorkflowResponse struct {
-	RunActiveWorkflow *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload `json:"runActiveWorkflow"`
+	RunActiveWorkflow RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload `json:"runActiveWorkflow"`
 }
 
 // GetRunActiveWorkflow returns RunActiveWorkflowResponse.RunActiveWorkflow, and is useful for accessing the field via an interface.
-func (v *RunActiveWorkflowResponse) GetRunActiveWorkflow() *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload {
+func (v *RunActiveWorkflowResponse) GetRunActiveWorkflow() RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayload {
 	return v.RunActiveWorkflow
 }
 
@@ -14256,11 +15832,11 @@ func (v *RunActiveWorkflowRunActiveWorkflowRunActiveWorkflowPayloadTaskWorkflowT
 
 // RunConvertWorkflowResponse is returned by RunConvertWorkflow on success.
 type RunConvertWorkflowResponse struct {
-	RunConvertWorkflow *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload `json:"runConvertWorkflow"`
+	RunConvertWorkflow RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload `json:"runConvertWorkflow"`
 }
 
 // GetRunConvertWorkflow returns RunConvertWorkflowResponse.RunConvertWorkflow, and is useful for accessing the field via an interface.
-func (v *RunConvertWorkflowResponse) GetRunConvertWorkflow() *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload {
+func (v *RunConvertWorkflowResponse) GetRunConvertWorkflow() RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayload {
 	return v.RunConvertWorkflow
 }
 
@@ -14468,22 +16044,97 @@ func (v *RunConvertWorkflowRunConvertWorkflowRunConvertWorkflowPayloadErrorWorkf
 
 // SelectEnvironmentResponse is returned by SelectEnvironment on success.
 type SelectEnvironmentResponse struct {
-	SelectEnvironment *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload `json:"selectEnvironment"`
+	SelectEnvironment SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload `json:"selectEnvironment"`
 }
 
 // GetSelectEnvironment returns SelectEnvironmentResponse.SelectEnvironment, and is useful for accessing the field via an interface.
-func (v *SelectEnvironmentResponse) GetSelectEnvironment() *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload {
+func (v *SelectEnvironmentResponse) GetSelectEnvironment() SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload {
 	return v.SelectEnvironment
 }
 
 // SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload includes the requested fields of the GraphQL type SelectEnvironmentPayload.
 type SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload struct {
-	Environment *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment `json:"environment"`
+	Environment *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment                 `json:"environment"`
+	Error       *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError `json:"-"`
 }
 
 // GetEnvironment returns SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload.Environment, and is useful for accessing the field via an interface.
 func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload) GetEnvironment() *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment {
 	return v.Environment
+}
+
+// GetError returns SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload.Error, and is useful for accessing the field via an interface.
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload) GetError() *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError {
+	return v.Error
+}
+
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload
+		Error json.RawMessage `json:"error"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError)
+			err = __unmarshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload.Error: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayload struct {
+	Environment *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment `json:"environment"`
+
+	Error json.RawMessage `json:"error"`
+}
+
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload) __premarshalJSON() (*__premarshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayload, error) {
+	var retval __premarshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayload
+
+	retval.Environment = v.Environment
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal SelectEnvironmentSelectEnvironmentSelectEnvironmentPayload.Error: %w", err)
+			}
+		}
+	}
+	return &retval, nil
 }
 
 // SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment includes the requested fields of the GraphQL type Environment.
@@ -14502,13 +16153,112 @@ func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadEnvironment) 
 	return v.Name
 }
 
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError includes the requested fields of the GraphQL interface SelectEnvironmentError.
+//
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError is implemented by the following types:
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError
+type SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError interface {
+	implementsGraphQLInterfaceSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError) implementsGraphQLInterfaceSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError() {
+}
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError() {
+}
+
+func __unmarshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError(b []byte, v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing SelectEnvironmentError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalSelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError(v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorSelectEnvironmentError: "%T"`, v)
+	}
+}
+
+// SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *SelectEnvironmentSelectEnvironmentSelectEnvironmentPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
+}
+
 // SelectProjectResponse is returned by SelectProject on success.
 type SelectProjectResponse struct {
-	SelectProject *SelectProjectSelectProjectSelectProjectPayload `json:"selectProject"`
+	SelectProject SelectProjectSelectProjectSelectProjectPayload `json:"selectProject"`
 }
 
 // GetSelectProject returns SelectProjectResponse.SelectProject, and is useful for accessing the field via an interface.
-func (v *SelectProjectResponse) GetSelectProject() *SelectProjectSelectProjectSelectProjectPayload {
+func (v *SelectProjectResponse) GetSelectProject() SelectProjectSelectProjectSelectProjectPayload {
 	return v.SelectProject
 }
 
@@ -14599,11 +16349,11 @@ func (v *SelectProjectSelectProjectSelectProjectPayload) __premarshalJSON() (*__
 
 // SelectProjectSelectProjectSelectProjectPayloadCurrentProject includes the requested fields of the GraphQL type CurrentProject.
 type SelectProjectSelectProjectSelectProjectPayloadCurrentProject struct {
-	Project *SelectProjectSelectProjectSelectProjectPayloadCurrentProjectProject `json:"project"`
+	Project SelectProjectSelectProjectSelectProjectPayloadCurrentProjectProject `json:"project"`
 }
 
 // GetProject returns SelectProjectSelectProjectSelectProjectPayloadCurrentProject.Project, and is useful for accessing the field via an interface.
-func (v *SelectProjectSelectProjectSelectProjectPayloadCurrentProject) GetProject() *SelectProjectSelectProjectSelectProjectPayloadCurrentProjectProject {
+func (v *SelectProjectSelectProjectSelectProjectPayloadCurrentProject) GetProject() SelectProjectSelectProjectSelectProjectPayloadCurrentProjectProject {
 	return v.Project
 }
 
@@ -14741,9 +16491,9 @@ func (v *SelectProjectSelectProjectSelectProjectPayloadErrorUnknownIdUserError) 
 }
 
 type SetInstanceSettingsInput struct {
-	AiProvider *SettingsAIProviderInput `json:"aiProvider,omitempty"`
-	Analytics  *SettingsAnalyticInput   `json:"analytics,omitempty"`
-	Onboarding *SettingsOnboardingInput `json:"onboarding,omitempty"`
+	AiProvider *SettingsAIProviderInput `json:"aiProvider"`
+	Analytics  *SettingsAnalyticInput   `json:"analytics"`
+	Onboarding *SettingsOnboardingInput `json:"onboarding"`
 }
 
 // GetAiProvider returns SetInstanceSettingsInput.AiProvider, and is useful for accessing the field via an interface.
@@ -14757,31 +16507,31 @@ func (v *SetInstanceSettingsInput) GetOnboarding() *SettingsOnboardingInput { re
 
 // SetInstanceSettingsResponse is returned by SetInstanceSettings on success.
 type SetInstanceSettingsResponse struct {
-	SetInstanceSettings *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload `json:"setInstanceSettings"`
+	SetInstanceSettings SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload `json:"setInstanceSettings"`
 }
 
 // GetSetInstanceSettings returns SetInstanceSettingsResponse.SetInstanceSettings, and is useful for accessing the field via an interface.
-func (v *SetInstanceSettingsResponse) GetSetInstanceSettings() *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload {
+func (v *SetInstanceSettingsResponse) GetSetInstanceSettings() SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload {
 	return v.SetInstanceSettings
 }
 
 // SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload includes the requested fields of the GraphQL type SetInstanceSettingsPayload.
 type SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload struct {
-	Settings *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings `json:"settings"`
+	Settings SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings `json:"settings"`
 }
 
 // GetSettings returns SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload.Settings, and is useful for accessing the field via an interface.
-func (v *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload) GetSettings() *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings {
+func (v *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayload) GetSettings() SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings {
 	return v.Settings
 }
 
 // SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings includes the requested fields of the GraphQL type InstanceSettings.
 type SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings struct {
-	Onboarding *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettingsOnboardingOnboardingState `json:"onboarding"`
+	Onboarding SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettingsOnboardingOnboardingState `json:"onboarding"`
 }
 
 // GetOnboarding returns SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings.Onboarding, and is useful for accessing the field via an interface.
-func (v *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings) GetOnboarding() *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettingsOnboardingOnboardingState {
+func (v *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettings) GetOnboarding() SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSettingsInstanceSettingsOnboardingOnboardingState {
 	return v.Onboarding
 }
 
@@ -14797,37 +16547,37 @@ func (v *SetInstanceSettingsSetInstanceSettingsSetInstanceSettingsPayloadSetting
 
 // SetInterceptOptionsResponse is returned by SetInterceptOptions on success.
 type SetInterceptOptionsResponse struct {
-	SetInterceptOptions *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload `json:"setInterceptOptions"`
+	SetInterceptOptions SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload `json:"setInterceptOptions"`
 }
 
 // GetSetInterceptOptions returns SetInterceptOptionsResponse.SetInterceptOptions, and is useful for accessing the field via an interface.
-func (v *SetInterceptOptionsResponse) GetSetInterceptOptions() *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload {
+func (v *SetInterceptOptionsResponse) GetSetInterceptOptions() SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload {
 	return v.SetInterceptOptions
 }
 
 // SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload includes the requested fields of the GraphQL type SetInterceptOptionsPayload.
 type SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload struct {
-	Options *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions `json:"options"`
+	Options SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions `json:"options"`
 }
 
 // GetOptions returns SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload.Options, and is useful for accessing the field via an interface.
-func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload) GetOptions() *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions {
+func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayload) GetOptions() SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions {
 	return v.Options
 }
 
 // SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions includes the requested fields of the GraphQL type InterceptOptions.
 type SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions struct {
-	Request  *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsRequestInterceptRequestOptions   `json:"request"`
-	Response *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsResponseInterceptResponseOptions `json:"response"`
+	Request  SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsRequestInterceptRequestOptions   `json:"request"`
+	Response SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsResponseInterceptResponseOptions `json:"response"`
 }
 
 // GetRequest returns SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions.Request, and is useful for accessing the field via an interface.
-func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions) GetRequest() *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsRequestInterceptRequestOptions {
+func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions) GetRequest() SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsRequestInterceptRequestOptions {
 	return v.Request
 }
 
 // GetResponse returns SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions.Response, and is useful for accessing the field via an interface.
-func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions) GetResponse() *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsResponseInterceptResponseOptions {
+func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptions) GetResponse() SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptionsInterceptOptionsResponseInterceptResponseOptions {
 	return v.Response
 }
 
@@ -14852,10 +16602,10 @@ func (v *SetInterceptOptionsSetInterceptOptionsSetInterceptOptionsPayloadOptions
 }
 
 type SettingsAIProviderInput struct {
-	Anthropic  *AIProviderAnthropicInput  `json:"anthropic,omitempty"`
-	Google     *AIProviderGoogleInput     `json:"google,omitempty"`
-	Openai     *AIProviderOpenAIInput     `json:"openai,omitempty"`
-	Openrouter *AIProviderOpenRouterInput `json:"openrouter,omitempty"`
+	Anthropic  *AIProviderAnthropicInput  `json:"anthropic"`
+	Google     *AIProviderGoogleInput     `json:"google"`
+	Openai     *AIProviderOpenAIInput     `json:"openai"`
+	Openrouter *AIProviderOpenRouterInput `json:"openrouter"`
 }
 
 // GetAnthropic returns SettingsAIProviderInput.Anthropic, and is useful for accessing the field via an interface.
@@ -14938,11 +16688,11 @@ var AllSource = []Source{
 
 // StartAuthenticationFlowResponse is returned by StartAuthenticationFlow on success.
 type StartAuthenticationFlowResponse struct {
-	StartAuthenticationFlow *StartAuthenticationFlowStartAuthenticationFlowStartAuthenticationFlowPayload `json:"startAuthenticationFlow"`
+	StartAuthenticationFlow StartAuthenticationFlowStartAuthenticationFlowStartAuthenticationFlowPayload `json:"startAuthenticationFlow"`
 }
 
 // GetStartAuthenticationFlow returns StartAuthenticationFlowResponse.StartAuthenticationFlow, and is useful for accessing the field via an interface.
-func (v *StartAuthenticationFlowResponse) GetStartAuthenticationFlow() *StartAuthenticationFlowStartAuthenticationFlowStartAuthenticationFlowPayload {
+func (v *StartAuthenticationFlowResponse) GetStartAuthenticationFlow() StartAuthenticationFlowStartAuthenticationFlowStartAuthenticationFlowPayload {
 	return v.StartAuthenticationFlow
 }
 
@@ -15202,11 +16952,11 @@ func (v *StartAuthenticationFlowStartAuthenticationFlowStartAuthenticationFlowPa
 
 // StartAutomateTaskResponse is returned by StartAutomateTask on success.
 type StartAutomateTaskResponse struct {
-	StartAutomateTask *StartAutomateTaskStartAutomateTaskStartAutomateTaskPayload `json:"startAutomateTask"`
+	StartAutomateTask StartAutomateTaskStartAutomateTaskStartAutomateTaskPayload `json:"startAutomateTask"`
 }
 
 // GetStartAutomateTask returns StartAutomateTaskResponse.StartAutomateTask, and is useful for accessing the field via an interface.
-func (v *StartAutomateTaskResponse) GetStartAutomateTask() *StartAutomateTaskStartAutomateTaskStartAutomateTaskPayload {
+func (v *StartAutomateTaskResponse) GetStartAutomateTask() StartAutomateTaskStartAutomateTaskStartAutomateTaskPayload {
 	return v.StartAutomateTask
 }
 
@@ -15231,27 +16981,27 @@ func (v *StartAutomateTaskStartAutomateTaskStartAutomateTaskPayloadAutomateTask)
 }
 
 type StartReplayTaskInput struct {
-	Connection *ConnectionInfoInput      `json:"connection,omitempty"`
-	Raw        string                    `json:"raw"`
-	Settings   *ReplayEntrySettingsInput `json:"settings,omitempty"`
+	Connection ConnectionInfoInput      `json:"connection"`
+	Raw        string                   `json:"raw"`
+	Settings   ReplayEntrySettingsInput `json:"settings"`
 }
 
 // GetConnection returns StartReplayTaskInput.Connection, and is useful for accessing the field via an interface.
-func (v *StartReplayTaskInput) GetConnection() *ConnectionInfoInput { return v.Connection }
+func (v *StartReplayTaskInput) GetConnection() ConnectionInfoInput { return v.Connection }
 
 // GetRaw returns StartReplayTaskInput.Raw, and is useful for accessing the field via an interface.
 func (v *StartReplayTaskInput) GetRaw() string { return v.Raw }
 
 // GetSettings returns StartReplayTaskInput.Settings, and is useful for accessing the field via an interface.
-func (v *StartReplayTaskInput) GetSettings() *ReplayEntrySettingsInput { return v.Settings }
+func (v *StartReplayTaskInput) GetSettings() ReplayEntrySettingsInput { return v.Settings }
 
 // StartReplayTaskResponse is returned by StartReplayTask on success.
 type StartReplayTaskResponse struct {
-	StartReplayTask *StartReplayTaskStartReplayTaskStartReplayTaskPayload `json:"startReplayTask"`
+	StartReplayTask StartReplayTaskStartReplayTaskStartReplayTaskPayload `json:"startReplayTask"`
 }
 
 // GetStartReplayTask returns StartReplayTaskResponse.StartReplayTask, and is useful for accessing the field via an interface.
-func (v *StartReplayTaskResponse) GetStartReplayTask() *StartReplayTaskStartReplayTaskStartReplayTaskPayload {
+func (v *StartReplayTaskResponse) GetStartReplayTask() StartReplayTaskStartReplayTaskStartReplayTaskPayload {
 	return v.StartReplayTask
 }
 
@@ -15512,9 +17262,9 @@ type TamperMatcherNameInput struct {
 func (v *TamperMatcherNameInput) GetName() string { return v.Name }
 
 type TamperMatcherRawInput struct {
-	Full  *TamperMatcherFullInput  `json:"full,omitempty"`
-	Regex *TamperMatcherRegexInput `json:"regex,omitempty"`
-	Value *TamperMatcherValueInput `json:"value,omitempty"`
+	Full  *TamperMatcherFullInput  `json:"full"`
+	Regex *TamperMatcherRegexInput `json:"regex"`
+	Value *TamperMatcherValueInput `json:"value"`
 }
 
 // GetFull returns TamperMatcherRawInput.Full, and is useful for accessing the field via an interface.
@@ -15541,75 +17291,75 @@ type TamperMatcherValueInput struct {
 func (v *TamperMatcherValueInput) GetValue() string { return v.Value }
 
 type TamperOperationAllInput struct {
-	Raw *TamperOperationAllRawInput `json:"raw,omitempty"`
+	Raw *TamperOperationAllRawInput `json:"raw"`
 }
 
 // GetRaw returns TamperOperationAllInput.Raw, and is useful for accessing the field via an interface.
 func (v *TamperOperationAllInput) GetRaw() *TamperOperationAllRawInput { return v.Raw }
 
 type TamperOperationAllRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationAllRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationAllRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationAllRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationAllRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationAllRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationAllRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationBodyInput struct {
-	Raw *TamperOperationBodyRawInput `json:"raw,omitempty"`
+	Raw *TamperOperationBodyRawInput `json:"raw"`
 }
 
 // GetRaw returns TamperOperationBodyInput.Raw, and is useful for accessing the field via an interface.
 func (v *TamperOperationBodyInput) GetRaw() *TamperOperationBodyRawInput { return v.Raw }
 
 type TamperOperationBodyRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationBodyRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationBodyRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationBodyRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationBodyRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationBodyRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationBodyRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationFirstLineInput struct {
-	Raw *TamperOperationFirstLineRawInput `json:"raw,omitempty"`
+	Raw *TamperOperationFirstLineRawInput `json:"raw"`
 }
 
 // GetRaw returns TamperOperationFirstLineInput.Raw, and is useful for accessing the field via an interface.
 func (v *TamperOperationFirstLineInput) GetRaw() *TamperOperationFirstLineRawInput { return v.Raw }
 
 type TamperOperationFirstLineRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationFirstLineRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationFirstLineRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationFirstLineRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationFirstLineRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationFirstLineRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationFirstLineRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationHeaderAddInput struct {
-	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+	Matcher  TamperMatcherNameInput `json:"matcher"`
+	Replacer TamperReplacerInput    `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationHeaderAddInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderAddInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationHeaderAddInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationHeaderAddInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderAddInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationHeaderAddInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationHeaderInput struct {
-	Add    *TamperOperationHeaderAddInput    `json:"add,omitempty"`
-	Raw    *TamperOperationHeaderRawInput    `json:"raw,omitempty"`
-	Remove *TamperOperationHeaderRemoveInput `json:"remove,omitempty"`
-	Update *TamperOperationHeaderUpdateInput `json:"update,omitempty"`
+	Add    *TamperOperationHeaderAddInput    `json:"add"`
+	Raw    *TamperOperationHeaderRawInput    `json:"raw"`
+	Remove *TamperOperationHeaderRemoveInput `json:"remove"`
+	Update *TamperOperationHeaderUpdateInput `json:"update"`
 }
 
 // GetAdd returns TamperOperationHeaderInput.Add, and is useful for accessing the field via an interface.
@@ -15625,82 +17375,82 @@ func (v *TamperOperationHeaderInput) GetRemove() *TamperOperationHeaderRemoveInp
 func (v *TamperOperationHeaderInput) GetUpdate() *TamperOperationHeaderUpdateInput { return v.Update }
 
 type TamperOperationHeaderRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationHeaderRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationHeaderRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationHeaderRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationHeaderRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationHeaderRemoveInput struct {
-	Matcher *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Matcher TamperMatcherNameInput `json:"matcher"`
 }
 
 // GetMatcher returns TamperOperationHeaderRemoveInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderRemoveInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationHeaderRemoveInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 type TamperOperationHeaderUpdateInput struct {
-	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+	Matcher  TamperMatcherNameInput `json:"matcher"`
+	Replacer TamperReplacerInput    `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationHeaderUpdateInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderUpdateInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationHeaderUpdateInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationHeaderUpdateInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationHeaderUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationHeaderUpdateInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationMethodInput struct {
-	Update *TamperOperationMethodUpdateInput `json:"update,omitempty"`
+	Update *TamperOperationMethodUpdateInput `json:"update"`
 }
 
 // GetUpdate returns TamperOperationMethodInput.Update, and is useful for accessing the field via an interface.
 func (v *TamperOperationMethodInput) GetUpdate() *TamperOperationMethodUpdateInput { return v.Update }
 
 type TamperOperationMethodUpdateInput struct {
-	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+	Replacer TamperReplacerInput `json:"replacer"`
 }
 
 // GetReplacer returns TamperOperationMethodUpdateInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationMethodUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationMethodUpdateInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationPathInput struct {
-	Raw *TamperOperationPathRawInput `json:"raw,omitempty"`
+	Raw *TamperOperationPathRawInput `json:"raw"`
 }
 
 // GetRaw returns TamperOperationPathInput.Raw, and is useful for accessing the field via an interface.
 func (v *TamperOperationPathInput) GetRaw() *TamperOperationPathRawInput { return v.Raw }
 
 type TamperOperationPathRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationPathRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationPathRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationPathRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationPathRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationPathRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationPathRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationQueryAddInput struct {
-	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+	Matcher  TamperMatcherNameInput `json:"matcher"`
+	Replacer TamperReplacerInput    `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationQueryAddInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryAddInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationQueryAddInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationQueryAddInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryAddInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationQueryAddInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationQueryInput struct {
-	Add    *TamperOperationQueryAddInput    `json:"add,omitempty"`
-	Raw    *TamperOperationQueryRawInput    `json:"raw,omitempty"`
-	Remove *TamperOperationQueryRemoveInput `json:"remove,omitempty"`
-	Update *TamperOperationQueryUpdateInput `json:"update,omitempty"`
+	Add    *TamperOperationQueryAddInput    `json:"add"`
+	Raw    *TamperOperationQueryRawInput    `json:"raw"`
+	Remove *TamperOperationQueryRemoveInput `json:"remove"`
+	Update *TamperOperationQueryUpdateInput `json:"update"`
 }
 
 // GetAdd returns TamperOperationQueryInput.Add, and is useful for accessing the field via an interface.
@@ -15716,50 +17466,50 @@ func (v *TamperOperationQueryInput) GetRemove() *TamperOperationQueryRemoveInput
 func (v *TamperOperationQueryInput) GetUpdate() *TamperOperationQueryUpdateInput { return v.Update }
 
 type TamperOperationQueryRawInput struct {
-	Matcher  *TamperMatcherRawInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput   `json:"replacer,omitempty"`
+	Matcher  TamperMatcherRawInput `json:"matcher"`
+	Replacer TamperReplacerInput   `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationQueryRawInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryRawInput) GetMatcher() *TamperMatcherRawInput { return v.Matcher }
+func (v *TamperOperationQueryRawInput) GetMatcher() TamperMatcherRawInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationQueryRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationQueryRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationQueryRemoveInput struct {
-	Matcher *TamperMatcherNameInput `json:"matcher,omitempty"`
+	Matcher TamperMatcherNameInput `json:"matcher"`
 }
 
 // GetMatcher returns TamperOperationQueryRemoveInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryRemoveInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationQueryRemoveInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 type TamperOperationQueryUpdateInput struct {
-	Matcher  *TamperMatcherNameInput `json:"matcher,omitempty"`
-	Replacer *TamperReplacerInput    `json:"replacer,omitempty"`
+	Matcher  TamperMatcherNameInput `json:"matcher"`
+	Replacer TamperReplacerInput    `json:"replacer"`
 }
 
 // GetMatcher returns TamperOperationQueryUpdateInput.Matcher, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryUpdateInput) GetMatcher() *TamperMatcherNameInput { return v.Matcher }
+func (v *TamperOperationQueryUpdateInput) GetMatcher() TamperMatcherNameInput { return v.Matcher }
 
 // GetReplacer returns TamperOperationQueryUpdateInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationQueryUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationQueryUpdateInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationSNIInput struct {
-	Raw *TamperOperationSNIRawInput `json:"raw,omitempty"`
+	Raw *TamperOperationSNIRawInput `json:"raw"`
 }
 
 // GetRaw returns TamperOperationSNIInput.Raw, and is useful for accessing the field via an interface.
 func (v *TamperOperationSNIInput) GetRaw() *TamperOperationSNIRawInput { return v.Raw }
 
 type TamperOperationSNIRawInput struct {
-	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+	Replacer TamperReplacerInput `json:"replacer"`
 }
 
 // GetReplacer returns TamperOperationSNIRawInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationSNIRawInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationSNIRawInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperOperationStatusCodeInput struct {
-	Update *TamperOperationStatusCodeUpdateInput `json:"update,omitempty"`
+	Update *TamperOperationStatusCodeUpdateInput `json:"update"`
 }
 
 // GetUpdate returns TamperOperationStatusCodeInput.Update, and is useful for accessing the field via an interface.
@@ -15768,15 +17518,15 @@ func (v *TamperOperationStatusCodeInput) GetUpdate() *TamperOperationStatusCodeU
 }
 
 type TamperOperationStatusCodeUpdateInput struct {
-	Replacer *TamperReplacerInput `json:"replacer,omitempty"`
+	Replacer TamperReplacerInput `json:"replacer"`
 }
 
 // GetReplacer returns TamperOperationStatusCodeUpdateInput.Replacer, and is useful for accessing the field via an interface.
-func (v *TamperOperationStatusCodeUpdateInput) GetReplacer() *TamperReplacerInput { return v.Replacer }
+func (v *TamperOperationStatusCodeUpdateInput) GetReplacer() TamperReplacerInput { return v.Replacer }
 
 type TamperReplacerInput struct {
-	Term     *TamperReplacerTermInput     `json:"term,omitempty"`
-	Workflow *TamperReplacerWorkflowInput `json:"workflow,omitempty"`
+	Term     *TamperReplacerTermInput     `json:"term"`
+	Workflow *TamperReplacerWorkflowInput `json:"workflow"`
 }
 
 // GetTerm returns TamperReplacerInput.Term, and is useful for accessing the field via an interface.
@@ -15800,19 +17550,19 @@ type TamperReplacerWorkflowInput struct {
 func (v *TamperReplacerWorkflowInput) GetId() string { return v.Id }
 
 type TamperSectionInput struct {
-	RequestAll         *TamperSectionRequestAllInput         `json:"requestAll,omitempty"`
-	RequestBody        *TamperSectionRequestBodyInput        `json:"requestBody,omitempty"`
-	RequestFirstLine   *TamperSectionRequestFirstLineInput   `json:"requestFirstLine,omitempty"`
-	RequestHeader      *TamperSectionRequestHeaderInput      `json:"requestHeader,omitempty"`
-	RequestMethod      *TamperSectionRequestMethodInput      `json:"requestMethod,omitempty"`
-	RequestPath        *TamperSectionRequestPathInput        `json:"requestPath,omitempty"`
-	RequestQuery       *TamperSectionRequestQueryInput       `json:"requestQuery,omitempty"`
-	RequestSNI         *TamperSectionRequestSNIInput         `json:"requestSNI,omitempty"`
-	ResponseAll        *TamperSectionResponseAllInput        `json:"responseAll,omitempty"`
-	ResponseBody       *TamperSectionResponseBodyInput       `json:"responseBody,omitempty"`
-	ResponseFirstLine  *TamperSectionResponseFirstLineInput  `json:"responseFirstLine,omitempty"`
-	ResponseHeader     *TamperSectionResponseHeaderInput     `json:"responseHeader,omitempty"`
-	ResponseStatusCode *TamperSectionResponseStatusCodeInput `json:"responseStatusCode,omitempty"`
+	RequestAll         *TamperSectionRequestAllInput         `json:"requestAll"`
+	RequestBody        *TamperSectionRequestBodyInput        `json:"requestBody"`
+	RequestFirstLine   *TamperSectionRequestFirstLineInput   `json:"requestFirstLine"`
+	RequestHeader      *TamperSectionRequestHeaderInput      `json:"requestHeader"`
+	RequestMethod      *TamperSectionRequestMethodInput      `json:"requestMethod"`
+	RequestPath        *TamperSectionRequestPathInput        `json:"requestPath"`
+	RequestQuery       *TamperSectionRequestQueryInput       `json:"requestQuery"`
+	RequestSNI         *TamperSectionRequestSNIInput         `json:"requestSNI"`
+	ResponseAll        *TamperSectionResponseAllInput        `json:"responseAll"`
+	ResponseBody       *TamperSectionResponseBodyInput       `json:"responseBody"`
+	ResponseFirstLine  *TamperSectionResponseFirstLineInput  `json:"responseFirstLine"`
+	ResponseHeader     *TamperSectionResponseHeaderInput     `json:"responseHeader"`
+	ResponseStatusCode *TamperSectionResponseStatusCodeInput `json:"responseStatusCode"`
 }
 
 // GetRequestAll returns TamperSectionInput.RequestAll, and is useful for accessing the field via an interface.
@@ -15867,128 +17617,132 @@ func (v *TamperSectionInput) GetResponseStatusCode() *TamperSectionResponseStatu
 }
 
 type TamperSectionRequestAllInput struct {
-	Operation *TamperOperationAllInput `json:"operation,omitempty"`
+	Operation TamperOperationAllInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestAllInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestAllInput) GetOperation() *TamperOperationAllInput { return v.Operation }
+func (v *TamperSectionRequestAllInput) GetOperation() TamperOperationAllInput { return v.Operation }
 
 type TamperSectionRequestBodyInput struct {
-	Operation *TamperOperationBodyInput `json:"operation,omitempty"`
+	Operation TamperOperationBodyInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestBodyInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestBodyInput) GetOperation() *TamperOperationBodyInput { return v.Operation }
+func (v *TamperSectionRequestBodyInput) GetOperation() TamperOperationBodyInput { return v.Operation }
 
 type TamperSectionRequestFirstLineInput struct {
-	Operation *TamperOperationFirstLineInput `json:"operation,omitempty"`
+	Operation TamperOperationFirstLineInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestFirstLineInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestFirstLineInput) GetOperation() *TamperOperationFirstLineInput {
+func (v *TamperSectionRequestFirstLineInput) GetOperation() TamperOperationFirstLineInput {
 	return v.Operation
 }
 
 type TamperSectionRequestHeaderInput struct {
-	Operation *TamperOperationHeaderInput `json:"operation,omitempty"`
+	Operation TamperOperationHeaderInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestHeaderInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestHeaderInput) GetOperation() *TamperOperationHeaderInput {
+func (v *TamperSectionRequestHeaderInput) GetOperation() TamperOperationHeaderInput {
 	return v.Operation
 }
 
 type TamperSectionRequestMethodInput struct {
-	Operation *TamperOperationMethodInput `json:"operation,omitempty"`
+	Operation TamperOperationMethodInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestMethodInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestMethodInput) GetOperation() *TamperOperationMethodInput {
+func (v *TamperSectionRequestMethodInput) GetOperation() TamperOperationMethodInput {
 	return v.Operation
 }
 
 type TamperSectionRequestPathInput struct {
-	Operation *TamperOperationPathInput `json:"operation,omitempty"`
+	Operation TamperOperationPathInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestPathInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestPathInput) GetOperation() *TamperOperationPathInput { return v.Operation }
+func (v *TamperSectionRequestPathInput) GetOperation() TamperOperationPathInput { return v.Operation }
 
 type TamperSectionRequestQueryInput struct {
-	Operation *TamperOperationQueryInput `json:"operation,omitempty"`
+	Operation TamperOperationQueryInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestQueryInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestQueryInput) GetOperation() *TamperOperationQueryInput {
-	return v.Operation
-}
+func (v *TamperSectionRequestQueryInput) GetOperation() TamperOperationQueryInput { return v.Operation }
 
 type TamperSectionRequestSNIInput struct {
-	Operation *TamperOperationSNIInput `json:"operation,omitempty"`
+	Operation TamperOperationSNIInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionRequestSNIInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionRequestSNIInput) GetOperation() *TamperOperationSNIInput { return v.Operation }
+func (v *TamperSectionRequestSNIInput) GetOperation() TamperOperationSNIInput { return v.Operation }
 
 type TamperSectionResponseAllInput struct {
-	Operation *TamperOperationAllInput `json:"operation,omitempty"`
+	Operation TamperOperationAllInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionResponseAllInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionResponseAllInput) GetOperation() *TamperOperationAllInput { return v.Operation }
+func (v *TamperSectionResponseAllInput) GetOperation() TamperOperationAllInput { return v.Operation }
 
 type TamperSectionResponseBodyInput struct {
-	Operation *TamperOperationBodyInput `json:"operation,omitempty"`
+	Operation TamperOperationBodyInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionResponseBodyInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionResponseBodyInput) GetOperation() *TamperOperationBodyInput { return v.Operation }
+func (v *TamperSectionResponseBodyInput) GetOperation() TamperOperationBodyInput { return v.Operation }
 
 type TamperSectionResponseFirstLineInput struct {
-	Operation *TamperOperationFirstLineInput `json:"operation,omitempty"`
+	Operation TamperOperationFirstLineInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionResponseFirstLineInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionResponseFirstLineInput) GetOperation() *TamperOperationFirstLineInput {
+func (v *TamperSectionResponseFirstLineInput) GetOperation() TamperOperationFirstLineInput {
 	return v.Operation
 }
 
 type TamperSectionResponseHeaderInput struct {
-	Operation *TamperOperationHeaderInput `json:"operation,omitempty"`
+	Operation TamperOperationHeaderInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionResponseHeaderInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionResponseHeaderInput) GetOperation() *TamperOperationHeaderInput {
+func (v *TamperSectionResponseHeaderInput) GetOperation() TamperOperationHeaderInput {
 	return v.Operation
 }
 
 type TamperSectionResponseStatusCodeInput struct {
-	Operation *TamperOperationStatusCodeInput `json:"operation,omitempty"`
+	Operation TamperOperationStatusCodeInput `json:"operation"`
 }
 
 // GetOperation returns TamperSectionResponseStatusCodeInput.Operation, and is useful for accessing the field via an interface.
-func (v *TamperSectionResponseStatusCodeInput) GetOperation() *TamperOperationStatusCodeInput {
+func (v *TamperSectionResponseStatusCodeInput) GetOperation() TamperOperationStatusCodeInput {
 	return v.Operation
 }
 
 // TogglePluginResponse is returned by TogglePlugin on success.
 type TogglePluginResponse struct {
-	TogglePlugin *TogglePluginTogglePluginTogglePluginPayload `json:"togglePlugin"`
+	TogglePlugin TogglePluginTogglePluginTogglePluginPayload `json:"togglePlugin"`
 }
 
 // GetTogglePlugin returns TogglePluginResponse.TogglePlugin, and is useful for accessing the field via an interface.
-func (v *TogglePluginResponse) GetTogglePlugin() *TogglePluginTogglePluginTogglePluginPayload {
+func (v *TogglePluginResponse) GetTogglePlugin() TogglePluginTogglePluginTogglePluginPayload {
 	return v.TogglePlugin
 }
 
 // TogglePluginTogglePluginTogglePluginPayload includes the requested fields of the GraphQL type TogglePluginPayload.
 type TogglePluginTogglePluginTogglePluginPayload struct {
-	Plugin *TogglePluginTogglePluginTogglePluginPayloadPlugin `json:"-"`
+	Plugin *TogglePluginTogglePluginTogglePluginPayloadPlugin                 `json:"-"`
+	Error  *TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError `json:"-"`
 }
 
 // GetPlugin returns TogglePluginTogglePluginTogglePluginPayload.Plugin, and is useful for accessing the field via an interface.
 func (v *TogglePluginTogglePluginTogglePluginPayload) GetPlugin() *TogglePluginTogglePluginTogglePluginPayloadPlugin {
 	return v.Plugin
+}
+
+// GetError returns TogglePluginTogglePluginTogglePluginPayload.Error, and is useful for accessing the field via an interface.
+func (v *TogglePluginTogglePluginTogglePluginPayload) GetError() *TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError {
+	return v.Error
 }
 
 func (v *TogglePluginTogglePluginTogglePluginPayload) UnmarshalJSON(b []byte) error {
@@ -16000,6 +17754,7 @@ func (v *TogglePluginTogglePluginTogglePluginPayload) UnmarshalJSON(b []byte) er
 	var firstPass struct {
 		*TogglePluginTogglePluginTogglePluginPayload
 		Plugin json.RawMessage `json:"plugin"`
+		Error  json.RawMessage `json:"error"`
 		graphql.NoUnmarshalJSON
 	}
 	firstPass.TogglePluginTogglePluginTogglePluginPayload = v
@@ -16022,11 +17777,27 @@ func (v *TogglePluginTogglePluginTogglePluginPayload) UnmarshalJSON(b []byte) er
 			}
 		}
 	}
+
+	{
+		dst := &v.Error
+		src := firstPass.Error
+		if len(src) != 0 && string(src) != "null" {
+			*dst = new(TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError)
+			err = __unmarshalTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError(
+				src, *dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal TogglePluginTogglePluginTogglePluginPayload.Error: %w", err)
+			}
+		}
+	}
 	return nil
 }
 
 type __premarshalTogglePluginTogglePluginTogglePluginPayload struct {
 	Plugin json.RawMessage `json:"plugin"`
+
+	Error json.RawMessage `json:"error"`
 }
 
 func (v *TogglePluginTogglePluginTogglePluginPayload) MarshalJSON() ([]byte, error) {
@@ -16054,7 +17825,144 @@ func (v *TogglePluginTogglePluginTogglePluginPayload) __premarshalJSON() (*__pre
 			}
 		}
 	}
+	{
+
+		dst := &retval.Error
+		src := v.Error
+		if src != nil {
+			var err error
+			*dst, err = __marshalTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError(
+				src)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"unable to marshal TogglePluginTogglePluginTogglePluginPayload.Error: %w", err)
+			}
+		}
+	}
 	return &retval, nil
+}
+
+// TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError includes the requested fields of the GraphQL type OtherUserError.
+type TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError struct {
+	Typename *string `json:"__typename"`
+	Code     string  `json:"code"`
+}
+
+// GetTypename returns TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError.Typename, and is useful for accessing the field via an interface.
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// GetCode returns TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError.Code, and is useful for accessing the field via an interface.
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError) GetCode() string {
+	return v.Code
+}
+
+// TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError includes the requested fields of the GraphQL type PluginUserError.
+type TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError.Typename, and is useful for accessing the field via an interface.
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError) GetTypename() *string {
+	return v.Typename
+}
+
+// TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError includes the requested fields of the GraphQL interface TogglePluginError.
+//
+// TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError is implemented by the following types:
+// TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError
+// TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError
+// TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError
+type TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError interface {
+	implementsGraphQLInterfaceTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() *string
+}
+
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError) implementsGraphQLInterfaceTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError() {
+}
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError) implementsGraphQLInterfaceTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError() {
+}
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError) implementsGraphQLInterfaceTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError() {
+}
+
+func __unmarshalTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError(b []byte, v *TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "OtherUserError":
+		*v = new(TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError)
+		return json.Unmarshal(b, *v)
+	case "PluginUserError":
+		*v = new(TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError)
+		return json.Unmarshal(b, *v)
+	case "UnknownIdUserError":
+		*v = new(TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing TogglePluginError.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalTogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError(v *TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError:
+		typename = "OtherUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*TogglePluginTogglePluginTogglePluginPayloadErrorOtherUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError:
+		typename = "PluginUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*TogglePluginTogglePluginTogglePluginPayloadErrorPluginUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case *TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError:
+		typename = "UnknownIdUserError"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for TogglePluginTogglePluginTogglePluginPayloadErrorTogglePluginError: "%T"`, v)
+	}
+}
+
+// TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError includes the requested fields of the GraphQL type UnknownIdUserError.
+type TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError struct {
+	Typename *string `json:"__typename"`
+}
+
+// GetTypename returns TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError.Typename, and is useful for accessing the field via an interface.
+func (v *TogglePluginTogglePluginTogglePluginPayloadErrorUnknownIdUserError) GetTypename() *string {
+	return v.Typename
 }
 
 // TogglePluginTogglePluginTogglePluginPayloadPlugin includes the requested fields of the GraphQL interface Plugin.
@@ -16210,11 +18118,11 @@ func (v *TogglePluginTogglePluginTogglePluginPayloadPluginPluginWorkflow) GetEna
 
 // ToggleTamperRuleResponse is returned by ToggleTamperRule on success.
 type ToggleTamperRuleResponse struct {
-	ToggleTamperRule *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload `json:"toggleTamperRule"`
+	ToggleTamperRule ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload `json:"toggleTamperRule"`
 }
 
 // GetToggleTamperRule returns ToggleTamperRuleResponse.ToggleTamperRule, and is useful for accessing the field via an interface.
-func (v *ToggleTamperRuleResponse) GetToggleTamperRule() *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload {
+func (v *ToggleTamperRuleResponse) GetToggleTamperRule() ToggleTamperRuleToggleTamperRuleToggleTamperRulePayload {
 	return v.ToggleTamperRule
 }
 
@@ -16430,11 +18338,11 @@ func (v *ToggleTamperRuleToggleTamperRuleToggleTamperRulePayloadRuleTamperRuleEn
 
 // ToggleWorkflowResponse is returned by ToggleWorkflow on success.
 type ToggleWorkflowResponse struct {
-	ToggleWorkflow *ToggleWorkflowToggleWorkflowToggleWorkflowPayload `json:"toggleWorkflow"`
+	ToggleWorkflow ToggleWorkflowToggleWorkflowToggleWorkflowPayload `json:"toggleWorkflow"`
 }
 
 // GetToggleWorkflow returns ToggleWorkflowResponse.ToggleWorkflow, and is useful for accessing the field via an interface.
-func (v *ToggleWorkflowResponse) GetToggleWorkflow() *ToggleWorkflowToggleWorkflowToggleWorkflowPayload {
+func (v *ToggleWorkflowResponse) GetToggleWorkflow() ToggleWorkflowToggleWorkflowToggleWorkflowPayload {
 	return v.ToggleWorkflow
 }
 
@@ -16641,10 +18549,10 @@ func (v *ToggleWorkflowToggleWorkflowToggleWorkflowPayloadWorkflow) GetEnabled()
 }
 
 type UpdateTamperRuleInput struct {
-	Condition *string             `json:"condition"`
-	Name      string              `json:"name"`
-	Section   *TamperSectionInput `json:"section,omitempty"`
-	Sources   []Source            `json:"sources"`
+	Condition *string            `json:"condition"`
+	Name      string             `json:"name"`
+	Section   TamperSectionInput `json:"section"`
+	Sources   []Source           `json:"sources"`
 }
 
 // GetCondition returns UpdateTamperRuleInput.Condition, and is useful for accessing the field via an interface.
@@ -16654,18 +18562,18 @@ func (v *UpdateTamperRuleInput) GetCondition() *string { return v.Condition }
 func (v *UpdateTamperRuleInput) GetName() string { return v.Name }
 
 // GetSection returns UpdateTamperRuleInput.Section, and is useful for accessing the field via an interface.
-func (v *UpdateTamperRuleInput) GetSection() *TamperSectionInput { return v.Section }
+func (v *UpdateTamperRuleInput) GetSection() TamperSectionInput { return v.Section }
 
 // GetSources returns UpdateTamperRuleInput.Sources, and is useful for accessing the field via an interface.
 func (v *UpdateTamperRuleInput) GetSources() []Source { return v.Sources }
 
 // UpdateTamperRuleResponse is returned by UpdateTamperRule on success.
 type UpdateTamperRuleResponse struct {
-	UpdateTamperRule *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload `json:"updateTamperRule"`
+	UpdateTamperRule UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload `json:"updateTamperRule"`
 }
 
 // GetUpdateTamperRule returns UpdateTamperRuleResponse.UpdateTamperRule, and is useful for accessing the field via an interface.
-func (v *UpdateTamperRuleResponse) GetUpdateTamperRule() *UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload {
+func (v *UpdateTamperRuleResponse) GetUpdateTamperRule() UpdateTamperRuleUpdateTamperRuleUpdateTamperRulePayload {
 	return v.UpdateTamperRule
 }
 
@@ -16943,99 +18851,99 @@ func (v *__CancelTaskInput) GetId() string { return v.Id }
 
 // __CreateAutomateSessionInput is used internally by genqlient
 type __CreateAutomateSessionInput struct {
-	Input *CreateAutomateSessionInput `json:"input,omitempty"`
+	Input CreateAutomateSessionInput `json:"input"`
 }
 
 // GetInput returns __CreateAutomateSessionInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateAutomateSessionInput) GetInput() *CreateAutomateSessionInput { return v.Input }
+func (v *__CreateAutomateSessionInput) GetInput() CreateAutomateSessionInput { return v.Input }
 
 // __CreateEnvironmentInput is used internally by genqlient
 type __CreateEnvironmentInput struct {
-	Input *CreateEnvironmentInput `json:"input,omitempty"`
+	Input CreateEnvironmentInput `json:"input"`
 }
 
 // GetInput returns __CreateEnvironmentInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateEnvironmentInput) GetInput() *CreateEnvironmentInput { return v.Input }
+func (v *__CreateEnvironmentInput) GetInput() CreateEnvironmentInput { return v.Input }
 
 // __CreateFilterPresetInput is used internally by genqlient
 type __CreateFilterPresetInput struct {
-	Input *CreateFilterPresetInput `json:"input,omitempty"`
+	Input CreateFilterPresetInput `json:"input"`
 }
 
 // GetInput returns __CreateFilterPresetInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateFilterPresetInput) GetInput() *CreateFilterPresetInput { return v.Input }
+func (v *__CreateFilterPresetInput) GetInput() CreateFilterPresetInput { return v.Input }
 
 // __CreateFindingInput is used internally by genqlient
 type __CreateFindingInput struct {
-	RequestId string              `json:"requestId"`
-	Input     *CreateFindingInput `json:"input,omitempty"`
+	RequestId string             `json:"requestId"`
+	Input     CreateFindingInput `json:"input"`
 }
 
 // GetRequestId returns __CreateFindingInput.RequestId, and is useful for accessing the field via an interface.
 func (v *__CreateFindingInput) GetRequestId() string { return v.RequestId }
 
 // GetInput returns __CreateFindingInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateFindingInput) GetInput() *CreateFindingInput { return v.Input }
+func (v *__CreateFindingInput) GetInput() CreateFindingInput { return v.Input }
 
 // __CreateProjectInput is used internally by genqlient
 type __CreateProjectInput struct {
-	Input *CreateProjectInput `json:"input,omitempty"`
+	Input CreateProjectInput `json:"input"`
 }
 
 // GetInput returns __CreateProjectInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateProjectInput) GetInput() *CreateProjectInput { return v.Input }
+func (v *__CreateProjectInput) GetInput() CreateProjectInput { return v.Input }
 
 // __CreateReplaySessionCollectionInput is used internally by genqlient
 type __CreateReplaySessionCollectionInput struct {
-	Input *CreateReplaySessionCollectionInput `json:"input,omitempty"`
+	Input CreateReplaySessionCollectionInput `json:"input"`
 }
 
 // GetInput returns __CreateReplaySessionCollectionInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateReplaySessionCollectionInput) GetInput() *CreateReplaySessionCollectionInput {
+func (v *__CreateReplaySessionCollectionInput) GetInput() CreateReplaySessionCollectionInput {
 	return v.Input
 }
 
 // __CreateReplaySessionInput is used internally by genqlient
 type __CreateReplaySessionInput struct {
-	Input *CreateReplaySessionInput `json:"input,omitempty"`
+	Input CreateReplaySessionInput `json:"input"`
 }
 
 // GetInput returns __CreateReplaySessionInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateReplaySessionInput) GetInput() *CreateReplaySessionInput { return v.Input }
+func (v *__CreateReplaySessionInput) GetInput() CreateReplaySessionInput { return v.Input }
 
 // __CreateScopeInput is used internally by genqlient
 type __CreateScopeInput struct {
-	Input *CreateScopeInput `json:"input,omitempty"`
+	Input CreateScopeInput `json:"input"`
 }
 
 // GetInput returns __CreateScopeInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateScopeInput) GetInput() *CreateScopeInput { return v.Input }
+func (v *__CreateScopeInput) GetInput() CreateScopeInput { return v.Input }
 
 // __CreateTamperRuleCollectionInput is used internally by genqlient
 type __CreateTamperRuleCollectionInput struct {
-	Input *CreateTamperRuleCollectionInput `json:"input,omitempty"`
+	Input CreateTamperRuleCollectionInput `json:"input"`
 }
 
 // GetInput returns __CreateTamperRuleCollectionInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateTamperRuleCollectionInput) GetInput() *CreateTamperRuleCollectionInput {
+func (v *__CreateTamperRuleCollectionInput) GetInput() CreateTamperRuleCollectionInput {
 	return v.Input
 }
 
 // __CreateTamperRuleInput is used internally by genqlient
 type __CreateTamperRuleInput struct {
-	Input *CreateTamperRuleInput `json:"input,omitempty"`
+	Input CreateTamperRuleInput `json:"input"`
 }
 
 // GetInput returns __CreateTamperRuleInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateTamperRuleInput) GetInput() *CreateTamperRuleInput { return v.Input }
+func (v *__CreateTamperRuleInput) GetInput() CreateTamperRuleInput { return v.Input }
 
 // __CreateWorkflowInput is used internally by genqlient
 type __CreateWorkflowInput struct {
-	Input *CreateWorkflowInput `json:"input,omitempty"`
+	Input CreateWorkflowInput `json:"input"`
 }
 
 // GetInput returns __CreateWorkflowInput.Input, and is useful for accessing the field via an interface.
-func (v *__CreateWorkflowInput) GetInput() *CreateWorkflowInput { return v.Input }
+func (v *__CreateWorkflowInput) GetInput() CreateWorkflowInput { return v.Input }
 
 // __DeleteAutomateSessionInput is used internally by genqlient
 type __DeleteAutomateSessionInput struct {
@@ -17063,7 +18971,7 @@ func (v *__DeleteFilterPresetInput) GetId() string { return v.Id }
 
 // __DeleteFindingsInput is used internally by genqlient
 type __DeleteFindingsInput struct {
-	Input *DeleteFindingsInput `json:"input,omitempty"`
+	Input *DeleteFindingsInput `json:"input"`
 }
 
 // GetInput returns __DeleteFindingsInput.Input, and is useful for accessing the field via an interface.
@@ -17179,16 +19087,16 @@ func (v *__DropInterceptMessageInput) GetId() string { return v.Id }
 
 // __ExportFindingsInput is used internally by genqlient
 type __ExportFindingsInput struct {
-	Input *ExportFindingsInput `json:"input,omitempty"`
+	Input ExportFindingsInput `json:"input"`
 }
 
 // GetInput returns __ExportFindingsInput.Input, and is useful for accessing the field via an interface.
-func (v *__ExportFindingsInput) GetInput() *ExportFindingsInput { return v.Input }
+func (v *__ExportFindingsInput) GetInput() ExportFindingsInput { return v.Input }
 
 // __ForwardInterceptMessageInput is used internally by genqlient
 type __ForwardInterceptMessageInput struct {
 	Id    string                        `json:"id"`
-	Input *ForwardInterceptMessageInput `json:"input,omitempty"`
+	Input *ForwardInterceptMessageInput `json:"input"`
 }
 
 // GetId returns __ForwardInterceptMessageInput.Id, and is useful for accessing the field via an interface.
@@ -17213,7 +19121,7 @@ type __GetAutomateEntryRequestsInput struct {
 	After  *string                         `json:"after"`
 	Before *string                         `json:"before"`
 	Filter *string                         `json:"filter"`
-	Order  *AutomateEntryRequestOrderInput `json:"order,omitempty"`
+	Order  *AutomateEntryRequestOrderInput `json:"order"`
 }
 
 // GetId returns __GetAutomateEntryRequestsInput.Id, and is useful for accessing the field via an interface.
@@ -17351,11 +19259,11 @@ func (v *__GlobalizeWorkflowInput) GetId() string { return v.Id }
 
 // __InstallPluginPackageInput is used internally by genqlient
 type __InstallPluginPackageInput struct {
-	Input *InstallPluginPackageInput `json:"input,omitempty"`
+	Input InstallPluginPackageInput `json:"input"`
 }
 
 // GetInput returns __InstallPluginPackageInput.Input, and is useful for accessing the field via an interface.
-func (v *__InstallPluginPackageInput) GetInput() *InstallPluginPackageInput { return v.Input }
+func (v *__InstallPluginPackageInput) GetInput() InstallPluginPackageInput { return v.Input }
 
 // __ListAutomateSessionsInput is used internally by genqlient
 type __ListAutomateSessionsInput struct {
@@ -17383,8 +19291,8 @@ type __ListFindingsInput struct {
 	Last   *int                      `json:"last"`
 	After  *string                   `json:"after"`
 	Before *string                   `json:"before"`
-	Filter *FilterClauseFindingInput `json:"filter,omitempty"`
-	Order  *FindingOrderInput        `json:"order,omitempty"`
+	Filter *FilterClauseFindingInput `json:"filter"`
+	Order  *FindingOrderInput        `json:"order"`
 }
 
 // GetFirst returns __ListFindingsInput.First, and is useful for accessing the field via an interface.
@@ -17412,7 +19320,7 @@ type __ListInterceptEntriesInput struct {
 	After   *string                   `json:"after"`
 	Before  *string                   `json:"before"`
 	Filter  *string                   `json:"filter"`
-	Order   *InterceptEntryOrderInput `json:"order,omitempty"`
+	Order   *InterceptEntryOrderInput `json:"order"`
 	ScopeId *string                   `json:"scopeId"`
 }
 
@@ -17482,7 +19390,7 @@ type __ListRequestsByOffsetInput struct {
 	Limit   *int                       `json:"limit"`
 	Offset  *int                       `json:"offset"`
 	Filter  *string                    `json:"filter"`
-	Order   *RequestResponseOrderInput `json:"order,omitempty"`
+	Order   *RequestResponseOrderInput `json:"order"`
 	ScopeId *string                    `json:"scopeId"`
 }
 
@@ -17508,7 +19416,7 @@ type __ListRequestsInput struct {
 	After   *string                    `json:"after"`
 	Before  *string                    `json:"before"`
 	Filter  *string                    `json:"filter"`
-	Order   *RequestResponseOrderInput `json:"order,omitempty"`
+	Order   *RequestResponseOrderInput `json:"order"`
 	ScopeId *string                    `json:"scopeId"`
 }
 
@@ -17683,15 +19591,15 @@ func (v *__ResumeAutomateTaskInput) GetId() string { return v.Id }
 
 // __RunActiveWorkflowInput is used internally by genqlient
 type __RunActiveWorkflowInput struct {
-	Id    string                  `json:"id"`
-	Input *RunActiveWorkflowInput `json:"input,omitempty"`
+	Id    string                 `json:"id"`
+	Input RunActiveWorkflowInput `json:"input"`
 }
 
 // GetId returns __RunActiveWorkflowInput.Id, and is useful for accessing the field via an interface.
 func (v *__RunActiveWorkflowInput) GetId() string { return v.Id }
 
 // GetInput returns __RunActiveWorkflowInput.Input, and is useful for accessing the field via an interface.
-func (v *__RunActiveWorkflowInput) GetInput() *RunActiveWorkflowInput { return v.Input }
+func (v *__RunActiveWorkflowInput) GetInput() RunActiveWorkflowInput { return v.Input }
 
 // __RunConvertWorkflowInput is used internally by genqlient
 type __RunConvertWorkflowInput struct {
@@ -17723,19 +19631,19 @@ func (v *__SelectProjectInput) GetId() string { return v.Id }
 
 // __SetInstanceSettingsInput is used internally by genqlient
 type __SetInstanceSettingsInput struct {
-	Input *SetInstanceSettingsInput `json:"input,omitempty"`
+	Input SetInstanceSettingsInput `json:"input"`
 }
 
 // GetInput returns __SetInstanceSettingsInput.Input, and is useful for accessing the field via an interface.
-func (v *__SetInstanceSettingsInput) GetInput() *SetInstanceSettingsInput { return v.Input }
+func (v *__SetInstanceSettingsInput) GetInput() SetInstanceSettingsInput { return v.Input }
 
 // __SetInterceptOptionsInput is used internally by genqlient
 type __SetInterceptOptionsInput struct {
-	Input *InterceptOptionsInput `json:"input,omitempty"`
+	Input InterceptOptionsInput `json:"input"`
 }
 
 // GetInput returns __SetInterceptOptionsInput.Input, and is useful for accessing the field via an interface.
-func (v *__SetInterceptOptionsInput) GetInput() *InterceptOptionsInput { return v.Input }
+func (v *__SetInterceptOptionsInput) GetInput() InterceptOptionsInput { return v.Input }
 
 // __StartAutomateTaskInput is used internally by genqlient
 type __StartAutomateTaskInput struct {
@@ -17747,15 +19655,15 @@ func (v *__StartAutomateTaskInput) GetAutomateSessionId() string { return v.Auto
 
 // __StartReplayTaskInput is used internally by genqlient
 type __StartReplayTaskInput struct {
-	SessionId string                `json:"sessionId"`
-	Input     *StartReplayTaskInput `json:"input,omitempty"`
+	SessionId string               `json:"sessionId"`
+	Input     StartReplayTaskInput `json:"input"`
 }
 
 // GetSessionId returns __StartReplayTaskInput.SessionId, and is useful for accessing the field via an interface.
 func (v *__StartReplayTaskInput) GetSessionId() string { return v.SessionId }
 
 // GetInput returns __StartReplayTaskInput.Input, and is useful for accessing the field via an interface.
-func (v *__StartReplayTaskInput) GetInput() *StartReplayTaskInput { return v.Input }
+func (v *__StartReplayTaskInput) GetInput() StartReplayTaskInput { return v.Input }
 
 // __TogglePluginInput is used internally by genqlient
 type __TogglePluginInput struct {
@@ -17795,15 +19703,15 @@ func (v *__ToggleWorkflowInput) GetEnabled() bool { return v.Enabled }
 
 // __UpdateTamperRuleInput is used internally by genqlient
 type __UpdateTamperRuleInput struct {
-	Id    string                 `json:"id"`
-	Input *UpdateTamperRuleInput `json:"input,omitempty"`
+	Id    string                `json:"id"`
+	Input UpdateTamperRuleInput `json:"input"`
 }
 
 // GetId returns __UpdateTamperRuleInput.Id, and is useful for accessing the field via an interface.
 func (v *__UpdateTamperRuleInput) GetId() string { return v.Id }
 
 // GetInput returns __UpdateTamperRuleInput.Input, and is useful for accessing the field via an interface.
-func (v *__UpdateTamperRuleInput) GetInput() *UpdateTamperRuleInput { return v.Input }
+func (v *__UpdateTamperRuleInput) GetInput() UpdateTamperRuleInput { return v.Input }
 
 // The mutation executed by CancelAutomateTask.
 const CancelAutomateTask_Operation = `
@@ -17844,6 +19752,12 @@ const CancelTask_Operation = `
 mutation CancelTask ($id: ID!) {
 	cancelTask(id: $id) {
 		cancelledId
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -17918,7 +19832,7 @@ mutation CreateAutomateSession ($input: CreateAutomateSessionInput!) {
 func CreateAutomateSession(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateAutomateSessionInput,
+	input CreateAutomateSessionInput,
 ) (data_ *CreateAutomateSessionResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateAutomateSession",
@@ -17958,7 +19872,7 @@ mutation CreateEnvironment ($input: CreateEnvironmentInput!) {
 func CreateEnvironment(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateEnvironmentInput,
+	input CreateEnvironmentInput,
 ) (data_ *CreateEnvironmentResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateEnvironment",
@@ -17999,7 +19913,7 @@ mutation CreateFilterPreset ($input: CreateFilterPresetInput!) {
 func CreateFilterPreset(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateFilterPresetInput,
+	input CreateFilterPresetInput,
 ) (data_ *CreateFilterPresetResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateFilterPreset",
@@ -18044,7 +19958,7 @@ func CreateFinding(
 	ctx_ context.Context,
 	client_ graphql.Client,
 	requestId string,
-	input *CreateFindingInput,
+	input CreateFindingInput,
 ) (data_ *CreateFindingResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateFinding",
@@ -18085,7 +19999,7 @@ mutation CreateProject ($input: CreateProjectInput!) {
 func CreateProject(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateProjectInput,
+	input CreateProjectInput,
 ) (data_ *CreateProjectResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateProject",
@@ -18122,7 +20036,7 @@ mutation CreateReplaySession ($input: CreateReplaySessionInput!) {
 func CreateReplaySession(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateReplaySessionInput,
+	input CreateReplaySessionInput,
 ) (data_ *CreateReplaySessionResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateReplaySession",
@@ -18159,7 +20073,7 @@ mutation CreateReplaySessionCollection ($input: CreateReplaySessionCollectionInp
 func CreateReplaySessionCollection(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateReplaySessionCollectionInput,
+	input CreateReplaySessionCollectionInput,
 ) (data_ *CreateReplaySessionCollectionResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateReplaySessionCollection",
@@ -18199,7 +20113,7 @@ mutation CreateScope ($input: CreateScopeInput!) {
 func CreateScope(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateScopeInput,
+	input CreateScopeInput,
 ) (data_ *CreateScopeResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateScope",
@@ -18239,7 +20153,7 @@ mutation CreateTamperRule ($input: CreateTamperRuleInput!) {
 func CreateTamperRule(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateTamperRuleInput,
+	input CreateTamperRuleInput,
 ) (data_ *CreateTamperRuleResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateTamperRule",
@@ -18276,7 +20190,7 @@ mutation CreateTamperRuleCollection ($input: CreateTamperRuleCollectionInput!) {
 func CreateTamperRuleCollection(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateTamperRuleCollectionInput,
+	input CreateTamperRuleCollectionInput,
 ) (data_ *CreateTamperRuleCollectionResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateTamperRuleCollection",
@@ -18316,7 +20230,7 @@ mutation CreateWorkflow ($input: CreateWorkflowInput!) {
 func CreateWorkflow(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *CreateWorkflowInput,
+	input CreateWorkflowInput,
 ) (data_ *CreateWorkflowResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "CreateWorkflow",
@@ -18377,6 +20291,12 @@ const DeleteEnvironment_Operation = `
 mutation DeleteEnvironment ($id: ID!) {
 	deleteEnvironment(id: $id) {
 		deletedId
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -18585,6 +20505,12 @@ const DeleteProject_Operation = `
 mutation DeleteProject ($id: ID!) {
 	deleteProject(id: $id) {
 		deletedId
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -18857,6 +20783,12 @@ const DeleteWorkflow_Operation = `
 mutation DeleteWorkflow ($id: ID!) {
 	deleteWorkflow(id: $id) {
 		deletedId
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -18937,7 +20869,7 @@ mutation ExportFindings ($input: ExportFindingsInput!) {
 func ExportFindings(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *ExportFindingsInput,
+	input ExportFindingsInput,
 ) (data_ *ExportFindingsResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "ExportFindings",
@@ -20053,6 +21985,12 @@ mutation GlobalizeWorkflow ($id: ID!) {
 			name
 			global
 		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -20100,7 +22038,7 @@ mutation InstallPluginPackage ($input: InstallPluginPackageInput!) {
 func InstallPluginPackage(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *InstallPluginPackageInput,
+	input InstallPluginPackageInput,
 ) (data_ *InstallPluginPackageResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "InstallPluginPackage",
@@ -21362,6 +23300,12 @@ mutation LocalizeWorkflow ($id: ID!) {
 			name
 			global
 		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -21628,6 +23572,12 @@ mutation RenameProject ($id: ID!, $name: String!) {
 			id
 			name
 		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -21784,6 +23734,12 @@ mutation RenameWorkflow ($id: ID!, $name: String!) {
 			id
 			name
 		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
+		}
 	}
 }
 `
@@ -21899,7 +23855,7 @@ func RunActiveWorkflow(
 	ctx_ context.Context,
 	client_ graphql.Client,
 	id string,
-	input *RunActiveWorkflowInput,
+	input RunActiveWorkflowInput,
 ) (data_ *RunActiveWorkflowResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "RunActiveWorkflow",
@@ -21968,6 +23924,12 @@ mutation SelectEnvironment ($id: ID) {
 		environment {
 			id
 			name
+		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
 		}
 	}
 }
@@ -22056,7 +24018,7 @@ mutation SetInstanceSettings ($input: SetInstanceSettingsInput!) {
 func SetInstanceSettings(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *SetInstanceSettingsInput,
+	input SetInstanceSettingsInput,
 ) (data_ *SetInstanceSettingsResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "SetInstanceSettings",
@@ -22097,7 +24059,7 @@ mutation SetInterceptOptions ($input: InterceptOptionsInput!) {
 func SetInterceptOptions(
 	ctx_ context.Context,
 	client_ graphql.Client,
-	input *InterceptOptionsInput,
+	input InterceptOptionsInput,
 ) (data_ *SetInterceptOptionsResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "SetInterceptOptions",
@@ -22214,7 +24176,7 @@ func StartReplayTask(
 	ctx_ context.Context,
 	client_ graphql.Client,
 	sessionId string,
-	input *StartReplayTaskInput,
+	input StartReplayTaskInput,
 ) (data_ *StartReplayTaskResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "StartReplayTask",
@@ -22245,6 +24207,12 @@ mutation TogglePlugin ($id: ID!, $enabled: Boolean!) {
 			__typename
 			id
 			enabled
+		}
+		error {
+			__typename
+			... on OtherUserError {
+				code
+			}
 		}
 	}
 }
@@ -22385,7 +24353,7 @@ func UpdateTamperRule(
 	ctx_ context.Context,
 	client_ graphql.Client,
 	id string,
-	input *UpdateTamperRuleInput,
+	input UpdateTamperRuleInput,
 ) (data_ *UpdateTamperRuleResponse, err_ error) {
 	req_ := &graphql.Request{
 		OpName: "UpdateTamperRule",

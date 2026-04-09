@@ -29,7 +29,7 @@ func (s *ProjectSDK) GetCurrent(
 func (s *ProjectSDK) Create(
 	ctx context.Context, input *gen.CreateProjectInput,
 ) (*gen.CreateProjectResponse, error) {
-	return gen.CreateProject(ctx, s.client.GraphQL, input)
+	return gen.CreateProject(ctx, s.client.GraphQL, *input)
 }
 
 // Select selects a project as the active project.

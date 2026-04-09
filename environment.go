@@ -36,7 +36,7 @@ func (s *EnvironmentSDK) GetContext(
 func (s *EnvironmentSDK) Create(
 	ctx context.Context, input *gen.CreateEnvironmentInput,
 ) (*gen.CreateEnvironmentResponse, error) {
-	return gen.CreateEnvironment(ctx, s.client.GraphQL, input)
+	return gen.CreateEnvironment(ctx, s.client.GraphQL, *input)
 }
 
 // Select selects an environment (pass nil to deselect).

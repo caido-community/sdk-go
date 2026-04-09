@@ -29,7 +29,7 @@ func (s *FilterSDK) Get(
 func (s *FilterSDK) Create(
 	ctx context.Context, input *gen.CreateFilterPresetInput,
 ) (*gen.CreateFilterPresetResponse, error) {
-	return gen.CreateFilterPreset(ctx, s.client.GraphQL, input)
+	return gen.CreateFilterPreset(ctx, s.client.GraphQL, *input)
 }
 
 // Delete deletes a filter preset.
