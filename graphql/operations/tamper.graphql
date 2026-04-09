@@ -1,0 +1,279 @@
+# Tamper Rules - Match & Replace rules
+
+query ListTamperRuleCollections {
+  tamperRuleCollections {
+    id
+    name
+    rules {
+      id
+      name
+      condition
+      sources
+      enable {
+        rank
+      }
+      section {
+        __typename
+        ... on TamperSectionRequestHeader {
+          operation {
+            __typename
+            ... on TamperOperationHeaderRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderAdd {
+              matcher { name }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderUpdate {
+              matcher { name }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderRemove {
+              matcher { name }
+            }
+          }
+        }
+        ... on TamperSectionRequestBody {
+          operation {
+            __typename
+            ... on TamperOperationBodyRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+          }
+        }
+        ... on TamperSectionRequestPath {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionRequestQuery {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionRequestMethod {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionRequestFirstLine {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionRequestAll {
+          operation {
+            __typename
+            ... on TamperOperationAllRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+          }
+        }
+        ... on TamperSectionResponseBody {
+          operation {
+            __typename
+            ... on TamperOperationBodyRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+          }
+        }
+        ... on TamperSectionResponseStatusCode {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionResponseFirstLine {
+          operation {
+            __typename
+          }
+        }
+        ... on TamperSectionResponseHeader {
+          operation {
+            __typename
+            ... on TamperOperationHeaderRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderAdd {
+              matcher { name }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderUpdate {
+              matcher { name }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+            ... on TamperOperationHeaderRemove {
+              matcher { name }
+            }
+          }
+        }
+        ... on TamperSectionResponseAll {
+          operation {
+            __typename
+            ... on TamperOperationAllRaw {
+              matcher {
+                __typename
+                ... on TamperMatcherValue { value }
+                ... on TamperMatcherRegex { regex }
+                ... on TamperMatcherFull { full }
+              }
+              replacer {
+                __typename
+                ... on TamperReplacerTerm { term }
+                ... on TamperReplacerWorkflow { id }
+              }
+            }
+          }
+        }
+        ... on TamperSectionRequestSNI {
+          operation {
+            __typename
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetTamperRule($id: ID!) {
+  tamperRule(id: $id) {
+    id
+    name
+    condition
+    sources
+    enable {
+      rank
+    }
+    collection {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateTamperRuleCollection(
+  $input: CreateTamperRuleCollectionInput!
+) {
+  createTamperRuleCollection(input: $input) {
+    collection {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateTamperRule($input: CreateTamperRuleInput!) {
+  createTamperRule(input: $input) {
+    error {
+      __typename
+    }
+    rule {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateTamperRule($id: ID!, $input: UpdateTamperRuleInput!) {
+  updateTamperRule(id: $id, input: $input) {
+    error {
+      __typename
+    }
+    rule {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteTamperRule($id: ID!) {
+  deleteTamperRule(id: $id) {
+    deletedId
+  }
+}
+
+mutation ToggleTamperRule($id: ID!, $enabled: Boolean!) {
+  toggleTamperRule(id: $id, enabled: $enabled) {
+    error {
+      __typename
+    }
+    rule {
+      id
+      name
+      enable {
+        rank
+      }
+    }
+  }
+}
+
+mutation DeleteTamperRuleCollection($id: ID!) {
+  deleteTamperRuleCollection(id: $id) {
+    deletedId
+  }
+}
