@@ -3,8 +3,8 @@ operations:
   - graphql/operations/*.graphql
 generated: graphql/generated.go
 package: graphql
-optional: pointer
-use_struct_references: true
+optional: pointer_omitempty
+use_struct_references: false
 
 bindings:
   DateTime:

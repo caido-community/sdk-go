@@ -9,5 +9,11 @@ query ListTasks {
 mutation CancelTask($id: ID!) {
   cancelTask(id: $id) {
     cancelledId
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }

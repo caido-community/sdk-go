@@ -44,5 +44,11 @@ mutation TogglePlugin($id: ID!, $enabled: Boolean!) {
       id
       enabled
     }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }

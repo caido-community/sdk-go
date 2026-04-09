@@ -63,11 +63,23 @@ mutation RenameProject($id: ID!, $name: String!) {
       id
       name
     }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }
 
 mutation DeleteProject($id: ID!) {
   deleteProject(id: $id) {
     deletedId
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }

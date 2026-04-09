@@ -57,11 +57,23 @@ mutation SelectEnvironment($id: ID) {
       id
       name
     }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }
 
 mutation DeleteEnvironment($id: ID!) {
   deleteEnvironment(id: $id) {
     deletedId
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }

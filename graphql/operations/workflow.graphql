@@ -51,12 +51,24 @@ mutation RenameWorkflow($id: ID!, $name: String!) {
       id
       name
     }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }
 
 mutation DeleteWorkflow($id: ID!) {
   deleteWorkflow(id: $id) {
     deletedId
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }
 
@@ -67,6 +79,12 @@ mutation GlobalizeWorkflow($id: ID!) {
       name
       global
     }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
+    }
   }
 }
 
@@ -76,6 +94,12 @@ mutation LocalizeWorkflow($id: ID!) {
       id
       name
       global
+    }
+    error {
+      __typename
+      ... on OtherUserError {
+        code
+      }
     }
   }
 }
